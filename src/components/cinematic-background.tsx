@@ -130,7 +130,7 @@ export function CinematicBackground() {
   }
   
   return (
-    <div className="fixed inset-0 z-0">
+    <div className="fixed inset-0 z-0" style={{ background: "#000000" }}>
       <Canvas
         camera={{ position: [0, 0, 8], fov: 60 }}
         dpr={1}
@@ -139,6 +139,7 @@ export function CinematicBackground() {
           alpha: true,
           powerPreference: "high-performance"
         }}
+        style={{ background: "transparent" }}
         onError={() => setHasError(true)}
       >
         <Scene />
