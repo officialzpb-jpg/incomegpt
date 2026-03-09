@@ -21,6 +21,8 @@ export default function SignupPage() {
     setLoading(true);
     setError("");
 
+    console.log("Starting signup...", { email, name });
+
     const { data: authData, error: authError } = await supabase.auth.signUp({
       email,
       password,
@@ -31,6 +33,8 @@ export default function SignupPage() {
       },
     });
 
+    console.log("Auth response:", { authData, authError });
+
     if (authError) {
       setError(authError.message);
       setLoading(false);
@@ -38,18 +42,26 @@ export default function SignupPage() {
     }
 
     if (authData.user) {
+      console.log("User created:", authData.user.id);
+      
       // Create profile in database
-      const { error: profileError } = await supabase.from("profiles").insert({
+      const { error: profileError, data: profileData } = await supabase.from("profiles").insert({
         id: authData.user.id,
         email: authData.user.email,
         income_goal: 0,
       });
 
+      console.log("Profile creation:", { profileError, profileData });
+
       if (profileError) {
         console.error("Profile creation error:", profileError);
+        setError("Account created but profile setup failed. Please contact support.");
+        setLoading(false);
+        return;
       }
     }
 
+    console.log("Redirecting to dashboard...");
     router.push("/dashboard");
     router.refresh();
   };
