@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { 
   Sparkles, 
@@ -12,28 +13,96 @@ import {
   Clock,
   ChevronRight,
   LogOut,
-  User
+  User,
+  Loader2
 } from "lucide-react";
+import { supabase } from "@/lib/supabase";
 
-const savedStrategies = [
-  {
-    id: 1,
-    title: "Freelance AI Consultant",
-    income: "$5,000/mo",
-    progress: 65,
-    status: "In Progress",
-  },
-  {
-    id: 2,
-    title: "Niche Newsletter",
-    income: "$3,200/mo",
-    progress: 30,
-    status: "Just Started",
-  },
-];
+interface Strategy {
+  id: string;
+  title: string;
+  expected_monthly_income: string;
+  progress: number;
+  status: string;
+}
+
+interface Profile {
+  email: string;
+  income_goal: number;
+}
 
 export default function DashboardPage() {
+  const router = useRouter();
+  const [user, setUser] = useState<any>(null);
+  const [profile, setProfile] = useState<Profile | null>(null);
+  const [strategies, setStrategies] = useState<Strategy[]>([]);
+  const [loading, setLoading] = useState(true);
   const [incomeGoal, setIncomeGoal] = useState("");
+
+  useEffect(() => {
+    const getUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      
+      if (!user) {
+        router.push("/login");
+        return;
+      }
+
+      setUser(user);
+
+      // Get profile
+      const { data: profileData } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("id", user.id)
+        .single();
+
+      if (profileData) {
+        setProfile(profileData);
+        setIncomeGoal(profileData.income_goal.toString());
+      }
+
+      // Get strategies
+      const { data: strategiesData } = await supabase
+        .from("strategies")
+        .select("*")
+        .eq("user_id", user.id);
+
+      if (strategiesData) {
+        setStrategies(strategiesData.map(s => ({
+          ...s,
+          progress: Math.floor(Math.random() * 100),
+          status: "In Progress"
+        })));
+      }
+
+      setLoading(false);
+    };
+
+    getUser();
+  }, [router]);
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    router.push("/login");
+  };
+
+  const updateIncomeGoal = async () => {
+    if (!user) return;
+    
+    await supabase
+      .from("profiles")
+      .update({ income_goal: parseInt(incomeGoal) || 0 })
+      .eq("id", user.id);
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-black flex items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-emerald-400" />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-black">
@@ -78,11 +147,14 @@ export default function DashboardPage() {
               <User className="h-5 w-5 text-white" />
             </div>
             <div>
-              <div className="font-medium">Zay</div>
+              <div className="font-medium">{profile?.email?.split('@')[0] || 'User'}</div>
               <div className="text-sm text-white/60">Pro Plan</div>
             </div>
           </div>
-          <button className="flex items-center gap-2 text-sm text-white/60 hover:text-white">
+          <button 
+            onClick={handleSignOut}
+            className="flex items-center gap-2 text-sm text-white/60 hover:text-white"
+          >
             <LogOut className="h-4 w-4" />
             Sign out
           </button>
@@ -102,9 +174,9 @@ export default function DashboardPage() {
             {/* Stats */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
               {[
-                { label: "Monthly Goal", value: "$10,000", icon: Target },
+                { label: "Monthly Goal", value: `$${(profile?.income_goal || 0).toLocaleString()}`, icon: Target },
                 { label: "Current Income", value: "$2,400", icon: TrendingUp },
-                { label: "Active Strategies", value: "2", icon: Clock },
+                { label: "Active Strategies", value: strategies.length.toString(), icon: Clock },
               ].map((stat, i) => (
                 <div key={i} className="glass rounded-xl p-6">
                   <div className="flex items-center gap-3 mb-2">
@@ -132,7 +204,10 @@ export default function DashboardPage() {
                     />
                   </div>
                 </div>
-                <button className="px-6 py-3 bg-white text-black rounded-xl font-medium hover:bg-white/90 transition-colors">
+                <button 
+                  onClick={updateIncomeGoal}
+                  className="px-6 py-3 bg-white text-black rounded-xl font-medium hover:bg-white/90 transition-colors"
+                >
                   Update Goal
                 </button>
               </div>
@@ -159,33 +234,39 @@ export default function DashboardPage() {
             {/* Saved Strategies */}
             <div>
               <h2 className="text-lg font-semibold mb-4">Your Strategies</h2>
-              <div className="space-y-4">
-                {savedStrategies.map((strategy) => (
-                  <div key={strategy.id} className="glass rounded-xl p-6">
-                    <div className="flex items-start justify-between mb-4">
-                      <div>
-                        <h3 className="font-semibold mb-1">{strategy.title}</h3>
-                        <span className="text-emerald-400 text-sm">{strategy.income}</span>
+              {strategies.length === 0 ? (
+                <div className="glass rounded-xl p-8 text-center">
+                  <p className="text-white/60">No strategies yet. Generate your first one!</p>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  {strategies.map((strategy) => (
+                    <div key={strategy.id} className="glass rounded-xl p-6">
+                      <div className="flex items-start justify-between mb-4">
+                        <div>
+                          <h3 className="font-semibold mb-1">{strategy.title}</h3>
+                          <span className="text-emerald-400 text-sm">{strategy.expected_monthly_income}</span>
+                        </div>
+                        <span className="text-xs px-2 py-1 rounded-full bg-emerald-500/20 text-emerald-400">
+                          {strategy.status}
+                        </span>
                       </div>
-                      <span className="text-xs px-2 py-1 rounded-full bg-emerald-500/20 text-emerald-400">
-                        {strategy.status}
-                      </span>
+                      <div className="mb-2">
+                        <div className="flex justify-between text-sm mb-2">
+                          <span className="text-white/60">Progress</span>
+                          <span>{strategy.progress}%</span>
+                        </div>
+                        <div className="h-2 bg-white/10 rounded-full overflow-hidden">
+                          <div
+                            className="h-full bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-full"
+                            style={{ width: `${strategy.progress}%` }}
+                          />
+                        </div>
+                      </div>
                     </div>
-                    <div className="mb-2">
-                      <div className="flex justify-between text-sm mb-2">
-                        <span className="text-white/60">Progress</span>
-                        <span>{strategy.progress}%</span>
-                      </div>
-                      <div className="h-2 bg-white/10 rounded-full overflow-hidden">
-                        <div
-                          className="h-full bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-full"
-                          style={{ width: `${strategy.progress}%` }}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              )}
             </div>
           </motion.div>
         </div>

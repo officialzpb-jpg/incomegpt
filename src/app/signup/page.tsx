@@ -2,19 +2,56 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { Sparkles, Eye, EyeOff, ArrowRight, Check } from "lucide-react";
+import { Sparkles, Eye, EyeOff, ArrowRight, Check, Loader2 } from "lucide-react";
+import { supabase } from "@/lib/supabase";
 
 export default function SignupPage() {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle signup logic here
-    console.log("Signup:", { name, email, password });
+    setLoading(true);
+    setError("");
+
+    const { data: authData, error: authError } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: {
+          full_name: name,
+        },
+      },
+    });
+
+    if (authError) {
+      setError(authError.message);
+      setLoading(false);
+      return;
+    }
+
+    if (authData.user) {
+      // Create profile in database
+      const { error: profileError } = await supabase.from("profiles").insert({
+        id: authData.user.id,
+        email: authData.user.email,
+        income_goal: 0,
+      });
+
+      if (profileError) {
+        console.error("Profile creation error:", profileError);
+      }
+    }
+
+    router.push("/dashboard");
+    router.refresh();
   };
 
   return (
@@ -38,6 +75,12 @@ export default function SignupPage() {
         </div>
 
         <div className="glass rounded-2xl p-8">
+          {error && (
+            <div className="mb-4 p-3 rounded-lg bg-red-500/20 text-red-400 text-sm">
+              {error}
+            </div>
+          )}
+
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label htmlFor="name" className="block text-sm font-medium mb-2">
@@ -82,6 +125,7 @@ export default function SignupPage() {
                   className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-emerald-500 focus:outline-none transition-colors"
                   placeholder="••••••••"
                   required
+                  minLength={6}
                 />
                 <button
                   type="button"
@@ -105,10 +149,20 @@ export default function SignupPage() {
 
             <button
               type="submit"
-              className="w-full flex items-center justify-center gap-2 bg-white text-black py-3 rounded-xl font-medium hover:bg-white/90 transition-colors"
+              disabled={loading}
+              className="w-full flex items-center justify-center gap-2 bg-white text-black py-3 rounded-xl font-medium hover:bg-white/90 transition-colors disabled:opacity-50"
             >
-              Create Account
-              <ArrowRight className="h-4 w-4" />
+              {loading ? (
+                <>
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                  Creating account...
+                </>
+              ) : (
+                <>
+                  Create Account
+                  <ArrowRight className="h-4 w-4" />
+                </>
+              )}
             </button>
           </form>
 
