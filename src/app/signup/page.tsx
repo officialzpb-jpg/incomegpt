@@ -77,8 +77,12 @@ export default function SignupPage() {
       >
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex items-center gap-2 mb-6">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-emerald-500 to-cyan-500">
-              <Sparkles className="h-6 w-6 text-white" />
+            <div className="h-10 w-10 rounded-lg overflow-hidden">
+              <img 
+                src="https://i.imgur.com/8XqY3hL.png" 
+                alt="IncomeGPT" 
+                className="h-full w-full object-cover"
+              />
             </div>
             <span className="text-xl font-semibold">IncomeGPT</span>
           </Link>

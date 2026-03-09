@@ -136,8 +136,12 @@ export default function DashboardPage() {
       <aside className="fixed left-0 top-0 h-full w-64 border-r border-white/5 bg-black/50 backdrop-blur-xl hidden lg:block">
         <div className="p-6">
           <Link href="/" className="flex items-center gap-2 mb-8">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-emerald-500 to-cyan-500">
-              <Sparkles className="h-5 w-5 text-white" />
+            <div className="h-8 w-8 rounded-lg overflow-hidden">
+              <img 
+                src="https://i.imgur.com/8XqY3hL.png" 
+                alt="IncomeGPT" 
+                className="h-full w-full object-cover"
+              />
             </div>
             <span className="text-lg font-semibold">IncomeGPT</span>
           </Link>

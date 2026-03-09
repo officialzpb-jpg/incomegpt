@@ -24,8 +24,12 @@ export function Navbar() {
       <nav className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-emerald-500 to-cyan-500">
-              <Sparkles className="h-5 w-5 text-white" />
+            <div className="h-8 w-8 rounded-lg overflow-hidden">
+              <img 
+                src="https://i.imgur.com/8XqY3hL.png" 
+                alt="IncomeGPT" 
+                className="h-full w-full object-cover"
+              />
             </div>
             <span className="text-lg font-semibold">IncomeGPT</span>
           </Link>
