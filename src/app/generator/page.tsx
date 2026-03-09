@@ -55,7 +55,7 @@ export default function GeneratorPage() {
   };
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen">
       {/* Header */}
       <header className="border-b border-white/5 bg-black/50 backdrop-blur-xl">
         <div className="mx-auto max-w-3xl px-6 py-4">
