@@ -24,7 +24,7 @@
   }
   
   .glass {
-    @apply bg-white/[0.02] backdrop-blur-xl border border-white/10;
+    @apply bg-black/30 backdrop-blur-xl border border-white/10;
   }
   
   .glow {
