@@ -240,10 +240,7 @@ export default function StrategyDetailPage() {
               </div>
             </div>
 
-            <StrategyChat 
-              strategyTitle={strategy.title}
-              strategyDescription={strategy.description}
-            />
+            <StrategyChat strategyTitle={strategy.title} />
           </div>
 
           <div className="flex gap-4">

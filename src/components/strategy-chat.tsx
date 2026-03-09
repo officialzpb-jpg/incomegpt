@@ -3,7 +3,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Send, Bot, User, Loader2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { supabase } from "@/lib/supabase";
 
 interface Message {
   id: string;
@@ -13,10 +12,9 @@ interface Message {
 
 interface StrategyChatProps {
   strategyTitle: string;
-  strategyDescription: string;
 }
 
-export function StrategyChat({ strategyTitle, strategyDescription }: StrategyChatProps) {
+export function StrategyChat({ strategyTitle }: StrategyChatProps) {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "welcome",
