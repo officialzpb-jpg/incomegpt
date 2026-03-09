@@ -5,19 +5,14 @@ import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
-  Sparkles, 
   ArrowLeft, 
   CheckCircle2,
   Lock,
   ChevronRight,
-  Clock,
-  DollarSign,
-  Target,
   Loader2,
   Send,
   Bot,
   Lightbulb,
-  AlertCircle,
   Trophy,
   Rocket
 } from "lucide-react";
@@ -318,7 +313,7 @@ export default function StrategyDetailPage() {
         <div className="text-center">
           <Trophy className="h-16 w-16 text-emerald-400 mx-auto mb-4" />
           <h1 className="text-3xl font-bold mb-4">Strategy Complete! 🎉</h1>
-          <p className="text-white/60 mb-6">You've completed all steps. Time to make money.</p>
+          <p className="text-white/60 mb-6">You&apos;ve completed all steps. Time to make money.</p>
           <Link href="/dashboard" className="text-emerald-400 hover:text-emerald-300">
             Back to Dashboard →
           </Link>
@@ -453,7 +448,7 @@ export default function StrategyDetailPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold">Your AI Money Coach</h3>
-                    <p className="text-xs text-white/60">Ask anything. I don't sugarcoat.</p>
+                    <p className="text-xs text-white/60">Ask anything. I don&apos;t sugarcoat.</p>
                   </div>
                 </div>
               </div>
@@ -462,10 +457,10 @@ export default function StrategyDetailPage() {
                 {chatMessages.length === 0 && (
                   <div className="bg-white/5 rounded-xl p-4">
                     <p className="text-white/80 italic">
-                      "{aiPersonalities[Math.floor(Math.random() * aiPersonalities.length)]}"
+                      &quot;{aiPersonalities[Math.floor(Math.random() * aiPersonalities.length)]}&quot;
                     </p>
                     <p className="text-sm text-white/60 mt-3">
-                      💡 Try asking: "{currentStep.aiPrompt.substring(0, 80)}..."
+                      💡 Try asking: &quot;{currentStep.aiPrompt.substring(0, 80)}...&quot;
                     </p>
                   </div>
                 )}
