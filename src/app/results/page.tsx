@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { 
   Sparkles, 
@@ -13,8 +14,10 @@ import {
   ChevronRight,
   Check,
   Bookmark,
-  Share2
+  Share2,
+  Loader2
 } from "lucide-react";
+import { supabase } from "@/lib/supabase";
 
 const strategies = [
   {
@@ -27,6 +30,13 @@ const strategies = [
     timeframe: "2-4 months",
     matchScore: 98,
     tags: ["Writing", "AI Tools", "Marketing"],
+    steps: [
+      "Set up your agency website and portfolio",
+      "Identify 3-5 niche industries to target",
+      "Create service packages and pricing",
+      "Build a client acquisition system",
+      "Hire freelancers to scale operations"
+    ]
   },
   {
     id: 2,
@@ -38,6 +48,13 @@ const strategies = [
     timeframe: "6-12 months",
     matchScore: 85,
     tags: ["Coding", "Product", "Sales"],
+    steps: [
+      "Research pain points in your target niche",
+      "Validate the idea with potential customers",
+      "Build a minimal viable product",
+      "Launch on Product Hunt and relevant communities",
+      "Iterate based on user feedback"
+    ]
   },
   {
     id: 3,
@@ -49,6 +66,13 @@ const strategies = [
     timeframe: "3-6 months",
     matchScore: 92,
     tags: ["Writing", "Community", "Marketing"],
+    steps: [
+      "Choose a niche with high willingness to pay",
+      "Set up newsletter infrastructure",
+      "Create a content calendar",
+      "Build an audience through free content",
+      "Launch paid tier with exclusive benefits"
+    ]
   },
 ];
 
@@ -59,14 +83,39 @@ const difficultyColors: Record<string, string> = {
 };
 
 export default function ResultsPage() {
+  const router = useRouter();
   const [savedStrategies, setSavedStrategies] = useState<number[]>([]);
+  const [savingId, setSavingId] = useState<number | null>(null);
 
-  const toggleSave = (id: number) => {
-    setSavedStrategies(prev => 
-      prev.includes(id) 
-        ? prev.filter(s => s !== id)
-        : [...prev, id]
-    );
+  const saveStrategy = async (strategy: typeof strategies[0]) => {
+    setSavingId(strategy.id);
+    
+    const { data: { user } } = await supabase.auth.getUser();
+    
+    if (!user) {
+      router.push("/login");
+      return;
+    }
+
+    const { error } = await supabase.from("strategies").insert({
+      user_id: user.id,
+      title: strategy.title,
+      description: strategy.description,
+      expected_monthly_income: strategy.expectedMonthlyIncome,
+      difficulty: strategy.difficulty,
+      startup_cost: strategy.startupCost,
+      timeframe: strategy.timeframe,
+      steps: strategy.steps,
+    });
+
+    if (error) {
+      console.error("Error saving strategy:", error);
+      alert("Failed to save strategy. Please try again.");
+    } else {
+      setSavedStrategies(prev => [...prev, strategy.id]);
+    }
+    
+    setSavingId(null);
   };
 
   return (
@@ -135,14 +184,19 @@ export default function ResultsPage() {
                       </div>
                       <div className="flex items-center gap-2">
                         <button
-                          onClick={() => toggleSave(strategy.id)}
+                          onClick={() => saveStrategy(strategy)}
+                          disabled={savedStrategies.includes(strategy.id) || savingId === strategy.id}
                           className={`p-2 rounded-lg transition-colors ${
                             savedStrategies.includes(strategy.id)
                               ? "bg-emerald-500/20 text-emerald-400"
                               : "hover:bg-white/5"
                           }`}
                         >
-                          <Bookmark className={`h-5 w-5 ${savedStrategies.includes(strategy.id) ? "fill-current" : ""}`} />
+                          {savingId === strategy.id ? (
+                            <Loader2 className="h-5 w-5 animate-spin" />
+                          ) : (
+                            <Bookmark className={`h-5 w-5 ${savedStrategies.includes(strategy.id) ? "fill-current" : ""}`} />
+                          )}
                         </button>
                         <button className="p-2 hover:bg-white/5 rounded-lg transition-colors">
                           <Share2 className="h-5 w-5" />
@@ -180,7 +234,7 @@ export default function ResultsPage() {
                       href={`/strategy/${strategy.id}`}
                       className="inline-flex items-center gap-2 bg-white text-black px-6 py-3 rounded-xl font-medium hover:bg-white/90 transition-colors"
                     >
-                      Generate Execution Plan
+                      {savedStrategies.includes(strategy.id) ? "View Saved Strategy" : "Generate Execution Plan"}
                       <ChevronRight className="h-4 w-4" />
                     </Link>
                   </div>
