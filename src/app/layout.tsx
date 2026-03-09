@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={`${inter.variable} font-sans antialiased bg-black text-white`}>
+      <body className={`${inter.variable} font-sans antialiased bg-transparent text-white`}>
         <AnimatedBackground />
         <div className="relative z-10">
           <Providers>{children}</Providers>
