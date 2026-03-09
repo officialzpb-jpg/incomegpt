@@ -16,7 +16,23 @@ import {
 } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 
-const strategiesData: Record<number, any> = {
+interface Step {
+  title: string;
+  duration: string;
+  completed: boolean;
+}
+
+interface Strategy {
+  title: string;
+  description: string;
+  expectedMonthlyIncome: string;
+  difficulty: string;
+  startupCost: string;
+  timeframe: string;
+  steps: Step[];
+}
+
+const strategiesData: Record<number, Strategy> = {
   1: {
     title: "AI-Powered Content Agency",
     description: "Start a content creation agency that leverages AI tools to deliver high-quality content at scale.",
@@ -67,10 +83,9 @@ const strategiesData: Record<number, any> = {
 export default function StrategyDetailPage() {
   const params = useParams();
   const router = useRouter();
-  const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const [steps, setSteps] = useState<any[]>([]);
-  const [strategy, setStrategy] = useState<any>(null);
+  const [steps, setSteps] = useState<Step[]>([]);
+  const [strategy, setStrategy] = useState<Strategy | null>(null);
 
   const strategyId = parseInt(params.id as string);
 
@@ -82,8 +97,6 @@ export default function StrategyDetailPage() {
         router.push("/login");
         return;
       }
-
-      setUser(user);
       
       const strat = strategiesData[strategyId];
       if (strat) {
