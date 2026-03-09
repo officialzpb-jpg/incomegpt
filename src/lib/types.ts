@@ -2,10 +2,12 @@ export interface Strategy {
   id: string;
   title: string;
   description: string;
+  whyItWorks: string;
   expectedMonthlyIncome: string;
   difficulty: "Beginner" | "Intermediate" | "Advanced";
   startupCost: string;
   timeframe: string;
+  timeToFirstDollar: string;
   steps: string[];
 }
 
