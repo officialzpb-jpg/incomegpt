@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { 
-  Sparkles, 
   ArrowLeft, 
   DollarSign, 
   Clock, 
