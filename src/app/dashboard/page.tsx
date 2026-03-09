@@ -13,7 +13,8 @@ import {
   ChevronRight,
   LogOut,
   User,
-  Loader2
+  Loader2,
+  Sparkles
 } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 
