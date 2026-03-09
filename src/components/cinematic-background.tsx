@@ -4,8 +4,8 @@ import { useRef, useMemo, useEffect, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
-// Floating coins
-function Coins({ count = 50 }: { count?: number }) {
+// Floating gold coins with high quality
+function GoldCoins({ count = 50 }: { count?: number }) {
   const groupRef = useRef<THREE.Group>(null);
   
   const coins = useMemo(() => {
@@ -15,11 +15,12 @@ function Coins({ count = 50 }: { count?: number }) {
         x: (Math.random() - 0.5) * 20,
         y: (Math.random() - 0.5) * 20,
         z: (Math.random() - 0.5) * 10,
-        rotSpeedX: (Math.random() - 0.5) * 0.02,
-        rotSpeedY: (Math.random() - 0.5) * 0.02,
-        rotSpeedZ: (Math.random() - 0.5) * 0.01,
+        rotSpeedX: (Math.random() - 0.5) * 0.03,
+        rotSpeedY: (Math.random() - 0.5) * 0.03,
+        rotSpeedZ: (Math.random() - 0.5) * 0.02,
         floatSpeed: 0.5 + Math.random() * 0.5,
         floatOffset: Math.random() * Math.PI * 2,
+        scale: 0.8 + Math.random() * 0.4,
       });
     }
     return items;
@@ -30,7 +31,7 @@ function Coins({ count = 50 }: { count?: number }) {
     const time = state.clock.elapsedTime;
     
     groupRef.current.children.forEach((child, i) => {
-      if (child instanceof THREE.Mesh) {
+      if (child instanceof THREE.Group) {
         const coin = coins[i];
         
         // Rotate coin
@@ -39,28 +40,50 @@ function Coins({ count = 50 }: { count?: number }) {
         child.rotation.z += coin.rotSpeedZ;
         
         // Float up and down
-        child.position.y += Math.sin(time * coin.floatSpeed + coin.floatOffset) * 0.01;
+        child.position.y += Math.sin(time * coin.floatSpeed + coin.floatOffset) * 0.015;
         
         // Slowly drift
-        child.position.x += Math.sin(time * 0.2 + i) * 0.002;
+        child.position.x += Math.sin(time * 0.2 + i) * 0.003;
       }
     });
     
     // Rotate entire group slowly
-    groupRef.current.rotation.y = time * 0.02;
+    groupRef.current.rotation.y = time * 0.015;
   });
   
   return (
     <group ref={groupRef}>
       {coins.map((coin, i) => (
-        <mesh key={i} position={[coin.x, coin.y, coin.z]}>
-          <cylinderGeometry args={[0.15, 0.15, 0.03, 32]} />
-          <meshStandardMaterial
-            color={i % 3 === 0 ? "#FFD700" : i % 3 === 1 ? "#C0C0C0" : "#B87333"}
-            metalness={0.8}
-            roughness={0.2}
-          />
-        </mesh>
+        <group key={i} position={[coin.x, coin.y, coin.z]} scale={coin.scale}>
+          {/* Coin face */}
+          <mesh>
+            <cylinderGeometry args={[0.2, 0.2, 0.04, 64]} />
+            <meshStandardMaterial
+              color="#FFD700"
+              metalness={1.0}
+              roughness={0.15}
+              emissive="#FFA500"
+              emissiveIntensity={0.1}
+            />
+          </mesh>
+          {/* Coin edge/detail ring */}
+          <mesh position={[0, 0, 0.021]}>
+            <cylinderGeometry args={[0.18, 0.18, 0.005, 64]} />
+            <meshStandardMaterial
+              color="#FFC125"
+              metalness={0.9}
+              roughness={0.2}
+            />
+          </mesh>
+          <mesh position={[0, 0, -0.021]}>
+            <cylinderGeometry args={[0.18, 0.18, 0.005, 64]} />
+            <meshStandardMaterial
+              color="#FFC125"
+              metalness={0.9}
+              roughness={0.2}
+            />
+          </mesh>
+        </group>
       ))}
     </group>
   );
@@ -114,9 +137,10 @@ function NeuralNodes() {
 function Scene() {
   return (
     <>
-      <ambientLight intensity={0.8} />
-      <directionalLight position={[10, 10, 5]} intensity={1} />
-      <Coins count={60} />
+      <ambientLight intensity={0.6} />
+      <directionalLight position={[10, 10, 5]} intensity={1.2} color="#FFF8DC" />
+      <pointLight position={[-10, -10, -5]} intensity={0.5} color="#FFA500" />
+      <GoldCoins count={50} />
       <NeuralNodes />
     </>
   );
