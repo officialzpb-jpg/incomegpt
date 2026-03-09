@@ -88,29 +88,38 @@ export default function DashboardPage() {
   };
 
   const updateIncomeGoal = async () => {
-    if (!user) return;
+    if (!user) {
+      alert("No user found - please log in again");
+      return;
+    }
     
-    const { error } = await supabase
+    const goalValue = parseInt(incomeGoal);
+    if (isNaN(goalValue) || goalValue < 0) {
+      alert("Please enter a valid number");
+      return;
+    }
+    
+    console.log("Updating goal for user:", user.id, "to:", goalValue);
+    
+    const { data, error } = await supabase
       .from("profiles")
-      .update({ income_goal: parseInt(incomeGoal) || 0 })
-      .eq("id", user.id);
+      .update({ income_goal: goalValue })
+      .eq("id", user.id)
+      .select();
+
+    console.log("Update response:", { data, error });
 
     if (error) {
       console.error("Error updating goal:", error);
-      alert("Failed to update goal");
+      alert("Failed to update goal: " + error.message);
       return;
     }
 
     // Update local state
-    setProfile(prev => prev ? { ...prev, income_goal: parseInt(incomeGoal) || 0 } : null);
+    setProfile(prev => prev ? { ...prev, income_goal: goalValue } : null);
     
     // Show success feedback
-    const btn = document.getElementById("update-goal-btn");
-    if (btn) {
-      const originalText = btn.textContent;
-      btn.textContent = "Saved!";
-      setTimeout(() => btn.textContent = originalText, 2000);
-    }
+    alert("Goal updated successfully!");
   };
 
   if (loading) {

@@ -15,6 +15,7 @@ import {
   Loader2
 } from "lucide-react";
 import { supabase } from "@/lib/supabase";
+import { StrategyChat } from "@/components/strategy-chat";
 
 interface Step {
   title: string;
@@ -197,45 +198,52 @@ export default function StrategyDetailPage() {
             </div>
           </div>
 
-          {/* Progress */}
-          <div className="glass rounded-2xl p-6 mb-8">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-semibold">Execution Plan</h2>
-              <span className="text-sm text-white/60">{completedCount} of {steps.length} completed</span>
-            </div>
-            
-            <div className="h-2 bg-white/10 rounded-full overflow-hidden mb-6">
-              <div
-                className="h-full bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-full transition-all"
-                style={{ width: `${progress}%` }}
-              />
+          {/* Progress & Chat */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            <div className="glass rounded-2xl p-6">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-lg font-semibold">Execution Plan</h2>
+                <span className="text-sm text-white/60">{completedCount} of {steps.length} completed</span>
+              </div>
+              
+              <div className="h-2 bg-white/10 rounded-full overflow-hidden mb-6">
+                <div
+                  className="h-full bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-full transition-all"
+                  style={{ width: `${progress}%` }}
+                />
+              </div>
+
+              <div className="space-y-3">
+                {steps.map((step, index) => (
+                  <button
+                    key={index}
+                    onClick={() => toggleStep(index)}
+                    className={`w-full flex items-start gap-4 p-4 rounded-xl border transition-all text-left ${
+                      step.completed 
+                        ? "border-emerald-500/30 bg-emerald-500/10" 
+                        : "border-white/10 hover:border-white/20"
+                    }`}
+                  >
+                    {step.completed ? (
+                      <CheckCircle2 className="h-6 w-6 text-emerald-400 flex-shrink-0" />
+                    ) : (
+                      <Circle className="h-6 w-6 text-white/40 flex-shrink-0" />
+                    )}
+                    <div className="flex-1">
+                      <p className={`font-medium ${step.completed ? "text-emerald-400 line-through" : ""}`}>
+                        {step.title}
+                      </p>
+                      <p className="text-sm text-white/60">{step.duration}</p>
+                    </div>
+                  </button>
+                ))}
+              </div>
             </div>
 
-            <div className="space-y-3">
-              {steps.map((step, index) => (
-                <button
-                  key={index}
-                  onClick={() => toggleStep(index)}
-                  className={`w-full flex items-start gap-4 p-4 rounded-xl border transition-all text-left ${
-                    step.completed 
-                      ? "border-emerald-500/30 bg-emerald-500/10" 
-                      : "border-white/10 hover:border-white/20"
-                  }`}
-                >
-                  {step.completed ? (
-                    <CheckCircle2 className="h-6 w-6 text-emerald-400 flex-shrink-0" />
-                  ) : (
-                    <Circle className="h-6 w-6 text-white/40 flex-shrink-0" />
-                  )}
-                  <div className="flex-1">
-                    <p className={`font-medium ${step.completed ? "text-emerald-400 line-through" : ""}`}>
-                      {step.title}
-                    </p>
-                    <p className="text-sm text-white/60">{step.duration}</p>
-                  </div>
-                </button>
-              ))}
-            </div>
+            <StrategyChat 
+              strategyTitle={strategy.title}
+              strategyDescription={strategy.description}
+            />
           </div>
 
           <div className="flex gap-4">

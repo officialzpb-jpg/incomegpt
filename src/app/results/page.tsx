@@ -90,14 +90,18 @@ export default function ResultsPage() {
   const saveStrategy = async (strategy: typeof strategies[0]) => {
     setSavingId(strategy.id);
     
-    const { data: { user } } = await supabase.auth.getUser();
+    const { data: { user }, error: authError } = await supabase.auth.getUser();
     
-    if (!user) {
+    if (authError || !user) {
+      console.error("Auth error:", authError);
+      alert("Please log in to save strategies");
       router.push("/login");
       return;
     }
 
-    const { error } = await supabase.from("strategies").insert({
+    console.log("Saving strategy for user:", user.id);
+    
+    const strategyData = {
       user_id: user.id,
       title: strategy.title,
       description: strategy.description,
@@ -106,13 +110,20 @@ export default function ResultsPage() {
       startup_cost: strategy.startupCost,
       timeframe: strategy.timeframe,
       steps: strategy.steps,
-    });
+    };
+    
+    console.log("Strategy data:", strategyData);
+
+    const { data, error } = await supabase.from("strategies").insert(strategyData).select();
+
+    console.log("Insert response:", { data, error });
 
     if (error) {
       console.error("Error saving strategy:", error);
-      alert("Failed to save strategy. Please try again.");
+      alert("Failed to save strategy: " + error.message);
     } else {
       setSavedStrategies(prev => [...prev, strategy.id]);
+      alert("Strategy saved successfully!");
     }
     
     setSavingId(null);
