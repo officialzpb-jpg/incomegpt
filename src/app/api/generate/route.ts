@@ -260,6 +260,7 @@ function generateStrategies(input: StrategyInput): Strategy[] {
       expectedMonthlyIncome: `$${Math.round(adjustedIncome * 0.7)}-$${adjustedIncome * 1.3}`,
       difficulty: template.difficulty as "Beginner" | "Intermediate" | "Advanced",
       timeframe: timeframe,
+      timeToFirstDollar: "2-4 weeks",
       steps: template.steps
     });
   });
