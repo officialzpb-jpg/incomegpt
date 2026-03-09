@@ -4,66 +4,35 @@ import { useRef, useMemo, useEffect, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
-// Create $100 bill texture
+// Create minimalist $100 bill texture
 function createBillTexture(): THREE.CanvasTexture {
   const canvas = document.createElement("canvas");
-  canvas.width = 512;
-  canvas.height = 220;
+  canvas.width = 256;
+  canvas.height = 110;
   const ctx = canvas.getContext("2d")!;
   
-  // Bill background (green tint)
-  ctx.fillStyle = "#85bb65";
-  ctx.fillRect(0, 0, 512, 220);
+  // Subtle green background
+  ctx.fillStyle = "#1a2f1a";
+  ctx.fillRect(0, 0, 256, 110);
   
-  // Border
-  ctx.strokeStyle = "#2d5016";
-  ctx.lineWidth = 8;
-  ctx.strokeRect(4, 4, 504, 212);
-  
-  // Inner border
-  ctx.strokeStyle = "#3d6b22";
-  ctx.lineWidth = 3;
-  ctx.strokeRect(15, 15, 482, 190);
-  
-  // "100" in corners
-  ctx.fillStyle = "#1a3d0a";
-  ctx.font = "bold 48px serif";
-  ctx.textAlign = "left";
-  ctx.fillText("100", 25, 55);
-  ctx.textAlign = "right";
-  ctx.fillText("100", 487, 55);
-  ctx.textAlign = "left";
-  ctx.fillText("100", 25, 200);
-  ctx.textAlign = "right";
-  ctx.fillText("100", 487, 200);
-  
-  // Center "ONE HUNDRED DOLLARS"
-  ctx.textAlign = "center";
-  ctx.font = "bold 28px serif";
-  ctx.fillText("ONE HUNDRED DOLLARS", 256, 110);
-  
-  // Large "100" in center
-  ctx.font = "bold 80px serif";
-  ctx.fillStyle = "#1a3d0a";
-  ctx.fillText("100", 256, 165);
-  
-  // Decorative patterns
-  ctx.strokeStyle = "#4a7c2a";
+  // Very subtle border
+  ctx.strokeStyle = "#2d4a2d";
   ctx.lineWidth = 2;
-  for (let i = 0; i < 10; i++) {
-    ctx.beginPath();
-    ctx.moveTo(60 + i * 40, 30);
-    ctx.lineTo(60 + i * 40, 190);
-    ctx.stroke();
-  }
+  ctx.strokeRect(2, 2, 252, 106);
+  
+  // Minimal "100" text
+  ctx.fillStyle = "#3d6b3d";
+  ctx.font = "24px sans-serif";
+  ctx.textAlign = "center";
+  ctx.fillText("100", 128, 60);
   
   const texture = new THREE.CanvasTexture(canvas);
   texture.anisotropy = 16;
   return texture;
 }
 
-// Floating $100 bills
-function DollarBills({ count = 40 }: { count?: number }) {
+// Minimalist floating dollar bills
+function DollarBills({ count = 25 }: { count?: number }) {
   const groupRef = useRef<THREE.Group>(null);
   const texture = useMemo(() => createBillTexture(), []);
   
@@ -71,15 +40,14 @@ function DollarBills({ count = 40 }: { count?: number }) {
     const items = [];
     for (let i = 0; i < count; i++) {
       items.push({
-        x: (Math.random() - 0.5) * 25,
-        y: (Math.random() - 0.5) * 25,
-        z: (Math.random() - 0.5) * 15,
-        rotSpeedX: (Math.random() - 0.5) * 0.015,
-        rotSpeedY: (Math.random() - 0.5) * 0.02,
-        rotSpeedZ: (Math.random() - 0.5) * 0.01,
-        floatSpeed: 0.3 + Math.random() * 0.4,
+        x: (Math.random() - 0.5) * 30,
+        y: (Math.random() - 0.5) * 30,
+        z: (Math.random() - 0.5) * 20,
+        rotSpeedX: (Math.random() - 0.5) * 0.008,
+        rotSpeedY: (Math.random() - 0.5) * 0.012,
+        rotSpeedZ: (Math.random() - 0.5) * 0.005,
+        floatSpeed: 0.2 + Math.random() * 0.3,
         floatOffset: Math.random() * Math.PI * 2,
-        scale: 0.7 + Math.random() * 0.4,
       });
     }
     return items;
@@ -93,22 +61,13 @@ function DollarBills({ count = 40 }: { count?: number }) {
       if (child instanceof THREE.Mesh) {
         const bill = bills[i];
         
-        // Gentle rotation like falling money
         child.rotation.x += bill.rotSpeedX;
         child.rotation.y += bill.rotSpeedY;
         child.rotation.z += bill.rotSpeedZ;
         
-        // Float up and down
-        child.position.y += Math.sin(time * bill.floatSpeed + bill.floatOffset) * 0.008;
-        
-        // Gentle drift
-        child.position.x += Math.sin(time * 0.1 + i) * 0.002;
-        child.position.z += Math.cos(time * 0.08 + i) * 0.001;
+        child.position.y += Math.sin(time * bill.floatSpeed + bill.floatOffset) * 0.005;
       }
     });
-    
-    // Slow group rotation
-    groupRef.current.rotation.y = time * 0.008;
   });
   
   return (
@@ -117,18 +76,14 @@ function DollarBills({ count = 40 }: { count?: number }) {
         <mesh 
           key={i} 
           position={[bill.x, bill.y, bill.z]} 
-          scale={bill.scale}
-          rotation={[Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * 0.5]}
+          rotation={[Math.random() * Math.PI, Math.random() * Math.PI, 0]}
         >
-          <planeGeometry args={[2.3, 1]} />
-          <meshStandardMaterial
+          <planeGeometry args={[0.8, 0.35]} />
+          <meshBasicMaterial
             map={texture}
-            color="#ffffff"
-            metalness={0.1}
-            roughness={0.6}
-            side={THREE.DoubleSide}
             transparent
-            opacity={0.95}
+            opacity={0.15}
+            side={THREE.DoubleSide}
           />
         </mesh>
       ))}
