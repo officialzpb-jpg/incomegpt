@@ -12,19 +12,19 @@ function createBillTexture(): THREE.CanvasTexture {
   const ctx = canvas.getContext("2d")!;
   
   // Subtle green background
-  ctx.fillStyle = "#1a2f1a";
+  ctx.fillStyle = "#2d4a2d";
   ctx.fillRect(0, 0, 256, 110);
   
-  // Very subtle border
-  ctx.strokeStyle = "#2d4a2d";
+  // Subtle border
+  ctx.strokeStyle = "#3d6b3d";
   ctx.lineWidth = 2;
   ctx.strokeRect(2, 2, 252, 106);
   
-  // Minimal "100" text
-  ctx.fillStyle = "#3d6b3d";
-  ctx.font = "24px sans-serif";
+  // "100" text - brighter for visibility
+  ctx.fillStyle = "#5a9a5a";
+  ctx.font = "28px sans-serif";
   ctx.textAlign = "center";
-  ctx.fillText("100", 128, 60);
+  ctx.fillText("100", 128, 62);
   
   const texture = new THREE.CanvasTexture(canvas);
   texture.anisotropy = 16;
@@ -82,7 +82,7 @@ function DollarBills({ count = 25 }: { count?: number }) {
           <meshBasicMaterial
             map={texture}
             transparent
-            opacity={0.15}
+            opacity={0.35}
             side={THREE.DoubleSide}
           />
         </mesh>
