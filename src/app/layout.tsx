@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/providers";
+import { AnimatedBackground } from "@/components/animated-background";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
@@ -18,7 +19,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className={`${inter.variable} font-sans antialiased bg-black text-white`}>
-        <Providers>{children}</Providers>
+        <AnimatedBackground />
+        <div className="relative z-10">
+          <Providers>{children}</Providers>
+        </div>
       </body>
     </html>
   );
