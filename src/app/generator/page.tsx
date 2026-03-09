@@ -66,7 +66,7 @@ export default function GeneratorPage() {
             <div className="flex items-center gap-2">
               <div className="h-8 w-8 rounded-lg overflow-hidden">
                 <img 
-                  src="https://i.imgur.com/KoehXsN.jpeg" 
+                  src="/logo.png" 
                   alt="IncomeGPT" 
                   className="h-full w-full object-cover"
                 />
