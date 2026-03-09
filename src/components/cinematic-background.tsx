@@ -4,24 +4,6 @@ import { useRef, useMemo, useEffect, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
-// Simple rotating cube to test if Three.js is working
-function TestCube() {
-  const meshRef = useRef<THREE.Mesh>(null);
-  
-  useFrame((state) => {
-    if (!meshRef.current) return;
-    meshRef.current.rotation.x = state.clock.elapsedTime * 0.5;
-    meshRef.current.rotation.y = state.clock.elapsedTime * 0.3;
-  });
-  
-  return (
-    <mesh ref={meshRef}>
-      <boxGeometry args={[1, 1, 1]} />
-      <meshBasicMaterial color="#10b981" wireframe />
-    </mesh>
-  );
-}
-
 // Floating particles with neural network aesthetic
 function ParticleField() {
   const pointsRef = useRef<THREE.Points>(null);
