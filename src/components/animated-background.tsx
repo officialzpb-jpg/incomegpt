@@ -7,10 +7,18 @@ export function AnimatedBackground() {
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!canvas) {
+      console.log("Canvas not found");
+      return;
+    }
 
     const ctx = canvas.getContext("2d");
-    if (!ctx) return;
+    if (!ctx) {
+      console.log("Canvas context not available");
+      return;
+    }
+
+    console.log("Canvas initialized", canvas.width, canvas.height);
 
     let animationFrameId: number;
     let particles: Particle[] = [];
@@ -18,6 +26,7 @@ export function AnimatedBackground() {
     const resize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
+      console.log("Canvas resized", canvas.width, canvas.height);
     };
 
     class Particle {
@@ -41,7 +50,6 @@ export function AnimatedBackground() {
         this.speedY = (Math.random() - 0.5) * 0.5;
         this.opacity = Math.random() * 0.5 + 0.1;
         
-        // Emerald to cyan gradient colors
         const colors = ["#10b981", "#06b6d4", "#3b82f6", "#8b5cf6"];
         this.color = colors[Math.floor(Math.random() * colors.length)];
       }
@@ -50,7 +58,6 @@ export function AnimatedBackground() {
         this.x += this.speedX;
         this.y += this.speedY;
 
-        // Wrap around screen
         if (this.x > this.canvasWidth) this.x = 0;
         if (this.x < 0) this.x = this.canvasWidth;
         if (this.y > this.canvasHeight) this.y = 0;
@@ -71,6 +78,7 @@ export function AnimatedBackground() {
     const init = () => {
       particles = [];
       const particleCount = Math.min(Math.floor(window.innerWidth / 10), 100);
+      console.log("Creating", particleCount, "particles");
       for (let i = 0; i < particleCount; i++) {
         particles.push(new Particle(canvas.width, canvas.height));
       }
@@ -148,7 +156,9 @@ export function AnimatedBackground() {
       className="fixed inset-0 pointer-events-none"
       style={{ 
         background: "linear-gradient(to bottom, #000000, #0a0a0a)",
-        zIndex: 0
+        zIndex: -1,
+        width: "100vw",
+        height: "100vh"
       }}
     />
   );
