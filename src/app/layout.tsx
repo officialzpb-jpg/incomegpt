@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/providers";
-import { AnimatedBackground } from "@/components/animated-background";
+import { CinematicBackground } from "@/components/cinematic-background";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className={`${inter.variable} font-sans antialiased bg-transparent text-white`}>
-        <AnimatedBackground />
+        <CinematicBackground />
         <div className="relative z-10">
           <Providers>{children}</Providers>
         </div>
