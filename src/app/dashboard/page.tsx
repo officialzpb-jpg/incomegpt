@@ -90,10 +90,27 @@ export default function DashboardPage() {
   const updateIncomeGoal = async () => {
     if (!user) return;
     
-    await supabase
+    const { error } = await supabase
       .from("profiles")
       .update({ income_goal: parseInt(incomeGoal) || 0 })
       .eq("id", user.id);
+
+    if (error) {
+      console.error("Error updating goal:", error);
+      alert("Failed to update goal");
+      return;
+    }
+
+    // Update local state
+    setProfile(prev => prev ? { ...prev, income_goal: parseInt(incomeGoal) || 0 } : null);
+    
+    // Show success feedback
+    const btn = document.getElementById("update-goal-btn");
+    if (btn) {
+      const originalText = btn.textContent;
+      btn.textContent = "Saved!";
+      setTimeout(() => btn.textContent = originalText, 2000);
+    }
   };
 
   if (loading) {
@@ -205,6 +222,7 @@ export default function DashboardPage() {
                   </div>
                 </div>
                 <button 
+                  id="update-goal-btn"
                   onClick={updateIncomeGoal}
                   className="px-6 py-3 bg-white text-black rounded-xl font-medium hover:bg-white/90 transition-colors"
                 >
