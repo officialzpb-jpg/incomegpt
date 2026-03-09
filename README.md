@@ -1,4 +1,4 @@
-# ProfitPilot AI
+# IncomeGPT
 
 An AI-powered platform that helps users generate and execute profitable money-making strategies.
 
@@ -53,7 +53,7 @@ An AI-powered platform that helps users generate and execute profitable money-ma
 ## Project Structure
 
 ```
-profipilot-ai/
+incomegpt/
 ├── src/
 │   ├── app/              # Next.js app router pages
 │   │   ├── api/          # API routes

@@ -10,7 +10,7 @@ export function Footer() {
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-emerald-500 to-cyan-500">
               <Sparkles className="h-5 w-5 text-white" />
             </div>
-            <span className="text-lg font-semibold">ProfitPilot</span>
+            <span className="text-lg font-semibold">IncomeGPT</span>
           </Link>
 
           <div className="flex items-center gap-8 text-sm text-white/60">
@@ -20,7 +20,7 @@ export function Footer() {
           </div>
 
           <p className="text-sm text-white/40">
-            © 2024 ProfitPilot AI. All rights reserved.
+            © 2024 IncomeGPT. All rights reserved.
           </p>
         </div>
       </div>

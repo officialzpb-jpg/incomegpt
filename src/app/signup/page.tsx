@@ -31,7 +31,7 @@ export default function SignupPage() {
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-emerald-500 to-cyan-500">
               <Sparkles className="h-6 w-6 text-white" />
             </div>
-            <span className="text-xl font-semibold">ProfitPilot</span>
+            <span className="text-xl font-semibold">IncomeGPT</span>
           </Link>
           <h1 className="text-2xl font-bold mb-2">Create your account</h1>
           <p className="text-white/60">Start generating profitable strategies today</p>

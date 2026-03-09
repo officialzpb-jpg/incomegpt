@@ -6,7 +6,7 @@ import { Providers } from "@/components/providers";
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
-  title: "ProfitPilot AI - The AI That Helps You Make Money",
+  title: "IncomeGPT - The AI That Helps You Make Money",
   description: "Generate and execute profitable money-making strategies with AI-powered insights.",
 };
 
