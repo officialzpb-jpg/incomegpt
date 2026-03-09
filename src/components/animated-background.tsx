@@ -45,10 +45,10 @@ export function AnimatedBackground() {
         this.canvasHeight = canvasH;
         this.x = Math.random() * this.canvasWidth;
         this.y = Math.random() * this.canvasHeight;
-        this.size = Math.random() * 2 + 0.5;
+        this.size = Math.random() * 3 + 1;
         this.speedX = (Math.random() - 0.5) * 0.5;
         this.speedY = (Math.random() - 0.5) * 0.5;
-        this.opacity = Math.random() * 0.5 + 0.1;
+        this.opacity = Math.random() * 0.8 + 0.2;
         
         const colors = ["#10b981", "#06b6d4", "#3b82f6", "#8b5cf6"];
         this.color = colors[Math.floor(Math.random() * colors.length)];
@@ -156,7 +156,7 @@ export function AnimatedBackground() {
       className="fixed inset-0 pointer-events-none"
       style={{ 
         background: "linear-gradient(to bottom, #000000, #0a0a0a)",
-        zIndex: -1,
+        zIndex: 0,
         width: "100vw",
         height: "100vh"
       }}
