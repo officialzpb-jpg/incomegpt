@@ -1,46 +1,20 @@
 import { NextResponse } from "next/server";
 import { StrategyInput, Strategy } from "@/lib/types";
 
-// AI Prompt Engine for IncomeGPT
-const SYSTEM_PROMPT = `You are IncomeGPT, an expert business strategist who specializes in generating realistic, actionable money-making strategies.
+// AI Prompt Engine for IncomeGPT - System prompt for OpenAI integration
+// const SYSTEM_PROMPT = `...`;
 
-YOUR PERSONALITY:
-- Direct and no-nonsense
-- Focus on practical, proven methods
-- Prioritize speed to first dollar
-- Always give specific numbers and timelines
-- Never give vague advice like "follow your passion"
+interface StrategyTemplate {
+  title: string;
+  baseIncome: number;
+  description: string;
+  whyItWorks: string;
+  startupCost: number;
+  difficulty: string;
+  steps: string[];
+}
 
-RULES FOR GENERATING STRATEGIES:
-1. Must be realistic for the user's budget and skills
-2. Prioritize online businesses (low overhead, scalable)
-3. Focus on methods that can generate income within the timeframe
-4. Give specific startup costs (not ranges like "$100-500")
-5. Expected revenue must be achievable based on market data
-6. First 5 steps must be actionable within 24 hours
-7. Avoid MLMs, crypto schemes, or anything requiring large upfront inventory
-8. Each strategy must have a clear path to the income goal
-
-OUTPUT FORMAT:
-Respond with a JSON array of 3 strategies. Each strategy must follow this exact structure:
-{
-  "title": "Specific Business Name",
-  "description": "2-3 sentences explaining what it is",
-  "whyItWorks": "1 sentence on market demand or proof",
-  "startupCost": "Exact dollar amount (e.g., $150)",
-  "expectedMonthlyIncome": "Realistic range (e.g., $2,000-$5,000)",
-  "difficulty": "Beginner|Intermediate|Advanced",
-  "timeToFirstDollar": "e.g., 2 weeks",
-  "steps": [
-    "Specific action 1",
-    "Specific action 2",
-    "Specific action 3",
-    "Specific action 4",
-    "Specific action 5"
-  ]
-}`;
-
-const STRATEGY_TEMPLATES: Record<string, any[]> = {
+const STRATEGY_TEMPLATES: Record<string, StrategyTemplate[]> = {
   writing: [
     {
       title: "AI-Assisted Copywriting Agency",
@@ -174,7 +148,7 @@ const STRATEGY_TEMPLATES: Record<string, any[]> = {
 };
 
 // Fallback strategies for any skill set
-const FALLBACK_STRATEGIES = [
+const FALLBACK_STRATEGIES: StrategyTemplate[] = [
   {
     title: "Digital Product Reseller",
     baseIncome: 3000,
@@ -252,7 +226,7 @@ function generateStrategies(input: StrategyInput): Strategy[] {
   const strategies: Strategy[] = [];
   
   // Match user skills to strategy templates
-  const matchedStrategies: any[] = [];
+  const matchedStrategies: StrategyTemplate[] = [];
   
   skills.forEach(skill => {
     const normalizedSkill = skill.toLowerCase();
