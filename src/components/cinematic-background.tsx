@@ -4,45 +4,65 @@ import { useRef, useMemo, useEffect, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
-// Floating particles with neural network aesthetic
-function ParticleField() {
-  const pointsRef = useRef<THREE.Points>(null);
-  const count = 100;
+// Floating coins
+function Coins({ count = 50 }: { count?: number }) {
+  const groupRef = useRef<THREE.Group>(null);
   
-  const positions = useMemo(() => {
-    const arr = new Float32Array(count * 3);
+  const coins = useMemo(() => {
+    const items = [];
     for (let i = 0; i < count; i++) {
-      arr[i * 3] = (Math.random() - 0.5) * 20;
-      arr[i * 3 + 1] = (Math.random() - 0.5) * 20;
-      arr[i * 3 + 2] = (Math.random() - 0.5) * 10;
+      items.push({
+        x: (Math.random() - 0.5) * 20,
+        y: (Math.random() - 0.5) * 20,
+        z: (Math.random() - 0.5) * 10,
+        rotSpeedX: (Math.random() - 0.5) * 0.02,
+        rotSpeedY: (Math.random() - 0.5) * 0.02,
+        rotSpeedZ: (Math.random() - 0.5) * 0.01,
+        floatSpeed: 0.5 + Math.random() * 0.5,
+        floatOffset: Math.random() * Math.PI * 2,
+      });
     }
-    return arr;
-  }, []);
+    return items;
+  }, [count]);
   
   useFrame((state) => {
-    if (!pointsRef.current) return;
-    pointsRef.current.rotation.y = state.clock.elapsedTime * 0.05;
-    pointsRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.1) * 0.1;
+    if (!groupRef.current) return;
+    const time = state.clock.elapsedTime;
+    
+    groupRef.current.children.forEach((child, i) => {
+      if (child instanceof THREE.Mesh) {
+        const coin = coins[i];
+        
+        // Rotate coin
+        child.rotation.x += coin.rotSpeedX;
+        child.rotation.y += coin.rotSpeedY;
+        child.rotation.z += coin.rotSpeedZ;
+        
+        // Float up and down
+        child.position.y += Math.sin(time * coin.floatSpeed + coin.floatOffset) * 0.01;
+        
+        // Slowly drift
+        child.position.x += Math.sin(time * 0.2 + i) * 0.002;
+      }
+    });
+    
+    // Rotate entire group slowly
+    groupRef.current.rotation.y = time * 0.02;
   });
   
   return (
-    <points ref={pointsRef}>
-      <bufferGeometry>
-        <bufferAttribute
-          attach="attributes-position"
-          count={count}
-          array={positions}
-          itemSize={3}
-        />
-      </bufferGeometry>
-      <pointsMaterial
-        size={0.1}
-        color="#10b981"
-        transparent
-        opacity={0.8}
-        sizeAttenuation
-      />
-    </points>
+    <group ref={groupRef}>
+      {coins.map((coin, i) => (
+        <mesh key={i} position={[coin.x, coin.y, coin.z]}>
+          <cylinderGeometry args={[0.15, 0.15, 0.03, 32]} />
+          <meshStandardMaterial
+            color={i % 3 === 0 ? "#FFD700" : i % 3 === 1 ? "#C0C0C0" : "#B87333"}
+            metalness={0.8}
+            roughness={0.2}
+          />
+        </mesh>
+      ))}
+    </group>
   );
 }
 
@@ -94,8 +114,9 @@ function NeuralNodes() {
 function Scene() {
   return (
     <>
-      <ambientLight intensity={0.5} />
-      <ParticleField />
+      <ambientLight intensity={0.8} />
+      <directionalLight position={[10, 10, 5]} intensity={1} />
+      <Coins count={60} />
       <NeuralNodes />
     </>
   );
