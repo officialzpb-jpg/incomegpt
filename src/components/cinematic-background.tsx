@@ -4,23 +4,82 @@ import { useRef, useMemo, useEffect, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
-// Floating gold coins with high quality
-function GoldCoins({ count = 50 }: { count?: number }) {
-  const groupRef = useRef<THREE.Group>(null);
+// Create $100 bill texture
+function createBillTexture(): THREE.CanvasTexture {
+  const canvas = document.createElement("canvas");
+  canvas.width = 512;
+  canvas.height = 220;
+  const ctx = canvas.getContext("2d")!;
   
-  const coins = useMemo(() => {
+  // Bill background (green tint)
+  ctx.fillStyle = "#85bb65";
+  ctx.fillRect(0, 0, 512, 220);
+  
+  // Border
+  ctx.strokeStyle = "#2d5016";
+  ctx.lineWidth = 8;
+  ctx.strokeRect(4, 4, 504, 212);
+  
+  // Inner border
+  ctx.strokeStyle = "#3d6b22";
+  ctx.lineWidth = 3;
+  ctx.strokeRect(15, 15, 482, 190);
+  
+  // "100" in corners
+  ctx.fillStyle = "#1a3d0a";
+  ctx.font = "bold 48px serif";
+  ctx.textAlign = "left";
+  ctx.fillText("100", 25, 55);
+  ctx.textAlign = "right";
+  ctx.fillText("100", 487, 55);
+  ctx.textAlign = "left";
+  ctx.fillText("100", 25, 200);
+  ctx.textAlign = "right";
+  ctx.fillText("100", 487, 200);
+  
+  // Center "ONE HUNDRED DOLLARS"
+  ctx.textAlign = "center";
+  ctx.font = "bold 28px serif";
+  ctx.fillText("ONE HUNDRED DOLLARS", 256, 110);
+  
+  // Large "100" in center
+  ctx.font = "bold 80px serif";
+  ctx.fillStyle = "#1a3d0a";
+  ctx.fillText("100", 256, 165);
+  
+  // Decorative patterns
+  ctx.strokeStyle = "#4a7c2a";
+  ctx.lineWidth = 2;
+  for (let i = 0; i < 10; i++) {
+    ctx.beginPath();
+    ctx.moveTo(60 + i * 40, 30);
+    ctx.lineTo(60 + i * 40, 190);
+    ctx.stroke();
+  }
+  
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.anisotropy = 16;
+  return texture;
+}
+
+// Floating $100 bills
+function DollarBills({ count = 40 }: { count?: number }) {
+  const groupRef = useRef<THREE.Group>(null);
+  const texture = useMemo(() => createBillTexture(), []);
+  
+  const bills = useMemo(() => {
     const items = [];
     for (let i = 0; i < count; i++) {
       items.push({
-        x: (Math.random() - 0.5) * 20,
-        y: (Math.random() - 0.5) * 20,
-        z: (Math.random() - 0.5) * 10,
-        rotSpeedX: (Math.random() - 0.5) * 0.03,
-        rotSpeedY: (Math.random() - 0.5) * 0.03,
-        rotSpeedZ: (Math.random() - 0.5) * 0.02,
-        floatSpeed: 0.5 + Math.random() * 0.5,
+        x: (Math.random() - 0.5) * 25,
+        y: (Math.random() - 0.5) * 25,
+        z: (Math.random() - 0.5) * 15,
+        rotSpeedX: (Math.random() - 0.5) * 0.015,
+        rotSpeedY: (Math.random() - 0.5) * 0.02,
+        rotSpeedZ: (Math.random() - 0.5) * 0.01,
+        floatSpeed: 0.3 + Math.random() * 0.4,
         floatOffset: Math.random() * Math.PI * 2,
-        scale: 0.8 + Math.random() * 0.4,
+        scale: 0.7 + Math.random() * 0.4,
       });
     }
     return items;
@@ -31,75 +90,63 @@ function GoldCoins({ count = 50 }: { count?: number }) {
     const time = state.clock.elapsedTime;
     
     groupRef.current.children.forEach((child, i) => {
-      if (child instanceof THREE.Group) {
-        const coin = coins[i];
+      if (child instanceof THREE.Mesh) {
+        const bill = bills[i];
         
-        // Rotate coin
-        child.rotation.x += coin.rotSpeedX;
-        child.rotation.y += coin.rotSpeedY;
-        child.rotation.z += coin.rotSpeedZ;
+        // Gentle rotation like falling money
+        child.rotation.x += bill.rotSpeedX;
+        child.rotation.y += bill.rotSpeedY;
+        child.rotation.z += bill.rotSpeedZ;
         
         // Float up and down
-        child.position.y += Math.sin(time * coin.floatSpeed + coin.floatOffset) * 0.015;
+        child.position.y += Math.sin(time * bill.floatSpeed + bill.floatOffset) * 0.008;
         
-        // Slowly drift
-        child.position.x += Math.sin(time * 0.2 + i) * 0.003;
+        // Gentle drift
+        child.position.x += Math.sin(time * 0.1 + i) * 0.002;
+        child.position.z += Math.cos(time * 0.08 + i) * 0.001;
       }
     });
     
-    // Rotate entire group slowly
-    groupRef.current.rotation.y = time * 0.015;
+    // Slow group rotation
+    groupRef.current.rotation.y = time * 0.008;
   });
   
   return (
     <group ref={groupRef}>
-      {coins.map((coin, i) => (
-        <group key={i} position={[coin.x, coin.y, coin.z]} scale={coin.scale}>
-          {/* Coin face */}
-          <mesh>
-            <cylinderGeometry args={[0.2, 0.2, 0.04, 64]} />
-            <meshStandardMaterial
-              color="#FFD700"
-              metalness={1.0}
-              roughness={0.15}
-              emissive="#FFA500"
-              emissiveIntensity={0.1}
-            />
-          </mesh>
-          {/* Coin edge/detail ring */}
-          <mesh position={[0, 0, 0.021]}>
-            <cylinderGeometry args={[0.18, 0.18, 0.005, 64]} />
-            <meshStandardMaterial
-              color="#FFC125"
-              metalness={0.9}
-              roughness={0.2}
-            />
-          </mesh>
-          <mesh position={[0, 0, -0.021]}>
-            <cylinderGeometry args={[0.18, 0.18, 0.005, 64]} />
-            <meshStandardMaterial
-              color="#FFC125"
-              metalness={0.9}
-              roughness={0.2}
-            />
-          </mesh>
-        </group>
+      {bills.map((bill, i) => (
+        <mesh 
+          key={i} 
+          position={[bill.x, bill.y, bill.z]} 
+          scale={bill.scale}
+          rotation={[Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * 0.5]}
+        >
+          <planeGeometry args={[2.3, 1]} />
+          <meshStandardMaterial
+            map={texture}
+            color="#ffffff"
+            metalness={0.1}
+            roughness={0.6}
+            side={THREE.DoubleSide}
+            transparent
+            opacity={0.95}
+          />
+        </mesh>
       ))}
     </group>
   );
 }
 
-// Neural network nodes
+// Neural network nodes (kept for ambiance)
 function NeuralNodes() {
   const groupRef = useRef<THREE.Group>(null);
   
   const nodes = useMemo(() => {
     const items = [];
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 15; i++) {
       items.push({
-        x: (Math.random() - 0.5) * 15,
-        y: (Math.random() - 0.5) * 15,
-        z: (Math.random() - 0.5) * 5,
+        x: (Math.random() - 0.5) * 20,
+        y: (Math.random() - 0.5) * 20,
+        z: (Math.random() - 0.5) * 10,
       });
     }
     return items;
@@ -111,8 +158,8 @@ function NeuralNodes() {
     
     groupRef.current.children.forEach((child, i) => {
       if (child instanceof THREE.Mesh) {
-        const pulse = Math.sin(time * 2 + i) * 0.5 + 0.5;
-        child.scale.setScalar(0.1 + pulse * 0.05);
+        const pulse = Math.sin(time * 1.5 + i) * 0.5 + 0.5;
+        child.scale.setScalar(0.08 + pulse * 0.04);
       }
     });
   });
@@ -121,11 +168,11 @@ function NeuralNodes() {
     <group ref={groupRef}>
       {nodes.map((node, i) => (
         <mesh key={i} position={[node.x, node.y, node.z]}>
-          <sphereGeometry args={[0.2, 16, 16]} />
+          <sphereGeometry args={[0.15, 16, 16]} />
           <meshBasicMaterial
             color={i % 2 === 0 ? "#10b981" : "#06b6d4"}
             transparent
-            opacity={0.6}
+            opacity={0.4}
           />
         </mesh>
       ))}
@@ -137,19 +184,19 @@ function NeuralNodes() {
 function Scene() {
   return (
     <>
-      <ambientLight intensity={0.6} />
-      <directionalLight position={[10, 10, 5]} intensity={1.2} color="#FFF8DC" />
-      <pointLight position={[-10, -10, -5]} intensity={0.5} color="#FFA500" />
-      <GoldCoins count={50} />
+      <ambientLight intensity={0.7} />
+      <directionalLight position={[10, 10, 5]} intensity={1} />
+      <pointLight position={[-10, -10, -5]} intensity={0.4} color="#85bb65" />
+      <DollarBills count={40} />
       <NeuralNodes />
     </>
   );
 }
 
-// Error boundary wrapper
+// Error fallback
 function ErrorFallback() {
   return (
-    <div className="fixed inset-0 bg-gradient-to-b from-black via-emerald-950/20 to-black z-0" />
+    <div className="fixed inset-0 bg-gradient-to-b from-black via-green-950/20 to-black z-0" />
   );
 }
 
@@ -157,12 +204,10 @@ export function CinematicBackground() {
   const [hasError, setHasError] = useState(false);
   
   useEffect(() => {
-    // Check if WebGL is supported
     try {
       const canvas = document.createElement("canvas");
       const gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
       if (!gl) {
-        console.log("WebGL not supported, using fallback");
         setHasError(true);
       }
     } catch {
@@ -177,7 +222,7 @@ export function CinematicBackground() {
   return (
     <div className="fixed inset-0 z-0" style={{ background: "#000000" }}>
       <Canvas
-        camera={{ position: [0, 0, 8], fov: 60 }}
+        camera={{ position: [0, 0, 10], fov: 60 }}
         dpr={1}
         gl={{ 
           antialias: false,
