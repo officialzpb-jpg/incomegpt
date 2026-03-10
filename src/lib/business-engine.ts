@@ -108,12 +108,12 @@ export function generateBusinessBlueprint(input: BlueprintInput): BusinessBluepr
       revenueModel: "Project-based + Monthly retainers",
       scalabilityScore: timePerWeek >= 20 ? 8 : 6,
     },
-    targetMarket: generateTargetMarket(interests, primarySkill),
-    offering: generateOffering(primarySkill, experienceLevel),
+    targetMarket: generateTargetMarket(interests),
+    offering: generateOffering(primarySkill),
     pricingStrategy: generatePricingStrategy(startingBudget, experienceLevel),
-    customerAcquisition: generateAcquisitionStrategy(primarySkill),
+    customerAcquisition: generateAcquisitionStrategy(),
     first30Days: generateFirst30Days(timePerWeek),
-    outreachScripts: generateOutreachScripts(businessName),
+    outreachScripts: generateOutreachScripts(),
     recommendedTools: generateToolStack(startingBudget),
     financialProjection: generateProjections(experienceLevel),
   };
@@ -134,7 +134,7 @@ function generateBusinessDescription(skill: string, interests: string): string {
   return descriptions[skill] || `Professional service business serving the ${interests} industry with expert ${skill.toLowerCase()} solutions.`;
 }
 
-function generateTargetMarket(interests: string, skill: string) {
+function generateTargetMarket(interests: string) {
   return {
     primaryAudience: `${interests} businesses and professionals`,
     painPoints: [
@@ -148,7 +148,7 @@ function generateTargetMarket(interests: string, skill: string) {
   };
 }
 
-function generateOffering(skill: string, experienceLevel: string) {
+function generateOffering(skill: string) {
   const offerings: Record<string, { service: string; core: string; deliverables: string[] }> = {
     "Writing": {
       service: "Content Creation Services",
@@ -221,7 +221,7 @@ function generatePricingStrategy(budget: number, experienceLevel: string) {
   };
 }
 
-function generateAcquisitionStrategy(skill: string) {
+function generateAcquisitionStrategy() {
   return {
     primaryChannels: ["LinkedIn outreach", "Cold email", "Referrals"],
     secondaryChannels: ["Content marketing", "Industry events", "Strategic partnerships"],
@@ -271,7 +271,7 @@ function generateFirst30Days(timePerWeek: number) {
   };
 }
 
-function generateOutreachScripts(businessName: string) {
+function generateOutreachScripts() {
   return {
     coldEmail: `Subject: Quick question about [Company]\n\nHi [Name],\n\nI help businesses like [Company] [achieve specific result].\n\nRecently worked with a similar company and helped them [specific outcome with numbers].\n\nWorth a brief conversation to see if I can do the same for you?\n\nBest,\n[Your name]\n\nP.S. Happy to share a quick audit - no pitch, just value.`,
     linkedinDm: `Hi [Name],\n\nSaw your post about [topic] - great insights!\n\nI specialize in helping [target] achieve [result].\n\nWould you be open to a quick conversation about [specific pain point]?\n\nNo pressure either way!`,
