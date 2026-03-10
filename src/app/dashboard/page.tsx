@@ -15,7 +15,8 @@ import {
   User,
   Loader2,
   Sparkles,
-  Rocket
+  Rocket,
+  MessageSquare
 } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { DailyTasks } from "@/components/daily-tasks";
@@ -169,6 +170,13 @@ export default function DashboardPage() {
             >
               <Rocket className="h-5 w-5" />
               Build $10K Business
+            </Link>
+            <Link
+              href="/chat"
+              className="flex items-center gap-3 px-4 py-3 rounded-xl text-white/60 hover:bg-white/5 hover:text-white transition-colors"
+            >
+              <MessageSquare className="h-5 w-5" />
+              AI Coach
             </Link>
             <Link
               href="#"
