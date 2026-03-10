@@ -203,20 +203,19 @@ const SKILL_MATCHES: Record<string, string[]> = {
   "Video Editing": ["AI Avatar/Video Agency"]
 };
 
-// Budget constraints
-const BUDGET_CONSTRAINTS: Record<number, string[]> = {
-  0: ["AI Automation Agency", "AI Content Agency", "Freelance Developer (AI-Assisted)"],
-  50: ["Niche Newsletter", "Digital Product Reseller", "AI Avatar/Video Agency"],
-  100: ["Micro-SaaS Product", "Local Lead Generation"]
-};
+// Remove unused constants - commented out for future use
+// const BUDGET_CONSTRAINTS: Record<number, string[]> = {
+//   0: ["AI Automation Agency", "AI Content Agency", "Freelance Developer (AI-Assisted)"],
+//   50: ["Niche Newsletter", "Digital Product Reseller", "AI Avatar/Video Agency"],
+//   100: ["Micro-SaaS Product", "Local Lead Generation"]
+// };
 
-// Time availability constraints
-const TIME_CONSTRAINTS: Record<number, string[]> = {
-  5: ["Digital Product Reseller", "Niche Newsletter"],
-  10: ["AI Content Agency", "AI Avatar/Video Agency"],
-  20: ["AI Automation Agency", "Local Lead Generation"],
-  30: ["Micro-SaaS Product", "Freelance Developer (AI-Assisted)"]
-};
+// const TIME_CONSTRAINTS: Record<number, string[]> = {
+//   5: ["Digital Product Reseller", "Niche Newsletter"],
+//   10: ["AI Content Agency", "AI Avatar/Video Agency"],
+//   20: ["AI Automation Agency", "Local Lead Generation"],
+//   30: ["Micro-SaaS Product", "Freelance Developer (AI-Assisted)"]
+// };
 
 export function generateStrategies(input: StrategyInput): Strategy[] {
   const { incomeGoal, startingBudget, skills, timePerWeek } = input;
@@ -337,8 +336,10 @@ export function validateStrategy(strategy: Strategy, input: StrategyInput): {
   };
 }
 
-export default {
+const StrategyEngine = {
   generateStrategies,
   generateExecutionPlan,
   validateStrategy
 };
+
+export default StrategyEngine;
