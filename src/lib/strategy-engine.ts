@@ -23,6 +23,7 @@ export interface Strategy {
   requirements: string[];
   pros: string[];
   cons: string[];
+  score?: number;
 }
 
 // Strategy templates database

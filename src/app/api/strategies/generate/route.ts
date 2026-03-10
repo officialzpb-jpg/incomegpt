@@ -28,7 +28,7 @@ export async function POST(request: Request) {
     const strategies = generateStrategies(input);
     
     // Add validation and execution plans
-    const enrichedStrategies = strategies.map(strategy => {
+    const enrichedStrategies = strategies.map((strategy, index) => {
       const validation = validateStrategy(strategy, input);
       const executionPlan = generateExecutionPlan(strategy, input);
       
@@ -36,7 +36,7 @@ export async function POST(request: Request) {
         ...strategy,
         validation,
         executionPlan,
-        matchScore: strategy.score || 0
+        matchScore: strategy.score ?? index + 1
       };
     });
     
