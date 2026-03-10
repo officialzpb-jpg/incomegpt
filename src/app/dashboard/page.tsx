@@ -18,6 +18,7 @@ import {
   Rocket
 } from "lucide-react";
 import { supabase } from "@/lib/supabase";
+import { DailyTasks } from "@/components/daily-tasks";
 
 interface Strategy {
   id: string;
@@ -287,6 +288,11 @@ export default function DashboardPage() {
                 </div>
               </div>
             </Link>
+
+            {/* Daily Tasks */}
+            <div className="mb-8">
+              <DailyTasks />
+            </div>
 
             {/* Saved Strategies */}
             <div>
