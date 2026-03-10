@@ -14,7 +14,8 @@ import {
   LogOut,
   User,
   Loader2,
-  Sparkles
+  Sparkles,
+  Rocket
 } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 
@@ -162,6 +163,13 @@ export default function DashboardPage() {
               Generate Strategy
             </Link>
             <Link
+              href="/business/build"
+              className="flex items-center gap-3 px-4 py-3 rounded-xl text-white/60 hover:bg-white/5 hover:text-white transition-colors"
+            >
+              <Rocket className="h-5 w-5" />
+              Build $10K Business
+            </Link>
+            <Link
               href="#"
               className="flex items-center gap-3 px-4 py-3 rounded-xl text-white/60 hover:bg-white/5 hover:text-white transition-colors"
             >
@@ -246,7 +254,7 @@ export default function DashboardPage() {
 
             {/* Generate Strategy CTA */}
             <Link href="/generator">
-              <div className="group glass rounded-2xl p-6 mb-8 hover:bg-white/[0.05] transition-colors cursor-pointer">
+              <div className="group glass rounded-2xl p-6 mb-4 hover:bg-white/[0.05] transition-colors cursor-pointer">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
                     <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-cyan-500">
@@ -255,6 +263,24 @@ export default function DashboardPage() {
                     <div>
                       <h3 className="font-semibold">Generate New Strategy</h3>
                       <p className="text-sm text-white/60">Create a personalized money-making plan</p>
+                    </div>
+                  </div>
+                  <ChevronRight className="h-5 w-5 text-white/40 group-hover:text-white group-hover:translate-x-1 transition-all" />
+                </div>
+              </div>
+            </Link>
+
+            {/* Build Business CTA */}
+            <Link href="/business/build">
+              <div className="group glass rounded-2xl p-6 mb-8 hover:bg-white/[0.05] transition-colors cursor-pointer border border-emerald-500/20">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-4">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-pink-500">
+                      <Rocket className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold">Build Your $10K Business</h3>
+                      <p className="text-sm text-white/60">Get a complete business blueprint in 10 seconds</p>
                     </div>
                   </div>
                   <ChevronRight className="h-5 w-5 text-white/40 group-hover:text-white group-hover:translate-x-1 transition-all" />
