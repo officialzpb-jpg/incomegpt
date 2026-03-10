@@ -172,7 +172,7 @@ export function DailyTasks() {
       {/* Progress Bar */}
       <div className="mb-6">
         <div className="flex items-center justify-between text-sm mb-2">
-          <span className="text-white/60">Today's Progress</span>
+          <span className="text-white/60">Today\u0027s Progress</span>
           <span className="font-medium">{completedCount}/{tasks.length} completed</span>
         </div>
         <div className="h-2 bg-white/10 rounded-full overflow-hidden">

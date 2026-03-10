@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getOrGenerateDailyTasks, completeTask } from "@/lib/daily-tasks-engine";
+import { getOrGenerateDailyTasks } from "@/lib/daily-tasks-engine";
 import { createClient } from "@/lib/supabase-server";
 
 // GET /api/tasks/daily - Get today's tasks

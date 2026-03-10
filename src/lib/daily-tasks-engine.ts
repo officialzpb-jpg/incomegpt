@@ -1,7 +1,7 @@
 // Daily Income Tasks Engine for IncomeGPT
 // Generates personalized daily tasks based on user profile and goals
 
-import { createClient } from "@supabase/supabase-js";
+import type { SupabaseClient } from "@supabase/supabase-js";
 
 export interface TaskInput {
   userId: string;
@@ -138,7 +138,7 @@ function determineDifficulty(completedCount: number, streak: number): "Easy" | "
   return "Easy";
 }
 
-function generateOutreachTask(difficulty: string): DailyTask {
+function generateOutreachTask(difficulty: "Easy" | "Medium" | "Hard"): DailyTask {
   const templates = TASK_TEMPLATES.outreach;
   const template = templates[Math.floor(Math.random() * templates.length)];
   const target = TARGETS[Math.floor(Math.random() * TARGETS.length)];
@@ -166,7 +166,7 @@ function generateOutreachTask(difficulty: string): DailyTask {
   };
 }
 
-function generateRevenueTask(difficulty: string): DailyTask {
+function generateRevenueTask(difficulty: "Easy" | "Medium" | "Hard"): DailyTask {
   const templates = [...TASK_TEMPLATES.sales, ...TASK_TEMPLATES.product_delivery];
   const template = templates[Math.floor(Math.random() * templates.length)];
   
@@ -191,7 +191,7 @@ function generateRevenueTask(difficulty: string): DailyTask {
   };
 }
 
-function generateGrowthTask(difficulty: string): DailyTask {
+function generateGrowthTask(difficulty: "Easy" | "Medium" | "Hard"): DailyTask {
   const categories = ["content", "lead_generation", "skill_building"];
   const category = categories[Math.floor(Math.random() * categories.length)];
   const templates = TASK_TEMPLATES[category];
@@ -232,7 +232,7 @@ function generateGrowthTask(difficulty: string): DailyTask {
 
 // Get tasks for a specific day, generating new ones if needed
 export async function getOrGenerateDailyTasks(
-  supabase: ReturnType<typeof createClient>,
+  supabase: SupabaseClient,
   userId: string,
   userProfile: { income_goal?: number; skills?: string[]; time_per_week?: number }
 ): Promise<DailyTask[]> {
@@ -257,16 +257,16 @@ export async function getOrGenerateDailyTasks(
   }
   
   if (existingTasks && existingTasks.length >= 3) {
-    return existingTasks.map((t: Record<string, unknown>) => ({
-      id: t.id,
-      task: t.task,
-      category: t.category,
-      estimatedTime: t.estimated_time,
-      difficulty: t.difficulty,
-      completed: t.completed,
-      completedAt: t.completed_at,
-      createdAt: t.created_at,
-      expiresAt: t.expires_at,
+    return existingTasks.map((t) => ({
+      id: t.id as string,
+      task: t.task as string,
+      category: t.category as string,
+      estimatedTime: t.estimated_time as string,
+      difficulty: t.difficulty as "Easy" | "Medium" | "Hard",
+      completed: t.completed as boolean,
+      completedAt: t.completed_at as string | undefined,
+      createdAt: t.created_at as string,
+      expiresAt: t.expires_at as string,
     }));
   }
   
@@ -309,22 +309,22 @@ export async function getOrGenerateDailyTasks(
     throw insertError;
   }
   
-  return insertedTasks.map((t: Record<string, unknown>) => ({
-    id: t.id,
-    task: t.task,
-    category: t.category,
-    estimatedTime: t.estimated_time,
-    difficulty: t.difficulty,
-    completed: t.completed,
-    completedAt: t.completed_at,
-    createdAt: t.created_at,
-    expiresAt: t.expires_at,
+  return insertedTasks.map((t) => ({
+    id: t.id as string,
+    task: t.task as string,
+    category: t.category as string,
+    estimatedTime: t.estimated_time as string,
+    difficulty: t.difficulty as "Easy" | "Medium" | "Hard",
+    completed: t.completed as boolean,
+    completedAt: t.completed_at as string | undefined,
+    createdAt: t.created_at as string,
+    expiresAt: t.expires_at as string,
   }));
 }
 
 // Mark task as complete and update streaks
 export async function completeTask(
-  supabase: ReturnType<typeof createClient>,
+  supabase: SupabaseClient,
   userId: string,
   taskId: string
 ): Promise<void> {
