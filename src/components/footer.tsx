@@ -8,7 +8,7 @@ export function Footer() {
           <Link href="/" className="flex items-center gap-2">
             <div className="h-8 w-8 rounded-lg overflow-hidden">
               <img 
-                src="/logo.png" 
+                src="https://i.imgur.com/8XAyUn2.jpeg" 
                 alt="IncomeGPT" 
                 className="h-full w-full object-cover"
               />
