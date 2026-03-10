@@ -138,7 +138,7 @@ export default function DashboardPage() {
       <aside className="fixed left-0 top-0 h-full w-64 border-r border-white/5 bg-black/50 backdrop-blur-xl hidden lg:block">
         <div className="p-6">
           <Link href="/" className="flex items-center gap-2 mb-8">
-            <div className="h-8 w-8 rounded-lg overflow-hidden">
+            <div className="h-10 w-10 rounded-lg overflow-hidden">
               <img 
                 src="/logo.jpg" 
                 alt="IncomeGPT" 

@@ -6,7 +6,7 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <Link href="/" className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-lg overflow-hidden">
+            <div className="h-10 w-10 rounded-lg overflow-hidden">
               <img 
                 src="/logo.jpg" 
                 alt="IncomeGPT" 

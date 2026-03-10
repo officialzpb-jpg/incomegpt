@@ -64,7 +64,7 @@ export default function GeneratorPage() {
               <ArrowLeft className="h-5 w-5" />
             </Link>
             <div className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-lg overflow-hidden">
+              <div className="h-10 w-10 rounded-lg overflow-hidden">
                 <img 
                   src="/logo.jpg" 
                   alt="IncomeGPT" 
