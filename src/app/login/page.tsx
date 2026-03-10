@@ -48,7 +48,7 @@ export default function LoginPage() {
           <Link href="/" className="inline-flex items-center gap-2 mb-6">
             <div className="h-10 w-10 rounded-lg overflow-hidden">
               <img 
-                src="https://i.imgur.com/8XAyUn2.jpeg" 
+                src="/logo.jpg" 
                 alt="IncomeGPT" 
                 className="h-full w-full object-cover"
               />
