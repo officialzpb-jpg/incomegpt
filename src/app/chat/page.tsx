@@ -92,6 +92,10 @@ export default function ChatPage() {
 
       const data = await response.json();
 
+      if (!response.ok) {
+        throw new Error(data.error || data.details || `HTTP ${response.status}`);
+      }
+
       if (data.success) {
         const assistantMessage: Message = {
           id: (Date.now() + 1).toString(),
@@ -108,7 +112,7 @@ export default function ChatPage() {
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: "assistant",
-        content: "I apologize, but I'm having trouble responding right now. Please try again in a moment.",
+        content: `Error: ${error instanceof Error ? error.message : "Unknown error"}. Please check that your OpenAI API key is configured correctly.`,
         timestamp: new Date(),
       };
       setMessages((prev) => [...prev, errorMessage]);
