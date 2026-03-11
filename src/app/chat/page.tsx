@@ -202,8 +202,12 @@ export default function ChatPage() {
                 animate={{ opacity: 1, y: 0 }}
                 className="text-center max-w-2xl"
               >
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center mx-auto mb-6">
-                  <Sparkles className="h-8 w-8 text-white" />
+                <div className="w-16 h-16 rounded-lg overflow-hidden mx-auto mb-6">
+                  <img
+                    src="/logo.jpg"
+                    alt="IncomeGPT"
+                    className="h-full w-full object-cover"
+                  />
                 </div>
                 <h1 className="text-3xl font-bold mb-3">How can I help you today?</h1>
                 <p className="text-white/60 mb-8">
@@ -245,8 +249,12 @@ export default function ChatPage() {
                     <div className="max-w-5xl mx-auto flex gap-4">
                       <div className="flex-shrink-0">
                         {message.role === "assistant" ? (
-                          <div className="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center">
-                            <Sparkles className="h-4 w-4 text-emerald-400" />
+                          <div className="w-8 h-8 rounded-lg overflow-hidden">
+                            <img
+                              src="/logo.jpg"
+                              alt="IncomeGPT"
+                              className="h-full w-full object-cover"
+                            />
                           </div>
                         ) : (
                           <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
@@ -295,8 +303,12 @@ export default function ChatPage() {
                   className="py-6 px-4 bg-white/[0.02]"
                 >
                   <div className="max-w-5xl mx-auto flex gap-4">
-                    <div className="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center">
-                      <Sparkles className="h-4 w-4 text-emerald-400" />
+                    <div className="w-8 h-8 rounded-lg overflow-hidden">
+                      <img
+                        src="/logo.jpg"
+                        alt="IncomeGPT"
+                        className="h-full w-full object-cover"
+                      />
                     </div>
                     <div className="flex-1">
                       <div className="font-medium text-sm mb-1 text-white/40">IncomeGPT</div>

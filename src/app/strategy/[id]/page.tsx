@@ -442,9 +442,9 @@ export default function StrategyDetailPage() {
             <div className="glass rounded-2xl overflow-hidden">
               <div className="p-4 border-b border-white/10 bg-gradient-to-r from-emerald-500/10 to-cyan-500/10">
                 <div className="flex items-center gap-3">
-                  <div className="h-12 w-12 rounded-full overflow-hidden border-2 border-emerald-500/50">
+                  <div className="h-12 w-12 rounded-lg overflow-hidden border-2 border-emerald-500/50">
                     <img 
-                      src="/ai-avatar.jpg" 
+                      src="/logo.jpg" 
                       alt="AI Coach" 
                       className="h-full w-full object-cover"
                     />
@@ -482,7 +482,7 @@ export default function StrategyDetailPage() {
                           : "bg-white/10"
                       }`}>
                         {msg.role === "assistant" ? (
-                          <img src="/ai-avatar.jpg" alt="AI" className="h-full w-full object-cover" />
+                          <img src="/logo.jpg" alt="AI" className="h-full w-full object-cover" />
                         ) : (
                           <span className="text-sm">You</span>
                         )}
@@ -498,8 +498,8 @@ export default function StrategyDetailPage() {
                 
                 {aiTyping && (
                   <div className="flex gap-3">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-full overflow-hidden border border-emerald-500/50">
-                      <img src="/ai-avatar.jpg" alt="AI" className="h-full w-full object-cover" />
+                    <div className="flex h-8 w-8 items-center justify-center rounded-lg overflow-hidden border border-emerald-500/50">
+                      <img src="/logo.jpg" alt="AI" className="h-full w-full object-cover" />
                     </div>
                     <div className="bg-white/5 rounded-2xl px-4 py-3 flex items-center gap-2">
                       <Loader2 className="h-4 w-4 animate-spin" />
