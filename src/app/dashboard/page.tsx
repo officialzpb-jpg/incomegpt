@@ -16,7 +16,9 @@ import {
   Loader2,
   Sparkles,
   Rocket,
-  MessageSquare
+  MessageSquare,
+  Users,
+  FileText
 } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { DailyTasks } from "@/components/daily-tasks";
@@ -178,6 +180,23 @@ export default function DashboardPage() {
               <MessageSquare className="h-5 w-5" />
               AI Coach
             </Link>
+            <div className="pt-4 mt-4 border-t border-white/10">
+              <p className="px-4 text-xs text-white/40 uppercase tracking-wider mb-2">AI Agents</p>
+              <Link
+                href="/agents/outreach"
+                className="flex items-center gap-3 px-4 py-3 rounded-xl text-white/60 hover:bg-white/5 hover:text-white transition-colors"
+              >
+                <Users className="h-5 w-5" />
+                Outreach Agent
+              </Link>
+              <Link
+                href="/agents/content"
+                className="flex items-center gap-3 px-4 py-3 rounded-xl text-white/60 hover:bg-white/5 hover:text-white transition-colors"
+              >
+                <FileText className="h-5 w-5" />
+                Content Agent
+              </Link>
+            </div>
             <Link
               href="#"
               className="flex items-center gap-3 px-4 py-3 rounded-xl text-white/60 hover:bg-white/5 hover:text-white transition-colors"
