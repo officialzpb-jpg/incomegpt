@@ -320,7 +320,7 @@ export default function DashboardPage() {
               </div>
             </Link>
 
-            <!-- Subscription Status -->
+            {/* Subscription Status */}
             <div className={`glass rounded-2xl p-6 mb-8 border ${profile?.subscription_status === 'active' ? 'border-emerald-500/30 bg-emerald-500/5' : 'border-white/10'}`}>
               <div className="flex items-center justify-between">
                 <div>
