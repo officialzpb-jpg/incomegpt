@@ -42,6 +42,29 @@ export default function ChatPage() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
+  // Load messages from localStorage on mount
+  useEffect(() => {
+    const savedMessages = localStorage.getItem("chatMessages");
+    if (savedMessages) {
+      try {
+        const parsed = JSON.parse(savedMessages);
+        setMessages(parsed.map((m: { id: string; role: "user" | "assistant"; content: string; timestamp: string }) => ({
+          ...m,
+          timestamp: new Date(m.timestamp),
+        })));
+      } catch {
+        console.error("Failed to parse saved messages");
+      }
+    }
+  }, []);
+
+  // Save messages to localStorage whenever they change
+  useEffect(() => {
+    if (messages.length > 0) {
+      localStorage.setItem("chatMessages", JSON.stringify(messages));
+    }
+  }, [messages]);
+
   // Check auth
   useEffect(() => {
     const checkAuth = async () => {
@@ -129,6 +152,7 @@ export default function ChatPage() {
 
   const clearChat = () => {
     setMessages([]);
+    localStorage.removeItem("chatMessages");
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -183,7 +207,7 @@ export default function ChatPage() {
                 </div>
                 <h1 className="text-3xl font-bold mb-3">How can I help you today?</h1>
                 <p className="text-white/60 mb-8">
-                  I\u0027m your AI business coach. Ask me anything about building your income, 
+                  I\u0026apos;m your AI business coach. Ask me anything about building your income, 
                   finding clients, pricing your services, or creating a business plan.
                 </p>
 
