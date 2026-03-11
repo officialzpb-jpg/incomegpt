@@ -34,6 +34,8 @@ interface Strategy {
 interface Profile {
   email: string;
   income_goal: number;
+  subscription_status?: string;
+  subscription_id?: string;
 }
 
 export default function DashboardPage() {
@@ -214,7 +216,9 @@ export default function DashboardPage() {
             </div>
             <div>
               <div className="font-medium">{profile?.email?.split('@')[0] || 'User'}</div>
-              <div className="text-sm text-white/60">Pro Plan</div>
+              <div className="text-sm text-white/60">
+                {profile?.subscription_status === 'active' ? 'Pro Plan' : 'Free Plan'}
+              </div>
             </div>
           </div>
           <button 
@@ -315,6 +319,25 @@ export default function DashboardPage() {
                 </div>
               </div>
             </Link>
+
+            <!-- Subscription Status -->
+            <div className={`glass rounded-2xl p-6 mb-8 border ${profile?.subscription_status === 'active' ? 'border-emerald-500/30 bg-emerald-500/5' : 'border-white/10'}`}>
+              <div className="flex items-center justify-between">
+                <div>
+                  <h2 className="text-lg font-semibold mb-1">Subscription</h2>
+                  <p className="text-white/60">{profile?.subscription_status === 'active' ? "You\u0026apos;re on the Pro plan" : "Upgrade to Pro for unlimited features"}</p>
+                </div>
+                <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm ${profile?.subscription_status === 'active' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-white/10 text-white/60'}`}>
+                  <div className={`w-2 h-2 rounded-full ${profile?.subscription_status === 'active' ? 'bg-emerald-400' : 'bg-white/40'}`} />
+                  {profile?.subscription_status === 'active' ? 'Active' : 'Free'}
+                </div>
+              </div>
+              {profile?.subscription_status !== 'active' && (
+                <Link href="/pricing" className="mt-4 inline-flex items-center gap-2 text-emerald-400 hover:text-emerald-300">
+                  Upgrade to Pro <ChevronRight className="h-4 w-4" />
+                </Link>
+              )}
+            </div>
 
             {/* Daily Tasks */}
             <div className="mb-8">

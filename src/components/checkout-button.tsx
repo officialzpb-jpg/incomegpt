@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
+import { useRouter } from "next/navigation";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
@@ -16,6 +17,7 @@ interface CheckoutButtonProps {
 
 export function CheckoutButton({ priceId, children, className }: CheckoutButtonProps) {
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
   
   const handleCheckout = async () => {
     setIsLoading(true);
@@ -28,6 +30,12 @@ export function CheckoutButton({ priceId, children, className }: CheckoutButtonP
       });
       
       const data = await response.json();
+      
+      if (response.status === 401) {
+        // Not authenticated, redirect to login
+        router.push("/login?redirect=/pricing");
+        return;
+      }
       
       if (data.success && data.url) {
         window.location.href = data.url;
