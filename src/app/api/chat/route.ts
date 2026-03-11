@@ -85,9 +85,11 @@ export async function POST(request: Request) {
     // Get current user
     const { data: { user }, error: authError } = await supabase.auth.getUser();
     
+    console.log("Auth check:", { user: user?.id, authError: authError?.message });
+    
     if (authError || !user) {
       return NextResponse.json(
-        { error: "Unauthorized" },
+        { error: "Unauthorized", details: authError?.message || "No user found" },
         { status: 401 }
       );
     }
