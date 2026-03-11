@@ -2,61 +2,64 @@ import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase-server";
 
 // Generate outreach campaign using OpenAI
-async function generateOutreachWithAI(
+async function generateOutreachCampaign(
   industry: string,
   targetDescription: string,
-  channels: string[]
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _channels: string[]
 ): Promise<{
-  leads: { name: string; company: string; source: string; message: string; followUp: string }[];
+  leads: {
+    name: string;
+    company: string;
+    source: string;
+    message: string;
+    followUp: string;
+  }[];
   summary: string;
 }> {
   const apiKey = process.env.OPENAI_API_KEY;
   
   if (!apiKey) {
-    // Fallback mock data
+    // Return mock data if no API key
     return {
       leads: [
         {
           name: "Sarah Johnson",
-          company: "Growth Marketing Co",
+          company: "TechStart Inc.",
           source: "LinkedIn",
-          message: `Hi Sarah, I noticed Growth Marketing Co has been scaling fast - congrats! I help ${industry} businesses like yours streamline operations with AI automation. One client saved 15 hours/week on admin tasks. Worth a quick chat?`,
+          message: `Hi Sarah,\n\nI noticed TechStart Inc. has been scaling rapidly - congrats on the growth!\n\nI help ${industry} companies like yours streamline operations and save 10+ hours per week through automation.\n\nWorth a brief conversation to see if I can help TechStart?\n\nBest regards`,
           followUp: "Send follow-up in 3 days if no response",
         },
         {
           name: "Michael Chen",
-          company: "TechStart Inc",
+          company: "GrowthLabs",
           source: "Email",
-          message: `Subject: Quick question about TechStart's workflow\n\nHi Michael,\n\nI came across TechStart and was impressed by your recent product launch. I specialize in helping ${industry} companies automate repetitive tasks using AI.\n\nWould you be open to a 10-minute call to see if there's a fit?\n\nBest regards`,
-          followUp: "Follow up with case study after 5 days",
+          message: `Subject: Quick question about GrowthLabs\n\nHi Michael,\n\nI came across GrowthLabs and was impressed by your recent expansion into ${industry}.\n\nI specialize in helping companies like yours optimize their workflow. Recently helped a similar client increase efficiency by 40%.\n\nWould you be open to a quick chat about how this might apply to GrowthLabs?\n\nBest`,
+          followUp: "Follow up with case study in 5 days",
         },
         {
           name: "Emily Rodriguez",
-          company: "Digital Solutions LLC",
+          company: "ScaleUp Solutions",
           source: "LinkedIn",
-          message: `Hi Emily, saw your post about scaling challenges - very relatable! I work with ${targetDescription} to implement AI solutions that cut operational costs by 30%. Happy to share how if you're interested.`,
-          followUp: "Connect on LinkedIn and engage with posts",
+          message: `Hi Emily,\n\nSaw your post about the challenges of scaling ${targetDescription}. Great insights!\n\nI've worked with several companies facing similar challenges and helped them overcome the exact bottlenecks you mentioned.\n\nWould love to share what worked - worth a conversation?\n\nCheers`,
+          followUp: "Share relevant resource in 2 days",
         },
       ],
-      summary: `Generated 3 high-quality leads in the ${industry} space. Each lead has a personalized message tailored to their company and role. Estimated response rate: 15-25% with proper follow-up.`,
+      summary: `Generated 3 high-quality leads in the ${industry} space. Each lead has a personalized message tailored to their specific situation and company profile. Follow-up sequences are scheduled to maximize response rates.`,
     };
   }
 
-  const prompt = `You are an expert outreach strategist. Generate a targeted outreach campaign for:
+  const prompt = `Generate an outreach campaign for a business in the ${industry} industry targeting ${targetDescription}.
 
-Industry: ${industry}
-Target Audience: ${targetDescription}
-Channels: ${channels.join(", ")}
-
-Generate 3 specific leads with:
-1. Realistic names and company names
-2. The channel to reach them (LinkedIn, Email, etc.)
-3. A personalized outreach message (2-3 sentences, conversational tone)
+Create 3 fictional but realistic leads with:
+1. Name and company
+2. Source (LinkedIn, Email, etc.)
+3. A personalized outreach message (2-3 paragraphs, professional but friendly)
 4. A specific follow-up strategy
 
-Also provide a brief summary of the campaign strategy.
+The messages should be tailored to the industry and target audience, mentioning specific pain points and offering value upfront.
 
-Return JSON in this format:
+Return as JSON with this structure:
 {
   "leads": [
     {
@@ -67,7 +70,7 @@ Return JSON in this format:
       "followUp": "..."
     }
   ],
-  "summary": "..."
+  "summary": "Brief summary of the campaign strategy"
 }`;
 
   const response = await fetch("https://api.openai.com/v1/chat/completions", {
@@ -78,7 +81,13 @@ Return JSON in this format:
     },
     body: JSON.stringify({
       model: "gpt-4o-mini",
-      messages: [{ role: "user", content: prompt }],
+      messages: [
+        {
+          role: "system",
+          content: "You are an expert sales outreach specialist. Generate realistic, personalized outreach campaigns that get responses."
+        },
+        { role: "user", content: prompt }
+      ],
       temperature: 0.8,
       max_tokens: 1500,
     }),
@@ -89,7 +98,7 @@ Return JSON in this format:
   }
 
   const data = await response.json();
-  const content = data.choices[0]?.message?.content || "";
+  const content = data.choices[0]?.message?.content;
   
   // Parse JSON from response
   try {
@@ -98,7 +107,7 @@ Return JSON in this format:
       return JSON.parse(jsonMatch[0]);
     }
   } catch {
-    console.error("Failed to parse AI response as JSON");
+    console.error("Failed to parse OpenAI response");
   }
   
   // Fallback
@@ -125,15 +134,14 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { industry, targetDescription, channels } = body;
     
-    if (!industry || !targetDescription || !channels?.length) {
+    if (!industry || !targetDescription) {
       return NextResponse.json(
-        { error: "Missing required fields" },
+        { error: "Industry and target description required" },
         { status: 400 }
       );
     }
     
-    // Generate outreach campaign
-    const result = await generateOutreachWithAI(industry, targetDescription, channels);
+    const result = await generateOutreachCampaign(industry, targetDescription, channels);
     
     return NextResponse.json({
       success: true,

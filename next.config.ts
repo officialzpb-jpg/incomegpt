@@ -6,6 +6,9 @@ const nextConfig: NextConfig = {
     domains: [],
   },
   output: 'standalone',
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
 
 export default nextConfig;

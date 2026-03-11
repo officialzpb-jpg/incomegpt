@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
-import Link from "next/link";
+import { CheckoutButton } from "./checkout-button";
 
 const plans = [
   {
@@ -17,7 +17,7 @@ const plans = [
       "Community access",
     ],
     cta: "Get Started",
-    href: "/signup",
+    priceId: null, // Free plan
     popular: false,
   },
   {
@@ -34,7 +34,7 @@ const plans = [
       "API access",
     ],
     cta: "Start Free Trial",
-    href: "/signup",
+    priceId: process.env.NEXT_PUBLIC_STRIPE_PRO_PRICE_ID || "price_placeholder",
     popular: true,
   },
   {
@@ -50,7 +50,7 @@ const plans = [
       "SLA guarantee",
     ],
     cta: "Contact Sales",
-    href: "#",
+    priceId: null,
     popular: false,
   },
 ];
@@ -67,7 +67,7 @@ export function Pricing() {
         >
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">Simple Pricing</h2>
           <p className="text-lg text-white/60 max-w-2xl mx-auto">
-            Start free, upgrade when you&apos;re ready to scale
+            Start free, upgrade when you\u0026apos;re ready to scale
           </p>
         </motion.div>
 
@@ -114,16 +114,29 @@ export function Pricing() {
                 ))}
               </ul>
 
-              <Link
-                href={plan.href}
-                className={`block w-full text-center py-3 rounded-full font-medium transition-colors ${
-                  plan.popular
-                    ? "bg-white text-black hover:bg-white/90"
-                    : "bg-white/10 text-white hover:bg-white/20"
-                }`}
-              >
-                {plan.cta}
-              </Link>
+              {plan.priceId ? (
+                <CheckoutButton
+                  priceId={plan.priceId}
+                  className={`block w-full text-center py-3 rounded-full font-medium transition-colors ${
+                    plan.popular
+                      ? "bg-white text-black hover:bg-white/90"
+                      : "bg-white/10 text-white hover:bg-white/20"
+                  }`}
+                >
+                  {plan.cta}
+                </CheckoutButton>
+              ) : (
+                <a
+                  href={plan.name === "Enterprise" ? "mailto:sales@incomegpt.com" : "/signup"}
+                  className={`block w-full text-center py-3 rounded-full font-medium transition-colors ${
+                    plan.popular
+                      ? "bg-white text-black hover:bg-white/90"
+                      : "bg-white/10 text-white hover:bg-white/20"
+                  }`}
+                >
+                  {plan.cta}
+                </a>
+              )}
             </motion.div>
           ))}
         </div>

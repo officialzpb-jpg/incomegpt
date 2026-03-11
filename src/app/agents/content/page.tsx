@@ -5,56 +5,52 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { 
   ArrowLeft, 
-  FileText, 
-  Video, 
-  Sparkles,
-  Copy,
-  CheckCircle2,
+  FileText,
+  Video,
   Instagram,
-  Youtube,
+  Sparkles,
+  CheckCircle2,
+  Copy,
+  TrendingUp,
+  Hash,
+  Lightbulb,
   Megaphone,
-  ShoppingBag,
-  Calendar
+  ShoppingBag
 } from "lucide-react";
 
 interface ContentResult {
   content: {
     type: string;
     title: string;
-    content: string;
+    script: string;
     hashtags?: string[];
-    tips?: string[];
-  }[];
-  contentCalendar: {
-    day: string;
-    platform: string;
-    content: string;
+    tips: string;
   }[];
   summary: string;
 }
 
 const CONTENT_TYPES = [
-  { id: "tiktok", label: "TikTok Scripts", icon: Video, desc: "Viral short-form video scripts" },
-  { id: "youtube", label: "YouTube Ideas", icon: Youtube, desc: "Video concepts & outlines" },
-  { id: "ads", label: "Ad Copy", icon: Megaphone, desc: "High-converting ad text" },
-  { id: "product", label: "Product Descriptions", icon: ShoppingBag, desc: "Compelling product copy" },
-  { id: "social", label: "Social Posts", icon: Instagram, desc: "Instagram, Twitter, LinkedIn" },
+  { id: "tiktok", label: "TikTok Scripts", icon: Video },
+  { id: "youtube", label: "YouTube Ideas", icon: Video },
+  { id: "instagram", label: "Instagram Posts", icon: Instagram },
+  { id: "ads", label: "Ad Copy", icon: Megaphone },
+  { id: "product", label: "Product Descriptions", icon: ShoppingBag },
 ];
 
-const PLATFORMS = [
-  { id: "instagram", label: "Instagram" },
-  { id: "tiktok", label: "TikTok" },
-  { id: "youtube", label: "YouTube" },
-  { id: "twitter", label: "Twitter/X" },
-  { id: "linkedin", label: "LinkedIn" },
+const TONES = [
+  { id: "professional", label: "Professional" },
+  { id: "casual", label: "Casual" },
+  { id: "humorous", label: "Humorous" },
+  { id: "urgent", label: "Urgent" },
+  { id: "inspirational", label: "Inspirational" },
 ];
 
 export default function ContentAgentPage() {
   const [step, setStep] = useState<"input" | "generating" | "results">("input");
   const [businessType, setBusinessType] = useState("");
   const [targetAudience, setTargetAudience] = useState("");
-  const [contentTypes, setContentTypes] = useState<string[]>(["social"]);
-  const [platforms, setPlatforms] = useState<string[]>(["instagram"]);
+  const [contentTypes, setContentTypes] = useState<string[]>(["tiktok"]);
+  const [tone, setTone] = useState("professional");
   const [results, setResults] = useState<ContentResult | null>(null);
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
 
@@ -63,14 +59,6 @@ export default function ContentAgentPage() {
       prev.includes(typeId)
         ? prev.filter(t => t !== typeId)
         : [...prev, typeId]
-    );
-  };
-
-  const togglePlatform = (platformId: string) => {
-    setPlatforms(prev => 
-      prev.includes(platformId)
-        ? prev.filter(p => p !== platformId)
-        : [...prev, platformId]
     );
   };
 
@@ -87,7 +75,7 @@ export default function ContentAgentPage() {
           businessType,
           targetAudience,
           contentTypes,
-          platforms,
+          tone,
         }),
       });
       
@@ -145,11 +133,11 @@ export default function ContentAgentPage() {
             <div className="text-center max-w-2xl mx-auto">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-sm mb-6">
                 <Sparkles className="h-4 w-4" />
-                <span>AI Content Studio</span>
+                <span>AI Content Creation</span>
               </div>
-              <h2 className="text-3xl font-bold mb-4">Create Content That Converts</h2>
+              <h2 className="text-3xl font-bold mb-4">Create Engaging Content in Seconds</h2>
               <p className="text-white/60">
-                Generate viral TikTok scripts, YouTube ideas, ad copy, and social media content 
+                Our AI agent generates TikTok scripts, YouTube ideas, ad copy, and more 
                 tailored to your business and audience.
               </p>
             </div>
@@ -158,12 +146,12 @@ export default function ContentAgentPage() {
             <div className="glass rounded-2xl p-8 space-y-6">
               {/* Business Type */}
               <div>
-                <label className="block text-sm font-medium mb-3">What\u0026apos;s your business?</label>
+                <label className="block text-sm font-medium mb-3">What\u0026apos;s your business or product?</label>
                 <input
                   type="text"
                   value={businessType}
                   onChange={(e) => setBusinessType(e.target.value)}
-                  placeholder="e.g., AI Automation Agency, Fitness Coaching, E-commerce Store..."
+                  placeholder="e.g., AI automation agency for e-commerce stores"
                   className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-purple-500 focus:outline-none"
                 />
               </div>
@@ -175,7 +163,7 @@ export default function ContentAgentPage() {
                   type="text"
                   value={targetAudience}
                   onChange={(e) => setTargetAudience(e.target.value)}
-                  placeholder="e.g., Small business owners, Fitness enthusiasts, Busy professionals..."
+                  placeholder="e.g., Small business owners, entrepreneurs, marketers..."
                   className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-purple-500 focus:outline-none"
                 />
               </div>
@@ -183,48 +171,39 @@ export default function ContentAgentPage() {
               {/* Content Types */}
               <div>
                 <label className="block text-sm font-medium mb-3">Content Types</label>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                   {CONTENT_TYPES.map((type) => (
                     <button
                       key={type.id}
                       onClick={() => toggleContentType(type.id)}
-                      className={`p-4 rounded-xl border transition-all text-left ${
+                      className={`p-4 rounded-xl border transition-all flex flex-col items-center gap-2 ${
                         contentTypes.includes(type.id)
                           ? "bg-purple-500/10 border-purple-500/50"
                           : "bg-white/5 border-white/10 hover:border-white/20"
                       }`}
                     >
-                      <div className="flex items-start gap-3">
-                        <div className={`p-2 rounded-lg ${
-                          contentTypes.includes(type.id) ? "bg-purple-500/20" : "bg-white/5"
-                        }`}>
-                          <type.icon className="h-5 w-5" />
-                        </div>
-                        <div>
-                          <p className="font-medium">{type.label}</p>
-                          <p className="text-xs text-white/60">{type.desc}</p>
-                        </div>
-                      </div>
+                      <type.icon className="h-6 w-6" />
+                      <span className="text-sm">{type.label}</span>
                     </button>
                   ))}
                 </div>
               </div>
 
-              {/* Platforms */}
+              {/* Tone Selection */}
               <div>
-                <label className="block text-sm font-medium mb-3">Target Platforms</label>
+                <label className="block text-sm font-medium mb-3">Tone of Voice</label>
                 <div className="flex flex-wrap gap-2">
-                  {PLATFORMS.map((platform) => (
+                  {TONES.map((t) => (
                     <button
-                      key={platform.id}
-                      onClick={() => togglePlatform(platform.id)}
+                      key={t.id}
+                      onClick={() => setTone(t.id)}
                       className={`px-4 py-2 rounded-full text-sm transition-all ${
-                        platforms.includes(platform.id)
+                        tone === t.id
                           ? "bg-purple-500 text-white"
                           : "bg-white/5 text-white/70 hover:bg-white/10 border border-white/10"
                       }`}
                     >
-                      {platform.label}
+                      {t.label}
                     </button>
                   ))}
                 </div>
@@ -242,6 +221,21 @@ export default function ContentAgentPage() {
                 Generate Content
               </motion.button>
             </div>
+
+            {/* Features */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {[
+                { icon: Video, title: "Video Scripts", desc: "TikTok & YouTube content that goes viral" },
+                { icon: Megaphone, title: "Ad Copy", desc: "High-converting ads for any platform" },
+                { icon: TrendingUp, title: "Growth Tips", desc: "Strategic advice to boost engagement" },
+              ].map((feature, i) => (
+                <div key={i} className="glass rounded-xl p-6 text-center">
+                  <feature.icon className="h-8 w-8 text-purple-400 mx-auto mb-4" />
+                  <h3 className="font-semibold mb-2">{feature.title}</h3>
+                  <p className="text-sm text-white/60">{feature.desc}</p>
+                </div>
+              ))}
+            </div>
           </motion.div>
         )}
 
@@ -253,7 +247,7 @@ export default function ContentAgentPage() {
               className="w-16 h-16 rounded-full border-4 border-purple-500/20 border-t-purple-500 mb-6"
             />
             <h2 className="text-2xl font-bold mb-2">Creating Your Content...</h2>
-            <p className="text-white/60">Our AI is crafting viral-worthy content for your brand</p>
+            <p className="text-white/60">Our AI is crafting engaging content for your audience</p>
           </div>
         )}
 
@@ -272,7 +266,7 @@ export default function ContentAgentPage() {
               <p className="text-white/70">{results.summary}</p>
             </div>
 
-            {/* Generated Content */}
+            {/* Content */}
             <div className="space-y-4">
               <h3 className="font-semibold text-lg">Generated Content</h3>
               
@@ -286,13 +280,13 @@ export default function ContentAgentPage() {
                 >
                   <div className="flex items-start justify-between mb-4">
                     <div>
-                      <span className="inline-block px-2 py-1 bg-purple-500/20 text-purple-400 text-xs rounded-full mb-2">
+                      <span className="inline-block text-xs px-2 py-1 bg-purple-500/20 text-purple-400 rounded-full mb-2">
                         {item.type}
                       </span>
                       <h4 className="font-semibold">{item.title}</h4>
                     </div>
                     <button
-                      onClick={() => copyContent(item.content, index)}
+                      onClick={() => copyContent(item.script, index)}
                       className="flex items-center gap-2 px-3 py-1.5 bg-white/5 hover:bg-white/10 rounded-lg transition-colors text-sm"
                     >
                       {copiedIndex === index ? (
@@ -310,51 +304,26 @@ export default function ContentAgentPage() {
                   </div>
                   
                   <div className="bg-white/5 rounded-lg p-4 mb-4">
-                    <p className="text-sm whitespace-pre-wrap">{item.content}</p>
+                    <p className="text-sm whitespace-pre-wrap">{item.script}</p>
                   </div>
                   
                   {item.hashtags && (
-                    <div className="flex flex-wrap gap-2 mb-3">
-                      {item.hashtags.map((tag, i) => (
-                        <span key={i} className="text-sm text-purple-400">#{tag}</span>
-                      ))}
+                    <div className="flex items-center gap-2 mb-3">
+                      <Hash className="h-4 w-4 text-purple-400" />
+                      <div className="flex flex-wrap gap-2">
+                        {item.hashtags.map((tag, i) => (
+                          <span key={i} className="text-sm text-purple-400">#{tag}</span>
+                        ))}
+                      </div>
                     </div>
                   )}
                   
-                  {item.tips && (
-                    <div className="space-y-1">
-                      <p className="text-sm text-white/60">💡 Tips:</p>
-                      {item.tips.map((tip, i) => (
-                        <p key={i} className="text-sm text-white/40">• {tip}</p>
-                      ))}
-                    </div>
-                  )}
+                  <div className="flex items-center gap-2 text-sm text-white/60">
+                    <Lightbulb className="h-4 w-4" />
+                    <span>{item.tips}</span>
+                  </div>
                 </motion.div>
               ))}
-            </div>
-
-            {/* Content Calendar */}
-            <div className="glass rounded-2xl p-6">
-              <div className="flex items-center gap-3 mb-4">
-                <Calendar className="h-5 w-5 text-purple-400" />
-                <h3 className="font-semibold">7-Day Content Calendar</h3>
-              </div>
-              
-              <div className="space-y-3">
-                {results.contentCalendar.map((item, index) => (
-                  <div key={index} className="flex items-start gap-4 p-3 bg-white/5 rounded-lg">
-                    <div className="flex-shrink-0 w-20">
-                      <span className="text-sm font-medium text-purple-400">{item.day}</span>
-                    </div>
-                    <div className="flex-1">
-                      <span className="inline-block px-2 py-0.5 bg-white/10 text-xs rounded mb-1">
-                        {item.platform}
-                      </span>
-                      <p className="text-sm">{item.content}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
             </div>
 
             {/* Action Buttons */}
