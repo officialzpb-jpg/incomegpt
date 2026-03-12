@@ -39,6 +39,17 @@ export async function POST(request: Request) {
       );
     }
     
+    // Get the app URL - use environment variable or construct from request
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL || 
+      (request.headers.get('host') ? `https://${request.headers.get('host')}` : null);
+    
+    if (!appUrl) {
+      return NextResponse.json(
+        { error: "App URL not configured" },
+        { status: 500 }
+      );
+    }
+    
     // Create Stripe checkout session
     const session = await stripe.checkout.sessions.create({
       customer_email: user.email,
@@ -49,8 +60,8 @@ export async function POST(request: Request) {
         },
       ],
       mode: "subscription",
-      success_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard?success=true`,
-      cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/pricing?canceled=true`,
+      success_url: `${appUrl}/dashboard?success=true`,
+      cancel_url: `${appUrl}/pricing?canceled=true`,
       metadata: {
         userId: user.id,
       },
