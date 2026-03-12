@@ -47,11 +47,34 @@ export default function GeneratorPage() {
     e.preventDefault();
     setIsLoading(true);
     
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    // Navigate to results
-    router.push("/results");
+    try {
+      const response = await fetch("/api/strategies/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          incomeGoal: Number(formData.incomeGoal),
+          timeframe: formData.timeframe,
+          startingBudget: Number(formData.startingBudget),
+          skills: formData.skills,
+          timePerWeek: 20, // Default value
+        }),
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        // Store strategies in sessionStorage for results page
+        sessionStorage.setItem("generatedStrategies", JSON.stringify(data.strategies));
+        router.push("/results");
+      } else {
+        throw new Error(data.error || "Failed to generate strategies");
+      }
+    } catch (error) {
+      console.error("Generation error:", error);
+      alert("Failed to generate strategies. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (

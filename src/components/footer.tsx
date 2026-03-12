@@ -17,13 +17,13 @@ export function Footer() {
           </Link>
 
           <div className="flex items-center gap-8 text-sm text-white/60">
-            <Link href="#" className="hover:text-white transition-colors">Privacy</Link>
-            <Link href="#" className="hover:text-white transition-colors">Terms</Link>
-            <Link href="#" className="hover:text-white transition-colors">Contact</Link>
+            <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>
+            <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>
+            <Link href="mailto:support@incomegpt.com" className="hover:text-white transition-colors">Contact</Link>
           </div>
 
           <p className="text-sm text-white/40">
-            © 2024 IncomeGPT. All rights reserved.
+            © 2026 IncomeGPT. All rights reserved.
           </p>
         </div>
       </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
@@ -13,112 +13,66 @@ import {
   ChevronRight,
   Check,
   Bookmark,
-  Share2,
-  Loader2
+  Loader2,
+  Sparkles
 } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 
-const strategies = [
-  {
-    id: 1,
-    title: "AI-Powered Content Agency",
-    description: "Start a content creation agency that leverages AI tools to deliver high-quality blog posts, social media content, and marketing copy at scale.",
-    expectedMonthlyIncome: "$4,000 - $8,000",
-    difficulty: "Beginner",
-    startupCost: "$500 - $1,000",
-    timeframe: "2-4 months",
-    matchScore: 98,
-    tags: ["Writing", "AI Tools", "Marketing"],
-    steps: [
-      "Set up your agency website and portfolio",
-      "Identify 3-5 niche industries to target",
-      "Create service packages and pricing",
-      "Build a client acquisition system",
-      "Hire freelancers to scale operations"
-    ]
-  },
-  {
-    id: 2,
-    title: "Niche SaaS Micro-Product",
-    description: "Build a small software tool that solves a specific problem for a niche audience. Focus on simplicity and high value.",
-    expectedMonthlyIncome: "$5,000 - $15,000",
-    difficulty: "Advanced",
-    startupCost: "$2,000 - $5,000",
-    timeframe: "6-12 months",
-    matchScore: 85,
-    tags: ["Coding", "Product", "Sales"],
-    steps: [
-      "Research pain points in your target niche",
-      "Validate the idea with potential customers",
-      "Build a minimal viable product",
-      "Launch on Product Hunt and relevant communities",
-      "Iterate based on user feedback"
-    ]
-  },
-  {
-    id: 3,
-    title: "Premium Newsletter Community",
-    description: "Create a paid newsletter focused on a specialized topic where you have expertise. Build a community of engaged subscribers.",
-    expectedMonthlyIncome: "$3,000 - $10,000",
-    difficulty: "Intermediate",
-    startupCost: "$100 - $500",
-    timeframe: "3-6 months",
-    matchScore: 92,
-    tags: ["Writing", "Community", "Marketing"],
-    steps: [
-      "Choose a niche with high willingness to pay",
-      "Set up newsletter infrastructure",
-      "Create a content calendar",
-      "Build an audience through free content",
-      "Launch paid tier with exclusive benefits"
-    ]
-  },
-];
-
-const difficultyColors: Record<string, string> = {
-  Beginner: "bg-emerald-500/20 text-emerald-400",
-  Intermediate: "bg-yellow-500/20 text-yellow-400",
-  Advanced: "bg-red-500/20 text-red-400",
-};
+interface Strategy {
+  id: string;
+  title: string;
+  description: string;
+  expectedMonthlyIncome: string;
+  difficulty: string;
+  startupCost: string;
+  timeframe: string;
+  matchScore: number;
+  steps: string[];
+  tags: string[];
+}
 
 export default function ResultsPage() {
   const router = useRouter();
-  const [savedStrategies, setSavedStrategies] = useState<number[]>([]);
-  const [savingId, setSavingId] = useState<number | null>(null);
+  const [strategies, setStrategies] = useState<Strategy[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [savedStrategies, setSavedStrategies] = useState<string[]>([]);
+  const [savingId, setSavingId] = useState<string | null>(null);
 
-  const saveStrategy = async (strategy: typeof strategies[0]) => {
+  useEffect(() => {
+    // Load strategies from sessionStorage
+    const stored = sessionStorage.getItem("generatedStrategies");
+    if (stored) {
+      try {
+        const parsed = JSON.parse(stored);
+        setStrategies(parsed);
+      } catch {
+        console.error("Failed to parse strategies");
+      }
+    }
+    setLoading(false);
+  }, []);
+
+  const saveStrategy = async (strategy: Strategy) => {
     setSavingId(strategy.id);
     
-    const { data: { user }, error: authError } = await supabase.auth.getUser();
-    
-    if (authError || !user) {
-      console.error("Auth error:", authError);
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) {
       alert("Please log in to save strategies");
-      router.push("/login");
+      setSavingId(null);
       return;
     }
-
-    console.log("Saving strategy for user:", user.id);
     
-    const strategyData = {
-      user_id: user.id,
-      title: strategy.title,
-      description: strategy.description,
-      expected_monthly_income: strategy.expectedMonthlyIncome,
-      difficulty: strategy.difficulty,
-      startup_cost: strategy.startupCost,
-      timeframe: strategy.timeframe,
-      steps: strategy.steps,
-    };
+    const { error } = await supabase
+      .from("saved_strategies")
+      .insert({
+        user_id: user.id,
+        strategy_id: strategy.id,
+        title: strategy.title,
+        description: strategy.description,
+        data: strategy,
+      });
     
-    console.log("Strategy data:", strategyData);
-
-    const { data, error } = await supabase.from("strategies").insert(strategyData).select();
-
-    console.log("Insert response:", { data, error });
-
     if (error) {
-      console.error("Error saving strategy:", error);
       alert("Failed to save strategy: " + error.message);
     } else {
       setSavedStrategies(prev => [...prev, strategy.id]);
@@ -128,176 +82,142 @@ export default function ResultsPage() {
     setSavingId(null);
   };
 
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-emerald-400" />
+      </div>
+    );
+  }
+
+  if (strategies.length === 0) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center px-6">
+        <Sparkles className="h-16 w-16 text-emerald-400 mb-6" />
+        <h1 className="text-2xl font-bold mb-4">No Strategies Found</h1>
+        <p className="text-white/60 mb-6">Generate strategies first to see results.</p>
+        <Link 
+          href="/generator"
+          className="px-6 py-3 bg-emerald-500 text-white rounded-xl font-medium"
+        >
+          Generate Strategies
+        </Link>
+      </div>
+    );
+  }
+
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen pb-20">
       {/* Header */}
-      <header className="border-b border-white/5 bg-black/50 backdrop-blur-xl">
-        <div className="mx-auto max-w-4xl px-6 py-4">
+      <header className="border-b border-white/5 bg-black/50 backdrop-blur-xl sticky top-0 z-50">
+        <div className="mx-auto max-w-5xl px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <Link href="/generator" className="p-2 -ml-2 hover:bg-white/5 rounded-lg transition-colors">
+              <Link href="/dashboard" className="p-2 -ml-2 hover:bg-white/5 rounded-lg transition-colors">
                 <ArrowLeft className="h-5 w-5" />
               </Link>
-              <div className="flex items-center gap-2">
-                <div className="h-10 w-10 rounded-lg overflow-hidden">
-                  <img 
-                    src="/logo.jpg" 
-                    alt="IncomeGPT" 
-                    className="h-full w-full object-cover"
-                  />
-                </div>
-                <span className="font-semibold">IncomeGPT</span>
+              <div>
+                <h1 className="font-semibold">Your Strategies</h1>
+                <p className="text-sm text-white/60">{strategies.length} strategies generated</p>
               </div>
             </div>
+            <Link 
+              href="/generator"
+              className="px-4 py-2 bg-white/5 hover:bg-white/10 rounded-lg text-sm font-medium transition-colors"
+            >
+              Generate New
+            </Link>
           </div>
         </div>
       </header>
 
-      {/* Main Content */}
-      <main className="mx-auto max-w-4xl px-6 py-12">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-        >
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-1.5 mb-4">
-              <Check className="h-4 w-4 text-emerald-400" />
-              <span className="text-sm text-emerald-400">3 Strategies Generated</span>
-            </div>
-            <h1 className="text-3xl font-bold mb-3">Your Personalized Strategies</h1>
-            <p className="text-white/60">Based on your goals, budget, and skills</p>
-          </div>
-
-          <div className="space-y-6">
-            {strategies.map((strategy, index) => (
-              <motion.div
-                key={strategy.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="glass rounded-2xl p-6 lg:p-8"
-              >
-                <div className="flex flex-col lg:flex-row lg:items-start gap-6">
-                  {/* Left: Main Info */}
-                  <div className="flex-1">
-                    <div className="flex items-start justify-between mb-4">
-                      <div>
-                        <div className="flex items-center gap-3 mb-2">
-                          <h3 className="text-xl font-semibold">{strategy.title}</h3>
-                          <span className={`text-xs px-2 py-1 rounded-full ${difficultyColors[strategy.difficulty]}`}>
-                            {strategy.difficulty}
-                          </span>
-                        </div>
-                        <div className="flex flex-wrap gap-2">
-                          {strategy.tags.map((tag) => (
-                            <span key={tag} className="text-xs px-2 py-1 rounded-full bg-white/5 text-white/60">
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <button
-                          onClick={() => saveStrategy(strategy)}
-                          disabled={savedStrategies.includes(strategy.id) || savingId === strategy.id}
-                          className={`p-2 rounded-lg transition-colors ${
-                            savedStrategies.includes(strategy.id)
-                              ? "bg-emerald-500/20 text-emerald-400"
-                              : "hover:bg-white/5"
-                          }`}
-                        >
-                          {savingId === strategy.id ? (
-                            <Loader2 className="h-5 w-5 animate-spin" />
-                          ) : (
-                            <Bookmark className={`h-5 w-5 ${savedStrategies.includes(strategy.id) ? "fill-current" : ""}`} />
-                          )}
-                        </button>
-                        <button className="p-2 hover:bg-white/5 rounded-lg transition-colors">
-                          <Share2 className="h-5 w-5" />
-                        </button>
-                      </div>
-                    </div>
-
-                    <p className="text-white/60 mb-6">{strategy.description}</p>
-
-                    <div className="grid grid-cols-3 gap-4 mb-6">
-                      <div className="glass rounded-xl p-4">
-                        <div className="flex items-center gap-2 mb-1">
-                          <TrendingUp className="h-4 w-4 text-emerald-400" />
-                          <span className="text-xs text-white/60">Monthly Income</span>
-                        </div>
-                        <div className="font-semibold text-emerald-400">{strategy.expectedMonthlyIncome}</div>
-                      </div>
-                      <div className="glass rounded-xl p-4">
-                        <div className="flex items-center gap-2 mb-1">
-                          <DollarSign className="h-4 w-4 text-cyan-400" />
-                          <span className="text-xs text-white/60">Startup Cost</span>
-                        </div>
-                        <div className="font-semibold">{strategy.startupCost}</div>
-                      </div>
-                      <div className="glass rounded-xl p-4">
-                        <div className="flex items-center gap-2 mb-1">
-                          <Clock className="h-4 w-4 text-purple-400" />
-                          <span className="text-xs text-white/60">Timeframe</span>
-                        </div>
-                        <div className="font-semibold">{strategy.timeframe}</div>
-                      </div>
-                    </div>
-
-                    <Link
-                      href={`/strategy/${strategy.id}`}
-                      className="inline-flex items-center gap-2 bg-white text-black px-6 py-3 rounded-xl font-medium hover:bg-white/90 transition-colors"
-                    >
-                      {savedStrategies.includes(strategy.id) ? "View Saved Strategy" : "Generate Execution Plan"}
-                      <ChevronRight className="h-4 w-4" />
-                    </Link>
-                  </div>
-
-                  {/* Right: Match Score */}
-                  <div className="lg:w-32 flex flex-row lg:flex-col items-center gap-4 lg:gap-2">
-                    <div className="relative w-20 h-20">
-                      <svg className="w-full h-full -rotate-90" viewBox="0 0 36 36">
-                        <path
-                          d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                          fill="none"
-                          stroke="rgba(255,255,255,0.1)"
-                          strokeWidth="3"
-                        />
-                        <path
-                          d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                          fill="none"
-                          stroke="url(#gradient)"
-                          strokeWidth="3"
-                          strokeDasharray={`${strategy.matchScore}, 100`}
-                        />
-                        <defs>
-                          <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" stopColor="#10b981" />
-                            <stop offset="100%" stopColor="#06b6d4" />
-                          </linearGradient>
-                        </defs>
-                      </svg>
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <span className="text-lg font-bold">{strategy.matchScore}%</span>
-                      </div>
-                    </div>
+      <main className="mx-auto max-w-5xl px-6 py-8">
+        <div className="space-y-6">
+          {strategies.map((strategy, index) => (
+            <motion.div
+              key={strategy.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+              className="glass rounded-2xl p-6"
+            >
+              <div className="flex items-start justify-between mb-4">
+                <div className="flex-1">
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className="text-2xl font-bold text-emerald-400">{strategy.matchScore}%</span>
                     <span className="text-sm text-white/60">Match Score</span>
                   </div>
+                  <h2 className="text-xl font-bold mb-2">{strategy.title}</h2>
+                  <p className="text-white/70 mb-4">{strategy.description}</p>
+                  
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {strategy.tags.map((tag, i) => (
+                      <span key={i} className="px-3 py-1 bg-white/5 rounded-full text-sm">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </motion.div>
-            ))}
-          </div>
-
-          <div className="mt-8 text-center">
-            <Link
-              href="/generator"
-              className="inline-flex items-center gap-2 text-white/60 hover:text-white transition-colors"
-            >
-              <Target className="h-4 w-4" />
-              Adjust your preferences and regenerate
-            </Link>
-          </div>
-        </motion.div>
+                
+                <button
+                  onClick={() => saveStrategy(strategy)}
+                  disabled={savedStrategies.includes(strategy.id) || savingId === strategy.id}
+                  className="p-2 bg-white/5 hover:bg-white/10 rounded-lg transition-colors disabled:opacity-50"
+                >
+                  <Bookmark className={`h-5 w-5 ${savedStrategies.includes(strategy.id) ? 'fill-emerald-400 text-emerald-400' : ''}`} />
+                </button>
+              </div>
+              
+              <div className="grid grid-cols-3 gap-4 mb-6">
+                <div className="bg-white/5 rounded-xl p-4">
+                  <div className="flex items-center gap-2 text-white/60 mb-1">
+                    <TrendingUp className="h-4 w-4" />
+                    <span className="text-sm">Income</span>
+                  </div>
+                  <div className="font-semibold">{strategy.expectedMonthlyIncome}</div>
+                </div>
+                
+                <div className="bg-white/5 rounded-xl p-4">
+                  <div className="flex items-center gap-2 text-white/60 mb-1">
+                    <DollarSign className="h-4 w-4" />
+                    <span className="text-sm">Startup</span>
+                  </div>
+                  <div className="font-semibold">{strategy.startupCost}</div>
+                </div>
+                
+                <div className="bg-white/5 rounded-xl p-4">
+                  <div className="flex items-center gap-2 text-white/60 mb-1">
+                    <Clock className="h-4 w-4" />
+                    <span className="text-sm">Timeline</span>
+                  </div>
+                  <div className="font-semibold">{strategy.timeframe}</div>
+                </div>
+              </div>
+              
+              <div className="mb-4">
+                <h3 className="font-semibold mb-3">Action Steps</h3>
+                <ol className="space-y-2">
+                  {strategy.steps.map((step, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <span className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-sm">
+                        {i + 1}
+                      </span>
+                      <span className="text-white/70">{step}</span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+              
+              <Link 
+                href={`/strategy/${strategy.id}`}
+                className="flex items-center justify-center gap-2 w-full py-3 bg-emerald-500 text-white rounded-xl font-medium hover:bg-emerald-600 transition-colors"
+              >
+                View Full Plan
+                <ChevronRight className="h-4 w-4" />
+              </Link>
+            </motion.div>
+          ))}
+        </div>
       </main>
     </div>
   );
