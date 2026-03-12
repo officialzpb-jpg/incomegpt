@@ -18,7 +18,8 @@ import {
   Rocket,
   MessageSquare,
   Users,
-  FileText
+  FileText,
+  Settings
 } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { DailyTasks } from "@/components/daily-tasks";
@@ -223,11 +224,18 @@ export default function DashboardPage() {
           </div>
           <button 
             onClick={handleSignOut}
-            className="flex items-center gap-2 text-sm text-white/60 hover:text-white"
+            className="flex items-center gap-2 text-sm text-white/60 hover:text-white mb-3"
           >
             <LogOut className="h-4 w-4" />
             Sign out
           </button>
+          <Link 
+            href="/settings"
+            className="flex items-center gap-2 text-sm text-white/60 hover:text-white"
+          >
+            <Settings className="h-4 w-4" />
+            Settings
+          </Link>
         </div>
       </aside>
 
