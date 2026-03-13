@@ -7,8 +7,8 @@ export function Footer() {
       <div className="mx-auto max-w-5xl px-4">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <Link href="/" className="flex items-center gap-2">
-            <div className="h-6 w-6 rounded-md bg-gradient-to-br from-orange-800 to-orange-950 flex items-center justify-center">
-              <Hammer className="h-3.5 w-3.5 text-orange-200" />
+            <div className="h-6 w-6 rounded-md overflow-hidden">
+              <img src="/logo.png" alt="WealthForge" className="h-full w-full object-cover" />
             </div>
             <span className="text-sm font-medium text-orange-100">WealthForge</span>
           </Link>

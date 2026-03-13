@@ -24,12 +24,10 @@ export function Navbar() {
       <nav className="mx-auto max-w-5xl px-4">
         <div className="flex h-12 items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <div className="h-7 w-7 rounded-md bg-gradient-to-br from-orange-700 to-orange-900 flex items-center justify-center">
-              <Hammer className="h-4 w-4 text-orange-100" />
+            <div className="h-7 w-7 rounded-md overflow-hidden">
+              <img src="/logo.png" alt="WealthForge" className="h-full w-full object-cover" />
             </div>
-            <span className="text-sm font-medium bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent">
-              WealthForge
-            </span>
+            <span className="text-sm font-medium text-orange-100">WealthForge</span>
           </Link>
 
           <div className="hidden md:flex items-center gap-6">

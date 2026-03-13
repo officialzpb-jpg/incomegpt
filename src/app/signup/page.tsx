@@ -91,8 +91,8 @@ export default function SignupPage() {
       >
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex items-center gap-2 mb-6">
-            <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-orange-700 to-orange-900 flex items-center justify-center">
-              <Hammer className="h-5 w-5 text-orange-100" />
+            <div className="h-10 w-10 rounded-lg overflow-hidden">
+              <img src="/logo.png" alt="WealthForge" className="h-full w-full object-cover" />
             </div>
             <span className="text-xl font-semibold text-orange-100">WealthForge</span>
           </Link>

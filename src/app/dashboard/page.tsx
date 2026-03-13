@@ -145,8 +145,8 @@ export default function DashboardPage() {
       <aside className="fixed left-0 top-0 h-full w-64 border-r border-white/5 bg-black/50 backdrop-blur-xl hidden lg:block">
         <div className="p-6">
           <Link href="/" className="flex items-center gap-2 mb-8">
-            <div className="h-8 w-8 rounded-md bg-gradient-to-br from-orange-700 to-orange-900 flex items-center justify-center">
-              <Hammer className="h-4 w-4 text-orange-100" />
+            <div className="h-8 w-8 rounded-md overflow-hidden">
+              <img src="/logo.png" alt="WealthForge" className="h-full w-full object-cover" />
             </div>
             <span className="text-lg font-semibold text-orange-100">WealthForge</span>
           </Link>
