@@ -41,6 +41,7 @@ export default function SignupPage() {
       const { error: profileError } = await supabase.from("profiles").insert({
         id: authData.user.id,
         email: authData.user.email,
+        full_name: name,
         income_goal: 0,
       });
 
