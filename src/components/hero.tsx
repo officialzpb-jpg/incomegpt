@@ -12,81 +12,113 @@ export function Hero() {
         {/* Gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-emerald-950/30 via-black to-black" />
         
-        {/* Animated flowing waves */}
+      {/* Animated flowing waves - horizontal flow in middle */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <svg
-          className="absolute bottom-0 left-0 w-full h-1/2 opacity-30"
-          viewBox="0 0 1440 600"
-          preserveAspectRatio="none"
+          className="w-full h-[60vh] opacity-50"
+          viewBox="0 0 1440 400"
+          preserveAspectRatio="xMidYMid slice"
         >
           <defs>
-            <linearGradient id="waveGradient1" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#10b981" stopOpacity="0.3" />
-              <stop offset="50%" stopColor="#06b6d4" stopOpacity="0.2" />
-              <stop offset="100%" stopColor="#10b981" stopOpacity="0.3" />
+            <linearGradient id="flowGradient1" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#10b981" stopOpacity="0" />
+              <stop offset="20%" stopColor="#10b981" stopOpacity="0.3" />
+              <stop offset="50%" stopColor="#06b6d4" stopOpacity="0.5" />
+              <stop offset="80%" stopColor="#10b981" stopOpacity="0.3" />
+              <stop offset="100%" stopColor="#10b981" stopOpacity="0" />
             </linearGradient>
-            <linearGradient id="waveGradient2" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.2" />
-              <stop offset="50%" stopColor="#10b981" stopOpacity="0.3" />
-              <stop offset="100%" stopColor="#06b6d4" stopOpacity="0.2" />
+            <linearGradient id="flowGradient2" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#06b6d4" stopOpacity="0" />
+              <stop offset="30%" stopColor="#06b6d4" stopOpacity="0.4" />
+              <stop offset="70%" stopColor="#10b981" stopOpacity="0.4" />
+              <stop offset="100%" stopColor="#06b6d4" stopOpacity="0" />
             </linearGradient>
           </defs>
           
-          {/* Wave 1 */}
+          {/* Flow Wave 1 - Top */}
           <motion.path
-            d="M0,300 C240,200 480,400 720,300 C960,200 1200,400 1440,300 L1440,600 L0,600 Z"
-            fill="url(#waveGradient1)"
+            d="M-100,100 Q200,50 400,100 T900,100 T1400,100 T1900,100"
+            fill="none"
+            stroke="url(#flowGradient1)"
+            strokeWidth="3"
             animate={{
               d: [
-                "M0,300 C240,200 480,400 720,300 C960,200 1200,400 1440,300 L1440,600 L0,600 Z",
-                "M0,350 C240,450 480,250 720,350 C960,450 1200,250 1440,350 L1440,600 L0,600 Z",
-                "M0,300 C240,200 480,400 720,300 C960,200 1200,400 1440,300 L1440,600 L0,600 Z",
+                "M-100,100 Q200,50 400,100 T900,100 T1400,100 T1900,100",
+                "M-100,100 Q200,150 400,100 T900,100 T1400,100 T1900,100",
+                "M-100,100 Q200,50 400,100 T900,100 T1400,100 T1900,100",
+              ],
+            }}
+            transition={{
+              duration: 6,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+          
+          {/* Flow Wave 2 - Middle */}
+          <motion.path
+            d="M-100,200 Q300,150 600,200 T1200,200 T1800,200"
+            fill="none"
+            stroke="url(#flowGradient2)"
+            strokeWidth="4"
+            animate={{
+              d: [
+                "M-100,200 Q300,150 600,200 T1200,200 T1800,200",
+                "M-100,200 Q300,250 600,200 T1200,200 T1800,200",
+                "M-100,200 Q300,150 600,200 T1200,200 T1800,200",
               ],
             }}
             transition={{
               duration: 8,
               repeat: Infinity,
               ease: "easeInOut",
+              delay: 0.5,
             }}
           />
           
-          {/* Wave 2 */}
+          {/* Flow Wave 3 - Bottom */}
           <motion.path
-            d="M0,400 C360,300 720,500 1080,400 C1260,350 1350,450 1440,400 L1440,600 L0,600 Z"
-            fill="url(#waveGradient2)"
+            d="M-100,300 Q250,250 500,300 T1000,300 T1500,300 T2000,300"
+            fill="none"
+            stroke="url(#flowGradient1)"
+            strokeWidth="3"
             animate={{
               d: [
-                "M0,400 C360,300 720,500 1080,400 C1260,350 1350,450 1440,400 L1440,600 L0,600 Z",
-                "M0,450 C360,550 720,350 1080,450 C1260,500 1350,400 1440,450 L1440,600 L0,600 Z",
-                "M0,400 C360,300 720,500 1080,400 C1260,350 1350,450 1440,400 L1440,600 L0,600 Z",
+                "M-100,300 Q250,250 500,300 T1000,300 T1500,300 T2000,300",
+                "M-100,300 Q250,350 500,300 T1000,300 T1500,300 T2000,300",
+                "M-100,300 Q250,250 500,300 T1000,300 T1500,300 T2000,300",
               ],
             }}
             transition={{
-              duration: 10,
+              duration: 7,
               repeat: Infinity,
               ease: "easeInOut",
               delay: 1,
             }}
           />
           
-          {/* Wave 3 */}
+          {/* Flow Wave 4 - Thinner accent */}
           <motion.path
-            d="M0,450 C480,350 960,550 1440,450 L1440,600 L0,600 Z"
-            fill="url(#waveGradient1)"
+            d="M-100,150 Q400,100 800,150 T1600,150"
+            fill="none"
+            stroke="url(#flowGradient2)"
+            strokeWidth="2"
             animate={{
               d: [
-                "M0,450 C480,350 960,550 1440,450 L1440,600 L0,600 Z",
-                "M0,500 C480,600 960,400 1440,500 L1440,600 L0,600 Z",
-                "M0,450 C480,350 960,550 1440,450 L1440,600 L0,600 Z",
+                "M-100,150 Q400,100 800,150 T1600,150",
+                "M-100,150 Q400,200 800,150 T1600,150",
+                "M-100,150 Q400,100 800,150 T1600,150",
               ],
             }}
             transition={{
-              duration: 12,
+              duration: 5,
               repeat: Infinity,
               ease: "easeInOut",
-              delay: 2,
+              delay: 1.5,
             }}
           />
         </svg>
+      </div>
         
         {/* Floating particles */}
         {[...Array(20)].map((_, i) => (
