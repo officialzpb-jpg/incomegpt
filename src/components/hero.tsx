@@ -40,18 +40,36 @@ export function Hero() {
         ))}
       </div>
 
-      <div className="relative mx-auto max-w-4xl px-6 py-24">
+      <div className="relative mx-auto max-w-4xl px-6 py-16">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="text-center"
         >
+          {/* Main Logo */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.1, duration: 0.8 }}
+            className="mb-8"
+          >
+            <div className="relative inline-block">
+              {/* Glow effect behind logo */}
+              <div className="absolute inset-0 bg-orange-600/20 blur-3xl rounded-full scale-150" />
+              <img 
+                src="/hero-logo.png" 
+                alt="WealthForge" 
+                className="relative w-48 h-48 md:w-64 md:h-64 object-contain drop-shadow-2xl"
+              />
+            </div>
+          </motion.div>
+
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2 }}
-            className="inline-flex items-center gap-2 rounded-full border border-orange-800/40 bg-orange-950/30 px-4 py-1.5 mb-8"
+            transition={{ delay: 0.3 }}
+            className="inline-flex items-center gap-2 rounded-full border border-orange-800/40 bg-orange-950/30 px-4 py-1.5 mb-6"
           >
             <Hammer className="h-4 w-4 text-orange-500" />
             <span className="text-sm text-orange-400">Forge Your Financial Future</span>
