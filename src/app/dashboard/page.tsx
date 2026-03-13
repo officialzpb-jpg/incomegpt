@@ -144,11 +144,11 @@ export default function DashboardPage() {
       {/* Sidebar */}
       <aside className="fixed left-0 top-0 h-full w-64 border-r border-white/5 bg-black/50 backdrop-blur-xl hidden lg:block">
         <div className="p-6">
-          <Link href="/" className="flex items-center gap-2 mb-8">
-            <div className="h-8 w-8 rounded-md overflow-hidden">
+          <Link href="/" className="flex items-center gap-3 mb-8">
+            <div className="h-10 w-10 rounded-md overflow-hidden">
               <img src="/logo.png" alt="WealthForge" className="h-full w-full object-cover" />
             </div>
-            <span className="text-lg font-semibold text-orange-100">WealthForge</span>
+            <span className="text-xl font-semibold text-orange-100">WealthForge</span>
           </Link>
 
           <nav className="space-y-1">

@@ -90,11 +90,11 @@ export default function SignupPage() {
         className="relative w-full max-w-md z-10"
       >
         <div className="text-center mb-8">
-          <Link href="/" className="inline-flex items-center gap-2 mb-6">
-            <div className="h-10 w-10 rounded-lg overflow-hidden">
+          <Link href="/" className="inline-flex items-center gap-3 mb-6">
+            <div className="h-14 w-14 rounded-xl overflow-hidden">
               <img src="/logo.png" alt="WealthForge" className="h-full w-full object-cover" />
             </div>
-            <span className="text-xl font-semibold text-orange-100">WealthForge</span>
+            <span className="text-2xl font-semibold text-orange-100">WealthForge</span>
           </Link>
           <h1 className="text-2xl font-bold mb-2 text-slate-100">Create your account</h1>
           <p className="text-slate-500">Start forging your financial future today</p>
