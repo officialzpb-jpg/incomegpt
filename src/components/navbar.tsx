@@ -19,43 +19,43 @@ export function Navbar() {
     <motion.header
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      className="fixed top-0 left-0 right-0 z-50 border-b border-white/5 bg-black/50 backdrop-blur-xl"
+      className="fixed top-0 left-0 right-0 z-50 border-b border-white/5 bg-black/80 backdrop-blur-md"
     >
-      <nav className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
+      <nav className="mx-auto max-w-5xl px-4">
+        <div className="flex h-12 items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <div className="h-10 w-10 rounded-lg overflow-hidden">
+            <div className="h-7 w-7 rounded-md overflow-hidden">
               <img 
                 src="/logo.jpg" 
                 alt="IncomeGPT" 
                 className="h-full w-full object-cover"
               />
             </div>
-            <span className="text-lg font-semibold">IncomeGPT</span>
+            <span className="text-sm font-medium">IncomeGPT</span>
           </Link>
 
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-6">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-sm text-white/60 hover:text-white transition-colors"
+                className="text-xs text-white/50 hover:text-white transition-colors"
               >
                 {link.label}
               </Link>
             ))}
           </div>
 
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-3">
             <Link
               href="/login"
-              className="text-sm text-white/60 hover:text-white transition-colors"
+              className="text-xs text-white/50 hover:text-white transition-colors"
             >
               Sign in
             </Link>
             <Link
               href="/signup"
-              className="rounded-full bg-white px-4 py-2 text-sm font-medium text-black hover:bg-white/90 transition-colors"
+              className="rounded-md bg-white px-3 py-1.5 text-xs font-medium text-black hover:bg-white/90 transition-colors"
             >
               Get Started
             </Link>
@@ -63,9 +63,9 @@ export function Navbar() {
 
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2"
+            className="md:hidden p-1.5"
           >
-            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            {isOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
           </button>
         </div>
 
@@ -74,27 +74,27 @@ export function Navbar() {
           animate={{ height: isOpen ? "auto" : 0, opacity: isOpen ? 1 : 0 }}
           className={cn("md:hidden overflow-hidden")}
         >
-          <div className="py-4 space-y-4">
+          <div className="py-3 space-y-3">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="block text-sm text-white/60 hover:text-white transition-colors"
+                className="block text-xs text-white/50 hover:text-white transition-colors"
               >
                 {link.label}
               </Link>
             ))}
-            <div className="pt-4 border-t border-white/10 space-y-3">
+            <div className="pt-3 border-t border-white/10 space-y-2">
               <Link
                 href="/login"
-                className="block text-sm text-white/60 hover:text-white"
+                className="block text-xs text-white/50 hover:text-white"
               >
                 Sign in
               </Link>
               <Link
                 href="/signup"
-                className="block w-full text-center rounded-full bg-white px-4 py-2 text-sm font-medium text-black"
+                className="block w-full text-center rounded-md bg-white px-3 py-1.5 text-xs font-medium text-black"
               >
                 Get Started
               </Link>
