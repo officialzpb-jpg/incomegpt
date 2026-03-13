@@ -19,7 +19,8 @@ import {
   MessageSquare,
   Users,
   FileText,
-  Settings
+  Settings,
+  Hammer
 } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { DailyTasks } from "@/components/daily-tasks";
@@ -144,60 +145,56 @@ export default function DashboardPage() {
       <aside className="fixed left-0 top-0 h-full w-64 border-r border-white/5 bg-black/50 backdrop-blur-xl hidden lg:block">
         <div className="p-6">
           <Link href="/" className="flex items-center gap-2 mb-8">
-            <div className="h-10 w-10 rounded-lg overflow-hidden">
-              <img 
-                src="/logo.jpg" 
-                alt="IncomeGPT" 
-                className="h-full w-full object-cover"
-              />
+            <div className="h-8 w-8 rounded-md bg-gradient-to-br from-orange-700 to-orange-900 flex items-center justify-center">
+              <Hammer className="h-4 w-4 text-orange-100" />
             </div>
-            <span className="text-lg font-semibold">IncomeGPT</span>
+            <span className="text-lg font-semibold text-orange-100">WealthForge</span>
           </Link>
 
           <nav className="space-y-1">
             <Link
               href="/dashboard"
-              className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/5 text-white"
+              className="flex items-center gap-3 px-3 py-2 rounded-lg bg-orange-950/30 text-orange-100 text-sm"
             >
-              <Target className="h-5 w-5" />
+              <Target className="h-4 w-4" />
               Dashboard
             </Link>
             <Link
               href="/generator"
-              className="flex items-center gap-3 px-4 py-3 rounded-xl text-white/60 hover:bg-white/5 hover:text-white transition-colors"
+              className="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 transition-colors text-sm"
             >
-              <Sparkles className="h-5 w-5" />
-              Generate Strategy
+              <Sparkles className="h-4 w-4" />
+              Generate
             </Link>
             <Link
               href="/business/build"
-              className="flex items-center gap-3 px-4 py-3 rounded-xl text-white/60 hover:bg-white/5 hover:text-white transition-colors"
+              className="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 transition-colors text-sm"
             >
-              <Rocket className="h-5 w-5" />
-              Build $10K Business
+              <Rocket className="h-4 w-4" />
+              Build Business
             </Link>
             <Link
               href="/chat"
-              className="flex items-center gap-3 px-4 py-3 rounded-xl text-white/60 hover:bg-white/5 hover:text-white transition-colors"
+              className="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 transition-colors text-sm"
             >
-              <MessageSquare className="h-5 w-5" />
+              <MessageSquare className="h-4 w-4" />
               AI Coach
             </Link>
-            <div className="pt-4 mt-4 border-t border-white/10">
-              <p className="px-4 text-xs text-white/40 uppercase tracking-wider mb-2">AI Agents</p>
+            <div className="pt-3 mt-3 border-t border-slate-800">
+              <p className="px-3 text-[10px] text-slate-600 uppercase tracking-wider mb-1">Agents</p>
               <Link
                 href="/agents/outreach"
-                className="flex items-center gap-3 px-4 py-3 rounded-xl text-white/60 hover:bg-white/5 hover:text-white transition-colors"
+                className="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 transition-colors text-sm"
               >
-                <Users className="h-5 w-5" />
-                Outreach Agent
+                <Users className="h-4 w-4" />
+                Outreach
               </Link>
               <Link
                 href="/agents/content"
-                className="flex items-center gap-3 px-4 py-3 rounded-xl text-white/60 hover:bg-white/5 hover:text-white transition-colors"
+                className="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 transition-colors text-sm"
               >
-                <FileText className="h-5 w-5" />
-                Content Agent
+                <FileText className="h-4 w-4" />
+                Content
               </Link>
             </div>
             <Link
@@ -210,32 +207,34 @@ export default function DashboardPage() {
           </nav>
         </div>
 
-        <div className="absolute bottom-0 left-0 right-0 p-6 border-t border-white/5">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-orange-700 to-orange-600 flex items-center justify-center">
-              <User className="h-5 w-5 text-white" />
+        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-slate-800 bg-slate-950">
+          <div className="flex items-center gap-3 mb-3">
+            <div className="h-8 w-8 rounded-full bg-gradient-to-br from-orange-700 to-orange-900 flex items-center justify-center">
+              <User className="h-4 w-4 text-orange-100" />
             </div>
-            <div>
-              <div className="font-medium">{profile?.email?.split('@')[0] || 'User'}</div>
-              <div className="text-sm text-white/60">
-                {profile?.subscription_status === 'active' ? 'Pro Plan' : 'Free Plan'}
+            <div className="flex-1 min-w-0">
+              <div className="text-sm font-medium text-slate-200 truncate">{profile?.email?.split('@')[0] || 'User'}</div>
+              <div className="text-xs text-slate-500">
+                {profile?.subscription_status === 'active' ? 'Pro' : 'Free'}
               </div>
             </div>
           </div>
-          <button 
-            onClick={handleSignOut}
-            className="flex items-center gap-2 text-sm text-white/60 hover:text-white mb-3"
-          >
-            <LogOut className="h-4 w-4" />
-            Sign out
-          </button>
-          <Link 
-            href="/settings"
-            className="flex items-center gap-2 text-sm text-white/60 hover:text-white"
-          >
-            <Settings className="h-4 w-4" />
-            Settings
-          </Link>
+          <div className="flex items-center gap-2">
+            <Link 
+              href="/settings"
+              className="flex-1 flex items-center justify-center gap-1.5 px-3 py-1.5 text-xs text-slate-400 hover:text-orange-400 hover:bg-slate-800/50 rounded-lg transition-colors"
+            >
+              <Settings className="h-3.5 w-3.5" />
+              Settings
+            </Link>
+            <button 
+              onClick={handleSignOut}
+              className="flex-1 flex items-center justify-center gap-1.5 px-3 py-1.5 text-xs text-slate-400 hover:text-red-400 hover:bg-slate-800/50 rounded-lg transition-colors"
+            >
+              <LogOut className="h-3.5 w-3.5" />
+              Sign out
+            </button>
+          </div>
         </div>
       </aside>
 
