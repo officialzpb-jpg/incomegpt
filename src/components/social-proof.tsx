@@ -3,6 +3,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Users, TrendingUp, Zap, Hammer } from "lucide-react";
+
+const stats = [
   { icon: Users, label: "Active Forgers", value: 1247, suffix: "+" },
   { icon: TrendingUp, label: "Avg. Monthly Income", value: 8430, prefix: "$" },
   { icon: Zap, label: "Strategies Generated", value: 15234, suffix: "+" },
