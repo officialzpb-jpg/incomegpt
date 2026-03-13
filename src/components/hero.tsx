@@ -38,48 +38,6 @@ export function Hero() {
             }}
           />
         ))}
-
-        {/* Horizontal flowing energy lines */}
-        <svg
-          className="absolute inset-0 w-full h-full opacity-30"
-          viewBox="0 0 1440 800"
-          preserveAspectRatio="xMidYMid slice"
-        >
-          <defs>
-            <linearGradient id="forgeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#c2410c" stopOpacity="0" />
-              <stop offset="30%" stopColor="#c2410c" stopOpacity="0.4" />
-              <stop offset="50%" stopColor="#9a3412" stopOpacity="0.7" />
-              <stop offset="70%" stopColor="#c2410c" stopOpacity="0.4" />
-              <stop offset="100%" stopColor="#c2410c" stopOpacity="0" />
-            </linearGradient>
-          </defs>
-          
-          {/* Flowing energy waves */}
-          {[350, 400, 450].map((y, i) => (
-            <motion.path
-              key={i}
-              d={`M-200,${y} Q300,${y - 30} 700,${y} T1500,${y}`}
-              fill="none"
-              stroke="url(#forgeGradient)"
-              strokeWidth={6 - i}
-              strokeLinecap="round"
-              animate={{
-                d: [
-                  `M-200,${y} Q300,${y - 30} 700,${y} T1500,${y}`,
-                  `M-200,${y} Q300,${y + 30} 700,${y} T1500,${y}`,
-                  `M-200,${y} Q300,${y - 30} 700,${y} T1500,${y}`,
-                ],
-              }}
-              transition={{
-                duration: 4 + i,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: i * 0.5,
-              }}
-            />
-          ))}
-        </svg>
       </div>
 
       <div className="relative mx-auto max-w-4xl px-6 py-24">
