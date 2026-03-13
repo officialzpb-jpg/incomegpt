@@ -198,7 +198,9 @@ export default function ResultsPage() {
                       <span className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-sm">
                         {i + 1}
                       </span>
-                      <span className="text-white/70">{step}</span>
+                      <span className="text-white/70">
+                        {typeof step === 'string' ? step : step.title || 'Step ' + (i + 1)}
+                      </span>
                     </li>
                   ))}
                 </ol>
