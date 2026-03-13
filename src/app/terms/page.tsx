@@ -41,13 +41,13 @@ export default function TermsOfServicePage() {
           <ul className="list-disc pl-6 space-y-2 text-white/70">
             <li>Use the service for illegal purposes</li>
             <li>Attempt to gain unauthorized access</li>
-            <li>Interfere with other users' accounts</li>
+            <li>Interfere with other users\u0026apos; accounts</li>
             <li>Resell or redistribute our AI-generated content</li>
           </ul>
           
           <h2 className="text-2xl font-semibold mt-8 mb-4">6. Disclaimer of Warranties</h2>
           <p className="text-white/70">
-            THE SERVICE IS PROVIDED "AS IS" WITHOUT WARRANTIES OF ANY KIND. 
+            THE SERVICE IS PROVIDED \u0026quot;AS IS\u0026quot; WITHOUT WARRANTIES OF ANY KIND. 
             We do not guarantee that the service will be uninterrupted, secure, or error-free. 
             AI-generated strategies are suggestions only and do not guarantee income.
           </p>
