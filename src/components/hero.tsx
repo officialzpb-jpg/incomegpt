@@ -11,41 +11,48 @@ export function Hero() {
       <div className="absolute inset-0 bg-black">
         {/* Gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-emerald-950/30 via-black to-black" />
-        
+
       {/* Animated flowing waves - horizontal flow in middle */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <svg
-          className="w-full h-[60vh] opacity-50"
+          className="w-full h-[70vh] opacity-60"
           viewBox="0 0 1440 400"
           preserveAspectRatio="xMidYMid slice"
         >
           <defs>
             <linearGradient id="flowGradient1" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stopColor="#10b981" stopOpacity="0" />
-              <stop offset="20%" stopColor="#10b981" stopOpacity="0.3" />
-              <stop offset="50%" stopColor="#06b6d4" stopOpacity="0.5" />
-              <stop offset="80%" stopColor="#10b981" stopOpacity="0.3" />
+              <stop offset="20%" stopColor="#10b981" stopOpacity="0.4" />
+              <stop offset="50%" stopColor="#06b6d4" stopOpacity="0.6" />
+              <stop offset="80%" stopColor="#10b981" stopOpacity="0.4" />
               <stop offset="100%" stopColor="#10b981" stopOpacity="0" />
             </linearGradient>
             <linearGradient id="flowGradient2" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stopColor="#06b6d4" stopOpacity="0" />
-              <stop offset="30%" stopColor="#06b6d4" stopOpacity="0.4" />
-              <stop offset="70%" stopColor="#10b981" stopOpacity="0.4" />
+              <stop offset="30%" stopColor="#06b6d4" stopOpacity="0.5" />
+              <stop offset="70%" stopColor="#10b981" stopOpacity="0.5" />
               <stop offset="100%" stopColor="#06b6d4" stopOpacity="0" />
             </linearGradient>
+            <linearGradient id="cashGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#fbbf24" stopOpacity="0" />
+              <stop offset="30%" stopColor="#fbbf24" stopOpacity="0.8" />
+              <stop offset="70%" stopColor="#f59e0b" stopOpacity="0.8" />
+              <stop offset="100%" stopColor="#fbbf24" stopOpacity="0" />
+            </linearGradient>
           </defs>
-          
-          {/* Flow Wave 1 - Top */}
+
+          {/* Main Flow Wave 1 - Top */}
           <motion.path
-            d="M-100,100 Q200,50 400,100 T900,100 T1400,100 T1900,100"
+            d="M-200,80 Q200,30 500,80 T1100,80 T1700,80"
             fill="none"
             stroke="url(#flowGradient1)"
-            strokeWidth="3"
+            strokeWidth="8"
+            strokeLinecap="round"
             animate={{
               d: [
-                "M-100,100 Q200,50 400,100 T900,100 T1400,100 T1900,100",
-                "M-100,100 Q200,150 400,100 T900,100 T1400,100 T1900,100",
-                "M-100,100 Q200,50 400,100 T900,100 T1400,100 T1900,100",
+                "M-200,80 Q200,30 500,80 T1100,80 T1700,80",
+                "M-200,80 Q200,130 500,80 T1100,80 T1700,80",
+                "M-200,80 Q200,30 500,80 T1100,80 T1700,80",
               ],
             }}
             transition={{
@@ -54,18 +61,19 @@ export function Hero() {
               ease: "easeInOut",
             }}
           />
-          
-          {/* Flow Wave 2 - Middle */}
+
+          {/* Main Flow Wave 2 - Middle */}
           <motion.path
-            d="M-100,200 Q300,150 600,200 T1200,200 T1800,200"
+            d="M-200,200 Q300,150 700,200 T1300,200 T1900,200"
             fill="none"
             stroke="url(#flowGradient2)"
-            strokeWidth="4"
+            strokeWidth="10"
+            strokeLinecap="round"
             animate={{
               d: [
-                "M-100,200 Q300,150 600,200 T1200,200 T1800,200",
-                "M-100,200 Q300,250 600,200 T1200,200 T1800,200",
-                "M-100,200 Q300,150 600,200 T1200,200 T1800,200",
+                "M-200,200 Q300,150 700,200 T1300,200 T1900,200",
+                "M-200,200 Q300,250 700,200 T1300,200 T1900,200",
+                "M-200,200 Q300,150 700,200 T1300,200 T1900,200",
               ],
             }}
             transition={{
@@ -75,18 +83,19 @@ export function Hero() {
               delay: 0.5,
             }}
           />
-          
-          {/* Flow Wave 3 - Bottom */}
+
+          {/* Main Flow Wave 3 - Bottom */}
           <motion.path
-            d="M-100,300 Q250,250 500,300 T1000,300 T1500,300 T2000,300"
+            d="M-200,320 Q250,270 600,320 T1200,320 T1800,320 T2400,320"
             fill="none"
             stroke="url(#flowGradient1)"
-            strokeWidth="3"
+            strokeWidth="8"
+            strokeLinecap="round"
             animate={{
               d: [
-                "M-100,300 Q250,250 500,300 T1000,300 T1500,300 T2000,300",
-                "M-100,300 Q250,350 500,300 T1000,300 T1500,300 T2000,300",
-                "M-100,300 Q250,250 500,300 T1000,300 T1500,300 T2000,300",
+                "M-200,320 Q250,270 600,320 T1200,320 T1800,320 T2400,320",
+                "M-200,320 Q250,370 600,320 T1200,320 T1800,320 T2400,320",
+                "M-200,320 Q250,270 600,320 T1200,320 T1800,320 T2400,320",
               ],
             }}
             transition={{
@@ -96,18 +105,63 @@ export function Hero() {
               delay: 1,
             }}
           />
-          
-          {/* Flow Wave 4 - Thinner accent */}
+
+          {/* Cash Flow Particles - Flowing through waves */}
+          {[...Array(12)].map((_, i) => (
+            <motion.circle
+              key={i}
+              r="4"
+              fill="url(#cashGradient)"
+              animate={{
+                cx: [-100, 1600],
+                cy: [140 + (i % 3) * 80, 140 + (i % 3) * 80 + Math.sin(i) * 30],
+              }}
+              transition={{
+                duration: 4 + (i % 3),
+                repeat: Infinity,
+                ease: "linear",
+                delay: i * 0.4,
+              }}
+            />
+          ))}
+
+          {/* Dollar Sign Symbols Flowing */}
+          {[...Array(8)].map((_, i) => (
+            <motion.text
+              key={`dollar-${i}`}
+              x={-100}
+              y={120 + (i % 4) * 70}
+              fill="#fbbf24"
+              fontSize="20"
+              fontWeight="bold"
+              opacity={0.6}
+              animate={{
+                x: [-100, 1600],
+                y: [120 + (i % 4) * 70, 120 + (i % 4) * 70 + Math.sin(i * 0.5) * 20],
+              }}
+              transition={{
+                duration: 5 + (i % 2),
+                repeat: Infinity,
+                ease: "linear",
+                delay: i * 0.6,
+              }}
+            >
+              $
+            </motion.text>
+          ))}
+
+          {/* Secondary Flow Wave - Accent */}
           <motion.path
-            d="M-100,150 Q400,100 800,150 T1600,150"
+            d="M-200,140 Q400,90 800,140 T1600,140"
             fill="none"
             stroke="url(#flowGradient2)"
-            strokeWidth="2"
+            strokeWidth="5"
+            strokeLinecap="round"
             animate={{
               d: [
-                "M-100,150 Q400,100 800,150 T1600,150",
-                "M-100,150 Q400,200 800,150 T1600,150",
-                "M-100,150 Q400,100 800,150 T1600,150",
+                "M-200,140 Q400,90 800,140 T1600,140",
+                "M-200,140 Q400,190 800,140 T1600,140",
+                "M-200,140 Q400,90 800,140 T1600,140",
               ],
             }}
             transition={{
@@ -117,9 +171,31 @@ export function Hero() {
               delay: 1.5,
             }}
           />
+
+          {/* Thin accent lines */}
+          <motion.path
+            d="M-200,260 Q350,210 750,260 T1550,260"
+            fill="none"
+            stroke="url(#flowGradient1)"
+            strokeWidth="3"
+            strokeLinecap="round"
+            animate={{
+              d: [
+                "M-200,260 Q350,210 750,260 T1550,260",
+                "M-200,260 Q350,310 750,260 T1550,260",
+                "M-200,260 Q350,210 750,260 T1550,260",
+              ],
+            }}
+            transition={{
+              duration: 6.5,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 0.8,
+            }}
+          />
         </svg>
       </div>
-        
+
         {/* Floating particles */}
         {[...Array(20)].map((_, i) => (
           <motion.div
@@ -177,7 +253,7 @@ export function Hero() {
             transition={{ delay: 0.4 }}
             className="mx-auto max-w-2xl text-lg text-white/60 mb-10"
           >
-            Generate personalized, profitable strategies tailored to your skills, budget, and goals. 
+            Generate personalized, profitable strategies tailored to your skills, budget, and goals.
             Turn your ambitions into actionable plans.
           </motion.p>
 
