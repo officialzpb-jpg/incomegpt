@@ -15,6 +15,16 @@ import {
 } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 
+interface Step {
+  id?: number;
+  title?: string;
+  duration?: string;
+  instruction?: string;
+  aiPrompt?: string;
+  completed?: boolean;
+  unlocked?: boolean;
+}
+
 interface Strategy {
   id: string;
   title: string;
@@ -24,7 +34,7 @@ interface Strategy {
   startupCost: string;
   timeframe: string;
   matchScore: number;
-  steps: string[];
+  steps: (string | Step)[];
   tags: string[];
 }
 
