@@ -1,4 +1,4 @@
-// IncomeGPT AI Strategy Engine
+// WealthForge AI Strategy Engine
 // Generates realistic, actionable income strategies based on user inputs
 
 export interface StrategyInput {

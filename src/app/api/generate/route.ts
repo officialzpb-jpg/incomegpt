@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { StrategyInput, Strategy } from "@/lib/types";
 
-// AI Prompt Engine for IncomeGPT - System prompt for OpenAI integration
+// AI Prompt Engine for WealthForge - System prompt for OpenAI integration
 // const SYSTEM_PROMPT = `...`;
 
 interface StrategyTemplate {

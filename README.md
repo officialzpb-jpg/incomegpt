@@ -1,6 +1,6 @@
-# IncomeGPT
+# WealthForge
 
-An AI-powered platform that helps users generate and execute profitable money-making strategies.
+An AI-powered platform that helps users forge their path to wealth through personalized income strategies and business blueprints.
 
 ## Features
 
@@ -53,7 +53,7 @@ An AI-powered platform that helps users generate and execute profitable money-ma
 ## Project Structure
 
 ```
-incomegpt/
+wealthforge/
 ├── src/
 │   ├── app/              # Next.js app router pages
 │   │   ├── api/          # API routes

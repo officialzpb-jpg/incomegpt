@@ -8,14 +8,14 @@ export default function TermsOfServicePage() {
           
           <h2 className="text-2xl font-semibold mt-8 mb-4">1. Acceptance of Terms</h2>
           <p className="text-white/70">
-            By accessing or using IncomeGPT, you agree to be bound by these Terms of Service. 
+            By accessing or using WealthForge, you agree to be bound by these Terms of Service.
             If you do not agree to these terms, please do not use our service.
           </p>
           
           <h2 className="text-2xl font-semibold mt-8 mb-4">2. Description of Service</h2>
           <p className="text-white/70">
-            IncomeGPT is an AI-powered platform that generates business strategies, 
-            content, and outreach campaigns to help users build income streams. 
+            WealthForge is an AI-powered platform that generates business strategies,
+            content, and outreach campaigns to help users forge their path to wealth. 
             We do not guarantee any specific income results from using our service.
           </p>
           
@@ -54,7 +54,7 @@ export default function TermsOfServicePage() {
           
           <h2 className="text-2xl font-semibold mt-8 mb-4">7. Limitation of Liability</h2>
           <p className="text-white/70">
-            IncomeGPT shall not be liable for any indirect, incidental, special, 
+            WealthForge shall not be liable for any indirect, incidental, special,
             consequential, or punitive damages resulting from your use of the service.
           </p>
           
@@ -67,7 +67,7 @@ export default function TermsOfServicePage() {
           <h2 className="text-2xl font-semibold mt-8 mb-4">9. Contact</h2>
           <p className="text-white/70">
             Questions about these Terms? Contact us at:
-            <a href="mailto:support@incomegpt.com" className="text-orange-600">support@incomegpt.com</a>
+            <a href="mailto:support@wealthforge.ai" className="text-orange-600">support@wealthforge.ai</a>
           </p>
         </div>
       </div>

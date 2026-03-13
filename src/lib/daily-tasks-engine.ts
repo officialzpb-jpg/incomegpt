@@ -1,4 +1,4 @@
-// Daily Income Tasks Engine for IncomeGPT
+// Daily Income Tasks Engine for WealthForge
 // Generates personalized daily tasks based on user profile and goals
 
 import type { SupabaseClient } from "@supabase/supabase-js";

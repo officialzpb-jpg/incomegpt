@@ -178,7 +178,7 @@ export default function ChatPage() {
               <div className="h-8 w-8 rounded-full bg-orange-700/20 flex items-center justify-center">
                 <Sparkles className="h-4 w-4 text-orange-600" />
               </div>
-              <span className="font-semibold">IncomeGPT Assistant</span>
+              <span className="font-semibold">WealthForge Assistant</span>
             </div>
           </div>
 
@@ -204,8 +204,8 @@ export default function ChatPage() {
               >
                 <div className="w-16 h-16 rounded-lg overflow-hidden mx-auto mb-6">
                   <img
-                    src="/logo.jpg"
-                    alt="IncomeGPT"
+                    src="/logo.png"
+                    alt="WealthForge"
                     className="h-full w-full object-cover"
                   />
                 </div>
@@ -251,8 +251,8 @@ export default function ChatPage() {
                         {message.role === "assistant" ? (
                           <div className="w-8 h-8 rounded-lg overflow-hidden">
                             <img
-                              src="/logo.jpg"
-                              alt="IncomeGPT"
+                              src="/logo.png"
+                              alt="WealthForge"
                               className="h-full w-full object-cover"
                             />
                           </div>
@@ -265,7 +265,7 @@ export default function ChatPage() {
 
                       <div className="flex-1 min-w-0">
                         <div className="font-medium text-sm mb-1 text-white/40">
-                          {message.role === "assistant" ? "IncomeGPT" : "You"}
+                          {message.role === "assistant" ? "WealthForge" : "You"}
                         </div>
                         <div className="prose prose-invert prose-sm max-w-none">
                           {message.content.split("\n").map((line, i) => (
@@ -305,13 +305,13 @@ export default function ChatPage() {
                   <div className="max-w-5xl mx-auto flex gap-4">
                     <div className="w-8 h-8 rounded-lg overflow-hidden">
                       <img
-                        src="/logo.jpg"
-                        alt="IncomeGPT"
+                        src="/logo.png"
+                        alt="WealthForge"
                         className="h-full w-full object-cover"
                       />
                     </div>
                     <div className="flex-1">
-                      <div className="font-medium text-sm mb-1 text-white/40">IncomeGPT</div>
+                      <div className="font-medium text-sm mb-1 text-white/40">WealthForge</div>
                       <div className="flex items-center gap-2">
                         <Loader2 className="h-4 w-4 animate-spin text-orange-600" />
                         <span className="text-sm text-white/60">Thinking...</span>
@@ -336,7 +336,7 @@ export default function ChatPage() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Message IncomeGPT..."
+              placeholder="Message WealthForge..."
               rows={1}
               className="flex-1 bg-transparent resize-none outline-none text-sm max-h-32 min-h-[20px] py-1"
               disabled={isLoading}
@@ -352,7 +352,7 @@ export default function ChatPage() {
           </div>
           
           <p className="text-center text-xs text-white/30 mt-2">
-            IncomeGPT can make mistakes. Consider checking important information.
+            WealthForge can make mistakes. Consider checking important information.
           </p>
         </div>
       </div>

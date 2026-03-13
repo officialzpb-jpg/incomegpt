@@ -51,7 +51,7 @@ export default function PrivacyPolicyPage() {
           <h2 className="text-2xl font-semibold mt-8 mb-4">6. Contact Us</h2>
           <p className="text-white/70">
             If you have any questions about this Privacy Policy, please contact us at:
-            <a href="mailto:support@incomegpt.com" className="text-orange-600">support@incomegpt.com</a>
+            <a href="mailto:support@wealthforge.ai" className="text-orange-600">support@wealthforge.ai</a>
           </p>
         </div>
       </div>

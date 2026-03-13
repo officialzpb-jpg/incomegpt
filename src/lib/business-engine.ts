@@ -1,4 +1,4 @@
-// Business Blueprint Engine for IncomeGPT
+// Business Blueprint Engine for WealthForge
 // Generates comprehensive $10K/month business plans
 
 export interface BlueprintInput {
