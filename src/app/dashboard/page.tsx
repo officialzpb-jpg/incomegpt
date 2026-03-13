@@ -35,6 +35,7 @@ interface Strategy {
 
 interface Profile {
   email: string;
+  full_name?: string;
   income_goal: number;
   subscription_status?: string;
   subscription_id?: string;
@@ -213,7 +214,7 @@ export default function DashboardPage() {
               <User className="h-4 w-4 text-orange-100" />
             </div>
             <div className="flex-1 min-w-0">
-              <div className="text-sm font-medium text-slate-200 truncate">{profile?.email?.split('@')[0] || 'User'}</div>
+              <div className="text-sm font-medium text-slate-200 truncate">{profile?.full_name || profile?.email?.split('@')[0] || 'User'}</div>
               <div className="text-xs text-slate-500">
                 {profile?.subscription_status === 'active' ? 'Pro' : 'Free'}
               </div>

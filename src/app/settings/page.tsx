@@ -91,6 +91,8 @@ export default function SettingsPage() {
       setMessage("Error updating profile: " + error.message);
     } else {
       setMessage("Profile updated successfully!");
+      // Reload profile data to reflect changes
+      await loadUser();
     }
     
     setSaving(false);
