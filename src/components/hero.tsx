@@ -13,7 +13,7 @@ export function Hero() {
         <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950" />
         
         {/* Glowing forge effect at bottom */}
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-t from-orange-600/20 via-amber-600/10 to-transparent blur-3xl" />
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-t from-orange-900/30 via-orange-800/15 to-transparent blur-3xl" />
         
         {/* Floating sparks */}
         {[...Array(30)].map((_, i) => (
@@ -47,11 +47,11 @@ export function Hero() {
         >
           <defs>
             <linearGradient id="forgeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#f59e0b" stopOpacity="0" />
-              <stop offset="30%" stopColor="#f59e0b" stopOpacity="0.5" />
-              <stop offset="50%" stopColor="#ea580c" stopOpacity="0.8" />
-              <stop offset="70%" stopColor="#f59e0b" stopOpacity="0.5" />
-              <stop offset="100%" stopColor="#f59e0b" stopOpacity="0" />
+              <stop offset="0%" stopColor="#c2410c" stopOpacity="0" />
+              <stop offset="30%" stopColor="#c2410c" stopOpacity="0.4" />
+              <stop offset="50%" stopColor="#9a3412" stopOpacity="0.7" />
+              <stop offset="70%" stopColor="#c2410c" stopOpacity="0.4" />
+              <stop offset="100%" stopColor="#c2410c" stopOpacity="0" />
             </linearGradient>
           </defs>
           
@@ -93,10 +93,10 @@ export function Hero() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2 }}
-            className="inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-4 py-1.5 mb-8"
+            className="inline-flex items-center gap-2 rounded-full border border-orange-800/40 bg-orange-950/30 px-4 py-1.5 mb-8"
           >
-            <Hammer className="h-4 w-4 text-amber-400" />
-            <span className="text-sm text-amber-400">Forge Your Financial Future</span>
+            <Hammer className="h-4 w-4 text-orange-500" />
+            <span className="text-sm text-orange-400">Forge Your Financial Future</span>
           </motion.div>
 
           <motion.h1
@@ -107,7 +107,7 @@ export function Hero() {
           >
             Forge Your Path to
             <br />
-            <span className="bg-gradient-to-r from-amber-400 via-orange-500 to-amber-400 bg-clip-text text-transparent">Wealth</span>
+            <span className="bg-gradient-to-r from-orange-500 via-orange-600 to-orange-500 bg-clip-text text-transparent">Wealth</span>
           </motion.h1>
 
           <motion.p
@@ -128,14 +128,14 @@ export function Hero() {
           >
             <Link
               href="/signup"
-              className="group flex items-center gap-2 rounded-full bg-gradient-to-r from-amber-500 to-orange-600 px-8 py-4 text-base font-medium text-white hover:from-amber-600 hover:to-orange-700 transition-all"
+              className="group flex items-center gap-2 rounded-full bg-gradient-to-r from-orange-800 to-orange-950 px-8 py-4 text-base font-medium text-orange-100 hover:from-orange-900 hover:to-black transition-all border border-orange-800/50"
             >
               Start Forging
               <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link
               href="#how-it-works"
-              className="rounded-full border border-slate-700 px-8 py-4 text-base font-medium text-slate-300 hover:border-amber-500/50 hover:text-amber-400 transition-colors"
+              className="rounded-full border border-slate-700 px-8 py-4 text-base font-medium text-slate-300 hover:border-orange-800/50 hover:text-orange-400 transition-colors"
             >
               See How It Works
             </Link>

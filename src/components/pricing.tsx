@@ -53,7 +53,7 @@ const plans = [
 
 export function Pricing() {
   return (
-    <section id="pricing" className="py-16">
+    <section id="pricing" className="py-16 bg-slate-950">
       <div className="mx-auto max-w-4xl px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -61,8 +61,8 @@ export function Pricing() {
           viewport={{ once: true }}
           className="text-center mb-10"
         >
-          <h2 className="text-2xl font-semibold mb-2">Simple Pricing</h2>
-          <p className="text-sm text-white/50">Start free, upgrade when ready</p>
+          <h2 className="text-2xl font-semibold mb-2 text-slate-100">Simple Pricing</h2>
+          <p className="text-sm text-slate-500">Start free, upgrade when ready</p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -75,35 +75,35 @@ export function Pricing() {
               transition={{ delay: index * 0.1 }}
               className={`relative rounded-xl p-5 ${
                 plan.popular
-                  ? "bg-emerald-500/10 border border-emerald-500/20"
-                  : "glass"
+                  ? "bg-gradient-to-b from-orange-950/50 to-slate-900/50 border border-orange-800/30"
+                  : "bg-slate-900/50 border border-slate-800"
               }`}
             >
               {plan.popular && (
                 <div className="absolute -top-2 left-1/2 -translate-x-1/2">
-                  <span className="bg-emerald-500 text-white text-[10px] font-medium px-2 py-0.5 rounded-full">
+                  <span className="bg-gradient-to-r from-orange-800 to-orange-950 text-orange-100 text-[10px] font-medium px-2 py-0.5 rounded-full border border-orange-700/50">
                     Popular
                   </span>
                 </div>
               )}
 
               <div className="mb-4">
-                <h3 className="text-sm font-medium mb-1">{plan.name}</h3>
-                <p className="text-xs text-white/50">{plan.description}</p>
+                <h3 className="text-sm font-medium mb-1 text-slate-200">{plan.name}</h3>
+                <p className="text-xs text-slate-500">{plan.description}</p>
               </div>
 
               <div className="mb-4">
-                <span className="text-2xl font-semibold">{plan.price}</span>
+                <span className="text-2xl font-semibold text-slate-100">{plan.price}</span>
                 {plan.period && (
-                  <span className="text-xs text-white/50">/{plan.period}</span>
+                  <span className="text-xs text-slate-500">/{plan.period}</span>
                 )}
               </div>
 
               <ul className="space-y-2 mb-5">
                 {plan.features.map((feature, i) => (
                   <li key={i} className="flex items-center gap-2 text-xs">
-                    <Check className="h-3 w-3 text-emerald-400 flex-shrink-0" />
-                    <span className="text-white/70">{feature}</span>
+                    <Check className="h-3 w-3 text-orange-600 flex-shrink-0" />
+                    <span className="text-slate-400">{feature}</span>
                   </li>
                 ))}
               </ul>
@@ -113,19 +113,19 @@ export function Pricing() {
                   priceId={plan.priceId}
                   className={`block w-full text-center py-2 rounded-md text-xs font-medium transition-colors ${
                     plan.popular
-                      ? "bg-white text-black hover:bg-white/90"
-                      : "bg-white/10 text-white hover:bg-white/20"
+                      ? "bg-gradient-to-r from-orange-800 to-orange-950 text-orange-100 hover:from-orange-900 hover:to-black border border-orange-800/50"
+                      : "bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700"
                   }`}
                 >
                   {plan.cta}
                 </CheckoutButton>
               ) : (
                 <a
-                  href={plan.name === "Enterprise" ? "mailto:sales@incomegpt.com" : "/signup"}
+                  href={plan.name === "Enterprise" ? "mailto:sales@wealthforge.com" : "/signup"}
                   className={`block w-full text-center py-2 rounded-md text-xs font-medium transition-colors ${
                     plan.popular
-                      ? "bg-white text-black hover:bg-white/90"
-                      : "bg-white/10 text-white hover:bg-white/20"
+                      ? "bg-gradient-to-r from-orange-800 to-orange-950 text-orange-100 hover:from-orange-900 hover:to-black border border-orange-800/50"
+                      : "bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700"
                   }`}
                 >
                   {plan.cta}
