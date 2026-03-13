@@ -2,16 +2,13 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { 
   ArrowLeft, 
   TrendingUp, 
   Clock, 
   DollarSign,
-  Target,
   ChevronRight,
-  Check,
   Bookmark,
   Loader2,
   Sparkles
@@ -32,7 +29,6 @@ interface Strategy {
 }
 
 export default function ResultsPage() {
-  const router = useRouter();
   const [strategies, setStrategies] = useState<Strategy[]>([]);
   const [loading, setLoading] = useState(true);
   const [savedStrategies, setSavedStrategies] = useState<string[]>([]);
