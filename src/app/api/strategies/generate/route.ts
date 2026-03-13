@@ -31,7 +31,7 @@ For each strategy, provide:
 5. Startup cost range
 6. Timeframe to first revenue
 7. Match score (0-100 based on how well it fits their skills and budget)
-8. 5 actionable steps to get started
+8. 5 detailed steps with title, duration, instructions, and an AI prompt for each step
 9. 3-4 relevant tags/categories
 
 Return as JSON array with this structure:
@@ -43,7 +43,17 @@ Return as JSON array with this structure:
   "startupCost": "$X - $X",
   "timeframe": "...",
   "matchScore": 95,
-  "steps": ["step 1", "step 2", ...],
+  "steps": [
+    {
+      "id": 1,
+      "title": "Step Title",
+      "duration": "1-2 weeks",
+      "instruction": "Detailed instructions for this step",
+      "aiPrompt": "AI prompt to help with this step",
+      "completed": false,
+      "unlocked": true
+    }
+  ],
   "tags": ["tag1", "tag2", ...]
 }]`;
 

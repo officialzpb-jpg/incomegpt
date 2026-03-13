@@ -236,11 +236,27 @@ export default function StrategyDetailPage() {
         return;
       }
       
-      const strat = strategiesData[strategyId];
-      if (strat) {
+      // Try to fetch from saved_strategies first
+      const { data: savedData } = await supabase
+        .from("saved_strategies")
+        .select("*")
+        .eq("strategy_id", params.id)
+        .eq("user_id", user.id)
+        .single();
+      
+      if (savedData?.data) {
+        const strat = savedData.data as Strategy;
         setStrategy(strat);
-        setSteps(strat.steps);
-        setCurrentStep(strat.steps.find((s: Step) => s.unlocked && !s.completed) || strat.steps[0]);
+        setSteps(strat.steps || []);
+        setCurrentStep(strat.steps?.[0] || null);
+      } else {
+        // Fall back to hardcoded data for demo strategies
+        const strat = strategiesData[strategyId];
+        if (strat) {
+          setStrategy(strat);
+          setSteps(strat.steps);
+          setCurrentStep(strat.steps.find((s: Step) => s.unlocked && !s.completed) || strat.steps[0]);
+        }
       }
       
       setLoading(false);
