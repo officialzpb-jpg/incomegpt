@@ -67,7 +67,7 @@ export default function TermsOfServicePage() {
           <h2 className="text-2xl font-semibold mt-8 mb-4">9. Contact</h2>
           <p className="text-white/70">
             Questions about these Terms? Contact us at:
-            <a href="mailto:support@incomegpt.com" className="text-emerald-400">support@incomegpt.com</a>
+            <a href="mailto:support@incomegpt.com" className="text-orange-600">support@incomegpt.com</a>
           </p>
         </div>
       </div>

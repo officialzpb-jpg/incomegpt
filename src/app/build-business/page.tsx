@@ -114,7 +114,7 @@ export default function BuildBusinessPage() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-12"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-700/10 border border-orange-700/20 text-orange-600 text-sm mb-6">
             <Sparkles className="h-4 w-4" />
             <span>AI-Powered Business Builder</span>
           </div>
@@ -135,8 +135,8 @@ export default function BuildBusinessPage() {
           {/* Skills Selection */}
           <div className="glass rounded-2xl p-6">
             <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 bg-emerald-500/10 rounded-lg">
-                <Briefcase className="h-5 w-5 text-emerald-400" />
+              <div className="p-2 bg-orange-700/10 rounded-lg">
+                <Briefcase className="h-5 w-5 text-orange-600" />
               </div>
               <div>
                 <h3 className="font-semibold">Your Skills</h3>
@@ -151,7 +151,7 @@ export default function BuildBusinessPage() {
                   onClick={() => toggleSkill(skill)}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                     formData.skills.includes(skill)
-                      ? "bg-emerald-500 text-white"
+                      ? "bg-orange-700 text-white"
                       : "bg-white/5 text-white/70 hover:bg-white/10 border border-white/10"
                   }`}
                 >
@@ -164,8 +164,8 @@ export default function BuildBusinessPage() {
           {/* Experience Level */}
           <div className="glass rounded-2xl p-6">
             <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 bg-emerald-500/10 rounded-lg">
-                <Target className="h-5 w-5 text-emerald-400" />
+              <div className="p-2 bg-orange-700/10 rounded-lg">
+                <Target className="h-5 w-5 text-orange-600" />
               </div>
               <div>
                 <h3 className="font-semibold">Experience Level</h3>
@@ -180,7 +180,7 @@ export default function BuildBusinessPage() {
                   onClick={() => setFormData(prev => ({ ...prev, experienceLevel: option.value }))}
                   className={`p-4 rounded-xl text-left transition-all border ${
                     formData.experienceLevel === option.value
-                      ? "bg-emerald-500/10 border-emerald-500/50"
+                      ? "bg-orange-700/10 border-orange-700/50"
                       : "bg-white/5 border-white/10 hover:bg-white/10"
                   }`}
                 >
@@ -195,8 +195,8 @@ export default function BuildBusinessPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="glass rounded-2xl p-6">
               <div className="flex items-center gap-3 mb-4">
-                <div className="p-2 bg-emerald-500/10 rounded-lg">
-                  <Clock className="h-5 w-5 text-emerald-400" />
+                <div className="p-2 bg-orange-700/10 rounded-lg">
+                  <Clock className="h-5 w-5 text-orange-600" />
                 </div>
                 <div>
                   <h3 className="font-semibold">Time Available</h3>
@@ -206,7 +206,7 @@ export default function BuildBusinessPage() {
               <select
                 value={formData.timePerWeek}
                 onChange={(e) => setFormData(prev => ({ ...prev, timePerWeek: e.target.value }))}
-                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-emerald-500 focus:outline-none"
+                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-orange-700 focus:outline-none"
               >
                 <option value="5">5 hours/week (Side hustle)</option>
                 <option value="10">10 hours/week (Part-time)</option>
@@ -218,8 +218,8 @@ export default function BuildBusinessPage() {
 
             <div className="glass rounded-2xl p-6">
               <div className="flex items-center gap-3 mb-4">
-                <div className="p-2 bg-emerald-500/10 rounded-lg">
-                  <Wallet className="h-5 w-5 text-emerald-400" />
+                <div className="p-2 bg-orange-700/10 rounded-lg">
+                  <Wallet className="h-5 w-5 text-orange-600" />
                 </div>
                 <div>
                   <h3 className="font-semibold">Starting Budget</h3>
@@ -229,7 +229,7 @@ export default function BuildBusinessPage() {
               <select
                 value={formData.startingBudget}
                 onChange={(e) => setFormData(prev => ({ ...prev, startingBudget: e.target.value }))}
-                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-emerald-500 focus:outline-none"
+                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-orange-700 focus:outline-none"
               >
                 <option value="0">$0 (Zero budget)</option>
                 <option value="100">$100 (Minimal)</option>
@@ -243,8 +243,8 @@ export default function BuildBusinessPage() {
           {/* Interests */}
           <div className="glass rounded-2xl p-6">
             <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 bg-emerald-500/10 rounded-lg">
-                <Heart className="h-5 w-5 text-emerald-400" />
+              <div className="p-2 bg-orange-700/10 rounded-lg">
+                <Heart className="h-5 w-5 text-orange-600" />
               </div>
               <div>
                 <h3 className="font-semibold">Your Interests</h3>
@@ -255,7 +255,7 @@ export default function BuildBusinessPage() {
               value={formData.interests}
               onChange={(e) => setFormData(prev => ({ ...prev, interests: e.target.value }))}
               placeholder="e.g., SaaS, healthcare, fitness, real estate, e-commerce, finance..."
-              className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-emerald-500 focus:outline-none min-h-[100px] resize-none"
+              className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-orange-700 focus:outline-none min-h-[100px] resize-none"
               required
             />
           </div>
@@ -266,7 +266,7 @@ export default function BuildBusinessPage() {
             disabled={isLoading || formData.skills.length === 0 || !formData.interests}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="w-full py-4 bg-gradient-to-r from-emerald-500 to-cyan-500 text-white rounded-xl font-semibold text-lg flex items-center justify-center gap-2 hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full py-4 bg-gradient-to-r from-orange-700 to-orange-600 text-white rounded-xl font-semibold text-lg flex items-center justify-center gap-2 hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isLoading ? (
               <>

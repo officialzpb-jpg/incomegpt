@@ -115,8 +115,8 @@ export default function GeneratorPage() {
             {/* Income Goal */}
             <div className="glass rounded-2xl p-6">
               <div className="flex items-center gap-3 mb-4">
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-500/20">
-                  <DollarSign className="h-5 w-5 text-emerald-400" />
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-orange-700/20">
+                  <DollarSign className="h-5 w-5 text-orange-600" />
                 </div>
                 <div>
                   <label className="font-semibold">Income Goal</label>
@@ -131,7 +131,7 @@ export default function GeneratorPage() {
                   value={formData.incomeGoal}
                   onChange={(e) => setFormData({ ...formData, incomeGoal: e.target.value })}
                   placeholder="5,000"
-                  className="w-full pl-8 pr-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-emerald-500 focus:outline-none"
+                  className="w-full pl-8 pr-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-orange-700 focus:outline-none"
                 />
               </div>
             </div>
@@ -139,8 +139,8 @@ export default function GeneratorPage() {
             {/* Timeframe */}
             <div className="glass rounded-2xl p-6">
               <div className="flex items-center gap-3 mb-4">
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-500/20">
-                  <Clock className="h-5 w-5 text-cyan-400" />
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-orange-600/20">
+                  <Clock className="h-5 w-5 text-orange-500" />
                 </div>
                 <div>
                   <label className="font-semibold">Timeframe</label>
@@ -155,7 +155,7 @@ export default function GeneratorPage() {
                     onClick={() => setFormData({ ...formData, timeframe })}
                     className={`py-3 px-4 rounded-xl border transition-all ${
                       formData.timeframe === timeframe
-                        ? "border-emerald-500 bg-emerald-500/20 text-emerald-400"
+                        ? "border-orange-700 bg-orange-700/20 text-orange-600"
                         : "border-white/10 hover:border-white/20"
                     }`}
                   >
@@ -184,7 +184,7 @@ export default function GeneratorPage() {
                   value={formData.startingBudget}
                   onChange={(e) => setFormData({ ...formData, startingBudget: e.target.value })}
                   placeholder="1,000"
-                  className="w-full pl-8 pr-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-emerald-500 focus:outline-none"
+                  className="w-full pl-8 pr-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-orange-700 focus:outline-none"
                 />
               </div>
             </div>
@@ -208,7 +208,7 @@ export default function GeneratorPage() {
                     onClick={() => toggleSkill(skill)}
                     className={`py-2 px-4 rounded-full border transition-all ${
                       formData.skills.includes(skill)
-                        ? "border-emerald-500 bg-emerald-500/20 text-emerald-400"
+                        ? "border-orange-700 bg-orange-700/20 text-orange-600"
                         : "border-white/10 hover:border-white/20"
                     }`}
                   >
@@ -222,7 +222,7 @@ export default function GeneratorPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-emerald-500 to-cyan-500 text-white py-4 rounded-xl font-medium hover:opacity-90 transition-opacity disabled:opacity-50"
+              className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-orange-700 to-orange-600 text-white py-4 rounded-xl font-medium hover:opacity-90 transition-opacity disabled:opacity-50"
             >
               {isLoading ? (
                 <>

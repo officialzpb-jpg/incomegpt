@@ -112,7 +112,7 @@ function CopyButton({ text }: { text: string }) {
       onClick={copy}
       className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-sm transition-colors"
     >
-      {copied ? <CheckCircle2 className="h-4 w-4 text-emerald-400" /> : <Copy className="h-4 w-4" />}
+      {copied ? <CheckCircle2 className="h-4 w-4 text-orange-600" /> : <Copy className="h-4 w-4" />}
       {copied ? "Copied!" : "Copy"}
     </button>
   );
@@ -142,7 +142,7 @@ function SectionCard({
         className="w-full flex items-center justify-between p-6 hover:bg-white/5 transition-colors"
       >
         <div className="flex items-center gap-3">
-          <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-400">
+          <div className="p-2 rounded-lg bg-orange-700/10 text-orange-600">
             {icon}
           </div>
           <h3 className="text-lg font-semibold">{title}</h3>
@@ -182,7 +182,7 @@ export default function BlueprintPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-black flex items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-emerald-400" />
+        <Loader2 className="h-8 w-8 animate-spin text-orange-600" />
       </div>
     );
   }
@@ -191,10 +191,10 @@ export default function BlueprintPage() {
     return (
       <div className="min-h-screen bg-black flex items-center justify-center">
         <div className="text-center">
-          <Rocket className="h-16 w-16 text-emerald-400 mx-auto mb-4" />
+          <Rocket className="h-16 w-16 text-orange-600 mx-auto mb-4" />
           <h1 className="text-2xl font-bold mb-4">No Blueprint Found</h1>
           <p className="text-white/60 mb-6">Generate your business blueprint first.</p>
-          <Link href="/business/build" className="text-emerald-400 hover:text-emerald-300">
+          <Link href="/business/build" className="text-orange-600 hover:text-orange-300">
             Build Your Business →
           </Link>
         </div>
@@ -244,7 +244,7 @@ export default function BlueprintPage() {
           className="grid md:grid-cols-4 gap-4"
         >
           <div className="glass rounded-2xl p-6 text-center">
-            <div className="text-3xl font-bold text-emerald-400 mb-1">$10K</div>
+            <div className="text-3xl font-bold text-orange-600 mb-1">$10K</div>
             <div className="text-sm text-white/60">Monthly Goal</div>
           </div>
           <div className="glass rounded-2xl p-6 text-center">
@@ -265,7 +265,7 @@ export default function BlueprintPage() {
         <SectionCard title="Business Model" defaultOpen={true}>
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <span className="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-sm">
+              <span className="px-3 py-1 rounded-full bg-orange-700/20 text-orange-600 text-sm">
                 {blueprint.businessModel.type}
               </span>
               <span className="px-3 py-1 rounded-full bg-white/10 text-white/70 text-sm">
@@ -292,7 +292,7 @@ export default function BlueprintPage() {
               <ul className="space-y-2">
                 {blueprint.targetMarket.painPoints.map((point, i) => (
                   <li key={i} className="flex items-start gap-2 text-white/80">
-                    <span className="text-emerald-400 mt-1">•</span>
+                    <span className="text-orange-600 mt-1">•</span>
                     {point}
                   </li>
                 ))}
@@ -313,7 +313,7 @@ export default function BlueprintPage() {
               <ul className="space-y-2">
                 {blueprint.offering.deliverables.map((item, i) => (
                   <li key={i} className="flex items-start gap-2 text-white/80">
-                    <CheckCircle2 className="h-4 w-4 text-emerald-400 mt-0.5" />
+                    <CheckCircle2 className="h-4 w-4 text-orange-600 mt-0.5" />
                     {item}
                   </li>
                 ))}
@@ -324,7 +324,7 @@ export default function BlueprintPage() {
               <ul className="space-y-2">
                 {blueprint.offering.upsells.map((item, i) => (
                   <li key={i} className="flex items-start gap-2 text-white/80">
-                    <span className="text-emerald-400">+</span>
+                    <span className="text-orange-600">+</span>
                     {item}
                   </li>
                 ))}
@@ -338,13 +338,13 @@ export default function BlueprintPage() {
           <div className="space-y-6">
             <div className="grid md:grid-cols-3 gap-4">
               {blueprint.pricingStrategy.packages.map((pkg, i) => (
-                <div key={i} className={`rounded-xl p-6 border ${i === 1 ? 'border-emerald-500/50 bg-emerald-500/10' : 'border-white/10 bg-white/5'}`}>
+                <div key={i} className={`rounded-xl p-6 border ${i === 1 ? 'border-orange-700/50 bg-orange-700/10' : 'border-white/10 bg-white/5'}`}>
                   <h4 className="font-semibold mb-2">{pkg.name}</h4>
-                  <div className="text-2xl font-bold text-emerald-400 mb-4">{pkg.price}</div>
+                  <div className="text-2xl font-bold text-orange-600 mb-4">{pkg.price}</div>
                   <ul className="space-y-2 text-sm">
                     {pkg.features.map((feature, j) => (
                       <li key={j} className="flex items-start gap-2 text-white/70">
-                        <CheckCircle2 className="h-3 w-3 text-emerald-400 mt-1" />
+                        <CheckCircle2 className="h-3 w-3 text-orange-600 mt-1" />
                         {feature}
                       </li>
                     ))}
@@ -355,8 +355,8 @@ export default function BlueprintPage() {
                 </div>
               ))}
             </div>
-            <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20">
-              <h4 className="font-medium text-emerald-400 mb-2">Path to $10K/month</h4>
+            <div className="p-4 rounded-xl bg-orange-700/10 border border-orange-700/20">
+              <h4 className="font-medium text-orange-600 mb-2">Path to $10K/month</h4>
               <p className="text-white/80">{blueprint.pricingStrategy.pathTo10K}</p>
             </div>
           </div>
@@ -370,7 +370,7 @@ export default function BlueprintPage() {
                 <h4 className="font-medium mb-2">Primary Channels</h4>
                 <div className="flex flex-wrap gap-2">
                   {blueprint.customerAcquisition.primaryChannels.map((channel, i) => (
-                    <span key={i} className="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-sm">
+                    <span key={i} className="px-3 py-1 rounded-full bg-orange-700/20 text-orange-600 text-sm">
                       {channel}
                     </span>
                   ))}
@@ -392,7 +392,7 @@ export default function BlueprintPage() {
               <ul className="space-y-2">
                 {blueprint.customerAcquisition.leadGeneration.map((item, i) => (
                   <li key={i} className="flex items-start gap-2 text-white/80">
-                    <Target className="h-4 w-4 text-emerald-400 mt-0.5" />
+                    <Target className="h-4 w-4 text-orange-600 mt-0.5" />
                     {item}
                   </li>
                 ))}
@@ -415,7 +415,7 @@ export default function BlueprintPage() {
               { week: "Week 4", items: blueprint.first30Days.week4 },
             ].map(({ week, items }, i) => (
               <div key={i}>
-                <h4 className="font-medium text-emerald-400 mb-3">{week}</h4>
+                <h4 className="font-medium text-orange-600 mb-3">{week}</h4>
                 <ul className="space-y-2">
                   {items.map((item, j) => (
                     <li key={j} className="flex items-start gap-3 text-white/80">
@@ -428,11 +428,11 @@ export default function BlueprintPage() {
                 </ul>
               </div>
             ))}
-            <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20">
-              <h4 className="font-medium text-emerald-400 mb-2">30-Day Milestones</h4>
+            <div className="p-4 rounded-xl bg-orange-700/10 border border-orange-700/20">
+              <h4 className="font-medium text-orange-600 mb-2">30-Day Milestones</h4>
               <div className="flex flex-wrap gap-2">
                 {blueprint.first30Days.milestones.map((milestone, i) => (
-                  <span key={i} className="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-sm">
+                  <span key={i} className="px-3 py-1 rounded-full bg-orange-700/20 text-orange-600 text-sm">
                     ✓ {milestone}
                   </span>
                 ))}
@@ -451,7 +451,7 @@ export default function BlueprintPage() {
                   onClick={() => setActiveScript(tab.key)}
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                     activeScript === tab.key
-                      ? "bg-emerald-500 text-white"
+                      ? "bg-orange-700 text-white"
                       : "bg-white/5 text-white/70 hover:bg-white/10"
                   }`}
                 >
@@ -475,13 +475,13 @@ export default function BlueprintPage() {
           <div className="grid md:grid-cols-2 gap-4">
             {blueprint.recommendedTools.map((tool, i) => (
               <div key={i} className="flex items-start gap-4 p-4 rounded-xl bg-white/5">
-                <div className="p-2 rounded-lg bg-emerald-500/10">
-                  <Wrench className="h-4 w-4 text-emerald-400" />
+                <div className="p-2 rounded-lg bg-orange-700/10">
+                  <Wrench className="h-4 w-4 text-orange-600" />
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center justify-between">
                     <h4 className="font-medium">{tool.tool}</h4>
-                    <span className="text-sm text-emerald-400">{tool.cost}</span>
+                    <span className="text-sm text-orange-600">{tool.cost}</span>
                   </div>
                   <p className="text-xs text-white/50 uppercase tracking-wide mt-1">{tool.category}</p>
                   <p className="text-sm text-white/70 mt-1">{tool.purpose}</p>
@@ -498,7 +498,7 @@ export default function BlueprintPage() {
               { label: "Month 1", value: blueprint.financialProjection.month1, color: "text-white/60" },
               { label: "Month 3", value: blueprint.financialProjection.month3, color: "text-blue-400" },
               { label: "Month 6", value: blueprint.financialProjection.month6, color: "text-purple-400" },
-              { label: "Month 12", value: blueprint.financialProjection.month12, color: "text-emerald-400" },
+              { label: "Month 12", value: blueprint.financialProjection.month12, color: "text-orange-600" },
               { label: "Break Even", value: blueprint.financialProjection.breakEven, color: "text-pink-400" },
             ].map((item, i) => (
               <div key={i} className="text-center p-4 rounded-xl bg-white/5">

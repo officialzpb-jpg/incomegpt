@@ -14,7 +14,7 @@ export function CTA() {
           viewport={{ once: true }}
           className="relative rounded-3xl overflow-hidden"
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-cyan-600" />
+          <div className="absolute inset-0 bg-gradient-to-r from-orange-800 to-cyan-600" />
           <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48cGF0aCBkPSJNMzYgMzRoLTJ2LTRoMnY0em0wLTZ2LTRoLTJ2NGgyem0tNiA2aC00djJoNHYtMnptMC02di00aC00djRoNHptLTYgNmgtNHYyaDR2LTJ6bTAtNnYtNGgtNHY0aDR6Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-20" />
           
           <div className="relative px-8 py-16 sm:px-16 sm:py-20 text-center">
@@ -26,7 +26,7 @@ export function CTA() {
             </p>
             <Link
               href="/signup"
-              className="inline-flex items-center gap-2 bg-white text-emerald-600 px-8 py-4 rounded-full font-medium hover:bg-white/90 transition-colors"
+              className="inline-flex items-center gap-2 bg-white text-orange-800 px-8 py-4 rounded-full font-medium hover:bg-white/90 transition-colors"
             >
               Get Started Free
               <ArrowRight className="h-5 w-5" />

@@ -48,17 +48,17 @@ export function HowItWorks() {
               className="relative"
             >
               <div className="glass rounded-2xl p-8 h-full glow">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-cyan-500 mb-6">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-orange-700 to-orange-600 mb-6">
                   <step.icon className="h-6 w-6 text-white" />
                 </div>
-                <div className="text-sm font-medium text-emerald-400 mb-2">
+                <div className="text-sm font-medium text-orange-600 mb-2">
                   Step {index + 1}
                 </div>
                 <h3 className="text-xl font-semibold mb-3">{step.title}</h3>
                 <p className="text-white/60">{step.description}</p>
               </div>
               {index < steps.length - 1 && (
-                <div className="hidden md:block absolute top-1/2 -right-4 w-8 h-px bg-gradient-to-r from-emerald-500/50 to-transparent" />
+                <div className="hidden md:block absolute top-1/2 -right-4 w-8 h-px bg-gradient-to-r from-orange-700/50 to-transparent" />
               )}
             </motion.div>
           ))}

@@ -143,7 +143,7 @@ export default function SettingsPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-black flex items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-emerald-400" />
+        <Loader2 className="h-8 w-8 animate-spin text-orange-600" />
       </div>
     );
   }
@@ -180,7 +180,7 @@ export default function SettingsPage() {
                   onClick={() => setActiveTab(tab.id)}
                   className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-all ${
                     activeTab === tab.id
-                      ? "bg-emerald-500/20 text-emerald-400"
+                      ? "bg-orange-700/20 text-orange-600"
                       : "text-white/60 hover:bg-white/5 hover:text-white"
                   }`}
                 >
@@ -210,7 +210,7 @@ export default function SettingsPage() {
                 className={`mb-6 p-4 rounded-xl ${
                   message.includes("Error") 
                     ? "bg-red-500/10 border border-red-500/20 text-red-400"
-                    : "bg-emerald-500/10 border border-emerald-500/20 text-emerald-400"
+                    : "bg-orange-700/10 border border-orange-700/20 text-orange-600"
                 }`}
               >
                 {message}
@@ -232,7 +232,7 @@ export default function SettingsPage() {
                       type="text"
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-emerald-500 focus:outline-none"
+                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-orange-700 focus:outline-none"
                       placeholder="Your name"
                     />
                   </div>
@@ -256,7 +256,7 @@ export default function SettingsPage() {
                         type="number"
                         value={incomeGoal}
                         onChange={(e) => setIncomeGoal(e.target.value)}
-                        className="w-full pl-8 pr-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-emerald-500 focus:outline-none"
+                        className="w-full pl-8 pr-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-orange-700 focus:outline-none"
                       />
                     </div>
                   </div>
@@ -265,7 +265,7 @@ export default function SettingsPage() {
                 <button
                   onClick={updateProfile}
                   disabled={saving}
-                  className="px-6 py-3 bg-emerald-500 text-white rounded-xl font-medium hover:bg-emerald-600 disabled:opacity-50 transition-colors"
+                  className="px-6 py-3 bg-orange-700 text-white rounded-xl font-medium hover:bg-orange-800 disabled:opacity-50 transition-colors"
                 >
                   {saving ? "Saving..." : "Save Changes"}
                 </button>
@@ -282,7 +282,7 @@ export default function SettingsPage() {
                 
                 <div className={`p-6 rounded-xl border ${
                   profile?.subscription_status === 'active' 
-                    ? 'bg-emerald-500/10 border-emerald-500/30' 
+                    ? 'bg-orange-700/10 border-orange-700/30' 
                     : 'bg-white/5 border-white/10'
                 }`}>
                   <div className="flex items-center justify-between mb-4">
@@ -294,7 +294,7 @@ export default function SettingsPage() {
                     </div>
                     <div className={`px-3 py-1 rounded-full text-sm ${
                       profile?.subscription_status === 'active'
-                        ? 'bg-emerald-500/20 text-emerald-400'
+                        ? 'bg-orange-700/20 text-orange-600'
                         : 'bg-white/10 text-white/60'
                     }`}>
                       {profile?.subscription_status === 'active' ? 'Active' : 'Free'}
@@ -304,7 +304,7 @@ export default function SettingsPage() {
                   {profile?.subscription_status !== 'active' ? (
                     <Link
                       href="/pricing"
-                      className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition-colors"
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-orange-700 text-white rounded-lg hover:bg-orange-800 transition-colors"
                     >
                       <CreditCard className="h-4 w-4" />
                       Upgrade to Pro
@@ -333,7 +333,7 @@ export default function SettingsPage() {
                       type="password"
                       value={newPassword}
                       onChange={(e) => setNewPassword(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-emerald-500 focus:outline-none"
+                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-orange-700 focus:outline-none"
                       placeholder="Enter new password"
                     />
                   </div>
@@ -342,7 +342,7 @@ export default function SettingsPage() {
                 <button
                   onClick={updatePassword}
                   disabled={saving}
-                  className="px-6 py-3 bg-emerald-500 text-white rounded-xl font-medium hover:bg-emerald-600 disabled:opacity-50 transition-colors"
+                  className="px-6 py-3 bg-orange-700 text-white rounded-xl font-medium hover:bg-orange-800 disabled:opacity-50 transition-colors"
                 >
                   {saving ? "Updating..." : "Update Password"}
                 </button>
@@ -384,7 +384,7 @@ export default function SettingsPage() {
                         <p className="font-medium">{item.label}</p>
                         <p className="text-sm text-white/60">{item.desc}</p>
                       </div>
-                      <div className="w-12 h-6 bg-emerald-500 rounded-full relative cursor-pointer">
+                      <div className="w-12 h-6 bg-orange-700 rounded-full relative cursor-pointer">
                         <div className="absolute right-1 top-1 w-4 h-4 bg-white rounded-full" />
                       </div>
                     </div>

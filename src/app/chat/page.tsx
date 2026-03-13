@@ -175,8 +175,8 @@ export default function ChatPage() {
               <ArrowLeft className="h-5 w-5" />
             </Link>
             <div className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-full bg-emerald-500/20 flex items-center justify-center">
-                <Sparkles className="h-4 w-4 text-emerald-400" />
+              <div className="h-8 w-8 rounded-full bg-orange-700/20 flex items-center justify-center">
+                <Sparkles className="h-4 w-4 text-orange-600" />
               </div>
               <span className="font-semibold">IncomeGPT Assistant</span>
             </div>
@@ -226,7 +226,7 @@ export default function ChatPage() {
                       className="p-4 text-left bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl transition-all group"
                     >
                       <div className="flex items-start gap-3">
-                        <Zap className="h-5 w-5 text-emerald-400 flex-shrink-0 mt-0.5" />
+                        <Zap className="h-5 w-5 text-orange-600 flex-shrink-0 mt-0.5" />
                         <span className="text-sm">{prompt}</span>
                       </div>
                     </motion.button>
@@ -283,7 +283,7 @@ export default function ChatPage() {
                               title="Copy message"
                             >
                               {copiedId === message.id ? (
-                                <Check className="h-4 w-4 text-emerald-400" />
+                                <Check className="h-4 w-4 text-orange-600" />
                               ) : (
                                 <Copy className="h-4 w-4" />
                               )}
@@ -313,7 +313,7 @@ export default function ChatPage() {
                     <div className="flex-1">
                       <div className="font-medium text-sm mb-1 text-white/40">IncomeGPT</div>
                       <div className="flex items-center gap-2">
-                        <Loader2 className="h-4 w-4 animate-spin text-emerald-400" />
+                        <Loader2 className="h-4 w-4 animate-spin text-orange-600" />
                         <span className="text-sm text-white/60">Thinking...</span>
                       </div>
                     </div>
@@ -330,7 +330,7 @@ export default function ChatPage() {
       {/* Input Area */}
       <div className="border-t border-white/10 bg-[#0d0d0d] p-4">
         <div className="max-w-5xl mx-auto">
-          <div className="relative flex items-end gap-2 bg-white/5 border border-white/10 rounded-2xl p-3 focus-within:border-emerald-500/50 focus-within:bg-white/[0.07] transition-all">
+          <div className="relative flex items-end gap-2 bg-white/5 border border-white/10 rounded-2xl p-3 focus-within:border-orange-700/50 focus-within:bg-white/[0.07] transition-all">
             <textarea
               ref={inputRef}
               value={input}
@@ -345,7 +345,7 @@ export default function ChatPage() {
             <button
               onClick={() => sendMessage()}
               disabled={!input.trim() || isLoading}
-              className="p-2 bg-emerald-500 text-white rounded-xl hover:bg-emerald-600 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+              className="p-2 bg-orange-700 text-white rounded-xl hover:bg-orange-800 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
             >
               <Send className="h-4 w-4" />
             </button>

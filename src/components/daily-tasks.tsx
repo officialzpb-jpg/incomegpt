@@ -107,7 +107,7 @@ export function DailyTasks() {
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
       case "Easy":
-        return "text-emerald-400 bg-emerald-500/10";
+        return "text-orange-600 bg-orange-700/10";
       case "Medium":
         return "text-yellow-400 bg-yellow-500/10";
       case "Hard":
@@ -139,7 +139,7 @@ export function DailyTasks() {
     return (
       <div className="glass rounded-2xl p-6">
         <div className="flex items-center justify-center py-8">
-          <Loader2 className="h-8 w-8 animate-spin text-emerald-400" />
+          <Loader2 className="h-8 w-8 animate-spin text-orange-600" />
         </div>
       </div>
     );
@@ -150,8 +150,8 @@ export function DailyTasks() {
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-emerald-500/10 rounded-lg">
-            <Target className="h-5 w-5 text-emerald-400" />
+          <div className="p-2 bg-orange-700/10 rounded-lg">
+            <Target className="h-5 w-5 text-orange-600" />
           </div>
           <div>
             <h3 className="font-semibold">Daily Income Tasks</h3>
@@ -180,7 +180,7 @@ export function DailyTasks() {
           <motion.div
             initial={{ width: 0 }}
             animate={{ width: `${progress}%` }}
-            className="h-full bg-gradient-to-r from-emerald-500 to-cyan-500"
+            className="h-full bg-gradient-to-r from-orange-700 to-orange-600"
           />
         </div>
       </div>
@@ -197,7 +197,7 @@ export function DailyTasks() {
               transition={{ delay: index * 0.1 }}
               className={`relative p-4 rounded-xl border transition-all ${
                 task.completed
-                  ? "bg-emerald-500/10 border-emerald-500/30"
+                  ? "bg-orange-700/10 border-orange-700/30"
                   : "bg-white/5 border-white/10 hover:border-white/20"
               }`}
             >
@@ -210,11 +210,11 @@ export function DailyTasks() {
                   }`}
                 >
                   {completingId === task.id ? (
-                    <Loader2 className="h-6 w-6 animate-spin text-emerald-400" />
+                    <Loader2 className="h-6 w-6 animate-spin text-orange-600" />
                   ) : task.completed ? (
-                    <CheckCircle2 className="h-6 w-6 text-emerald-400" />
+                    <CheckCircle2 className="h-6 w-6 text-orange-600" />
                   ) : (
-                    <Circle className="h-6 w-6 text-white/40 hover:text-emerald-400" />
+                    <Circle className="h-6 w-6 text-white/40 hover:text-orange-600" />
                   )}
                 </button>
                 
@@ -250,9 +250,9 @@ export function DailyTasks() {
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="mt-6 p-4 bg-gradient-to-r from-emerald-500/20 to-cyan-500/20 rounded-xl border border-emerald-500/30 text-center"
+          className="mt-6 p-4 bg-gradient-to-r from-orange-700/20 to-orange-600/20 rounded-xl border border-orange-700/30 text-center"
         >
-          <Trophy className="h-8 w-8 text-emerald-400 mx-auto mb-2" />
+          <Trophy className="h-8 w-8 text-orange-600 mx-auto mb-2" />
           <p className="font-semibold">All tasks completed! 🔥</p>
           <p className="text-sm text-white/60">You&apos;re on a {streak.current_streak}-day streak. Keep it up!</p>
         </motion.div>

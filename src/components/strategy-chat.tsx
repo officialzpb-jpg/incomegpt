@@ -82,7 +82,7 @@ export function StrategyChat({ strategyTitle }: StrategyChatProps) {
     <div className="glass rounded-2xl overflow-hidden flex flex-col h-[500px]">
       <div className="p-4 border-b border-white/10 bg-white/5">
         <div className="flex items-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-emerald-500 to-cyan-500">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-orange-700 to-orange-600">
             <Bot className="h-5 w-5 text-white" />
           </div>
           <div>
@@ -107,7 +107,7 @@ export function StrategyChat({ strategyTitle }: StrategyChatProps) {
               <div
                 className={`flex h-8 w-8 items-center justify-center rounded-full flex-shrink-0 ${
                   message.role === "assistant"
-                    ? "bg-gradient-to-br from-emerald-500 to-cyan-500"
+                    ? "bg-gradient-to-br from-orange-700 to-orange-600"
                     : "bg-white/10"
                 }`}
               >
@@ -121,7 +121,7 @@ export function StrategyChat({ strategyTitle }: StrategyChatProps) {
                 className={`max-w-[80%] rounded-2xl px-4 py-3 text-sm ${
                   message.role === "assistant"
                     ? "bg-white/5"
-                    : "bg-emerald-500/20 text-emerald-100"
+                    : "bg-orange-700/20 text-orange-100"
                 }`}
               >
                 {message.content.split("\n").map((line, i) => (
@@ -141,7 +141,7 @@ export function StrategyChat({ strategyTitle }: StrategyChatProps) {
             animate={{ opacity: 1 }}
             className="flex gap-3"
           >
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-emerald-500 to-cyan-500">
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-orange-700 to-orange-600">
               <Bot className="h-4 w-4 text-white" />
             </div>
             <div className="bg-white/5 rounded-2xl px-4 py-3 flex items-center gap-2">
@@ -162,12 +162,12 @@ export function StrategyChat({ strategyTitle }: StrategyChatProps) {
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Ask about your strategy..."
-            className="flex-1 px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-emerald-500 focus:outline-none text-sm"
+            className="flex-1 px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-orange-700 focus:outline-none text-sm"
           />
           <button
             onClick={sendMessage}
             disabled={loading || !input.trim()}
-            className="px-4 py-3 bg-emerald-500 text-white rounded-xl hover:bg-emerald-600 transition-colors disabled:opacity-50"
+            className="px-4 py-3 bg-orange-700 text-white rounded-xl hover:bg-orange-800 transition-colors disabled:opacity-50"
           >
             <Send className="h-5 w-5" />
           </button>

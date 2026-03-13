@@ -91,7 +91,7 @@ export default function ResultsPage() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-emerald-400" />
+        <Loader2 className="h-8 w-8 animate-spin text-orange-600" />
       </div>
     );
   }
@@ -99,12 +99,12 @@ export default function ResultsPage() {
   if (strategies.length === 0) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center px-6">
-        <Sparkles className="h-16 w-16 text-emerald-400 mb-6" />
+        <Sparkles className="h-16 w-16 text-orange-600 mb-6" />
         <h1 className="text-2xl font-bold mb-4">No Strategies Found</h1>
         <p className="text-white/60 mb-6">Generate strategies first to see results.</p>
         <Link 
           href="/generator"
-          className="px-6 py-3 bg-emerald-500 text-white rounded-xl font-medium"
+          className="px-6 py-3 bg-orange-700 text-white rounded-xl font-medium"
         >
           Generate Strategies
         </Link>
@@ -150,7 +150,7 @@ export default function ResultsPage() {
               <div className="flex items-start justify-between mb-4">
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-2">
-                    <span className="text-2xl font-bold text-emerald-400">{strategy.matchScore}%</span>
+                    <span className="text-2xl font-bold text-orange-600">{strategy.matchScore}%</span>
                     <span className="text-sm text-white/60">Match Score</span>
                   </div>
                   <h2 className="text-xl font-bold mb-2">{strategy.title}</h2>
@@ -170,7 +170,7 @@ export default function ResultsPage() {
                   disabled={savedStrategies.includes(strategy.id) || savingId === strategy.id}
                   className="p-2 bg-white/5 hover:bg-white/10 rounded-lg transition-colors disabled:opacity-50"
                 >
-                  <Bookmark className={`h-5 w-5 ${savedStrategies.includes(strategy.id) ? 'fill-emerald-400 text-emerald-400' : ''}`} />
+                  <Bookmark className={`h-5 w-5 ${savedStrategies.includes(strategy.id) ? 'fill-orange-600 text-orange-600' : ''}`} />
                 </button>
               </div>
               
@@ -205,7 +205,7 @@ export default function ResultsPage() {
                 <ol className="space-y-2">
                   {strategy.steps.map((step, i) => (
                     <li key={i} className="flex items-start gap-3">
-                      <span className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-sm">
+                      <span className="flex-shrink-0 w-6 h-6 rounded-full bg-orange-700/20 text-orange-600 flex items-center justify-center text-sm">
                         {i + 1}
                       </span>
                       <span className="text-white/70">
@@ -218,7 +218,7 @@ export default function ResultsPage() {
               
               <Link 
                 href={`/strategy/${strategy.id}`}
-                className="flex items-center justify-center gap-2 w-full py-3 bg-emerald-500 text-white rounded-xl font-medium hover:bg-emerald-600 transition-colors"
+                className="flex items-center justify-center gap-2 w-full py-3 bg-orange-700 text-white rounded-xl font-medium hover:bg-orange-800 transition-colors"
               >
                 View Full Plan
                 <ChevronRight className="h-4 w-4" />

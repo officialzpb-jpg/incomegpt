@@ -103,8 +103,8 @@ export default function OutreachAgentPage() {
               <ArrowLeft className="h-5 w-5" />
             </Link>
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-emerald-500/10 rounded-lg">
-                <Target className="h-5 w-5 text-emerald-400" />
+              <div className="p-2 bg-orange-700/10 rounded-lg">
+                <Target className="h-5 w-5 text-orange-600" />
               </div>
               <div>
                 <h1 className="font-semibold">Outreach Agent</h1>
@@ -124,7 +124,7 @@ export default function OutreachAgentPage() {
           >
             {/* Hero */}
             <div className="text-center max-w-2xl mx-auto">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm mb-6">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-700/10 border border-orange-700/20 text-orange-600 text-sm mb-6">
                 <Sparkles className="h-4 w-4" />
                 <span>AI Outreach Automation</span>
               </div>
@@ -147,7 +147,7 @@ export default function OutreachAgentPage() {
                       onClick={() => setIndustry(ind)}
                       className={`px-4 py-2 rounded-full text-sm transition-all ${
                         industry === ind
-                          ? "bg-emerald-500 text-white"
+                          ? "bg-orange-700 text-white"
                           : "bg-white/5 text-white/70 hover:bg-white/10 border border-white/10"
                       }`}
                     >
@@ -164,7 +164,7 @@ export default function OutreachAgentPage() {
                   value={targetDescription}
                   onChange={(e) => setTargetDescription(e.target.value)}
                   placeholder="e.g., Small e-commerce businesses doing $500K+ revenue who need help with email marketing..."
-                  className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-emerald-500 focus:outline-none min-h-[100px]"
+                  className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-orange-700 focus:outline-none min-h-[100px]"
                 />
               </div>
 
@@ -178,7 +178,7 @@ export default function OutreachAgentPage() {
                       onClick={() => toggleChannel(channel.id)}
                       className={`p-4 rounded-xl border transition-all flex flex-col items-center gap-2 ${
                         channels.includes(channel.id)
-                          ? "bg-emerald-500/10 border-emerald-500/50"
+                          ? "bg-orange-700/10 border-orange-700/50"
                           : "bg-white/5 border-white/10 hover:border-white/20"
                       }`}
                     >
@@ -195,7 +195,7 @@ export default function OutreachAgentPage() {
                 disabled={!industry || !targetDescription || channels.length === 0}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full py-4 bg-gradient-to-r from-emerald-500 to-cyan-500 text-white rounded-xl font-semibold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full py-4 bg-gradient-to-r from-orange-700 to-orange-600 text-white rounded-xl font-semibold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <Target className="h-5 w-5" />
                 Generate Outreach Campaign
@@ -210,7 +210,7 @@ export default function OutreachAgentPage() {
                 { icon: TrendingUp, title: "Track & Follow Up", desc: "Smart follow-up sequences to close deals" },
               ].map((feature, i) => (
                 <div key={i} className="glass rounded-xl p-6 text-center">
-                  <feature.icon className="h-8 w-8 text-emerald-400 mx-auto mb-4" />
+                  <feature.icon className="h-8 w-8 text-orange-600 mx-auto mb-4" />
                   <h3 className="font-semibold mb-2">{feature.title}</h3>
                   <p className="text-sm text-white/60">{feature.desc}</p>
                 </div>
@@ -224,7 +224,7 @@ export default function OutreachAgentPage() {
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-              className="w-16 h-16 rounded-full border-4 border-emerald-500/20 border-t-emerald-500 mb-6"
+              className="w-16 h-16 rounded-full border-4 border-orange-700/20 border-t-orange-700 mb-6"
             />
             <h2 className="text-2xl font-bold mb-2">Researching Your Market...</h2>
             <p className="text-white/60">Our AI is finding leads and crafting personalized messages</p>
@@ -238,9 +238,9 @@ export default function OutreachAgentPage() {
             className="space-y-6"
           >
             {/* Summary */}
-            <div className="glass rounded-2xl p-6 border border-emerald-500/20">
+            <div className="glass rounded-2xl p-6 border border-orange-700/20">
               <div className="flex items-center gap-3 mb-4">
-                <CheckCircle2 className="h-6 w-6 text-emerald-400" />
+                <CheckCircle2 className="h-6 w-6 text-orange-600" />
                 <h2 className="text-xl font-bold">Campaign Ready</h2>
               </div>
               <p className="text-white/70">{results.summary}</p>
@@ -272,7 +272,7 @@ export default function OutreachAgentPage() {
                     >
                       {copiedIndex === index ? (
                         <>
-                          <CheckCircle2 className="h-4 w-4 text-emerald-400" />
+                          <CheckCircle2 className="h-4 w-4 text-orange-600" />
                           Copied
                         </>
                       ) : (

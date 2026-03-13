@@ -73,7 +73,7 @@ export default function BlueprintResultsPage() {
     return (
       <div className="min-h-screen bg-black flex items-center justify-center">
         <div className="text-center">
-          <Sparkles className="h-12 w-12 text-emerald-400 mx-auto mb-4 animate-pulse" />
+          <Sparkles className="h-12 w-12 text-orange-600 mx-auto mb-4 animate-pulse" />
           <p className="text-white/60">Loading your blueprint...</p>
         </div>
       </div>
@@ -130,7 +130,7 @@ export default function BlueprintResultsPage() {
                     onClick={() => setActiveTab(tab.id)}
                     className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left transition-all text-sm ${
                       activeTab === tab.id
-                        ? "bg-emerald-500/20 text-emerald-400"
+                        ? "bg-orange-700/20 text-orange-600"
                         : "text-white/60 hover:bg-white/5 hover:text-white"
                     }`}
                   >
@@ -153,7 +153,7 @@ export default function BlueprintResultsPage() {
               {activeTab === "overview" && (
                 <div className="space-y-6">
                   <div className="glass rounded-2xl p-8 text-center">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm mb-6">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-700/10 border border-orange-700/20 text-orange-600 text-sm mb-6">
                       <Sparkles className="h-4 w-4" />
                       <span>AI-Generated Business Model</span>
                     </div>
@@ -176,24 +176,24 @@ export default function BlueprintResultsPage() {
                       </div>
                       <div className="bg-white/5 rounded-xl p-4">
                         <div className="text-sm text-white/60 mb-1">Path to $10K</div>
-                        <div className="font-semibold text-emerald-400">{blueprint.pricingStrategy.pathTo10K}</div>
+                        <div className="font-semibold text-orange-600">{blueprint.pricingStrategy.pathTo10K}</div>
                       </div>
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div className="glass rounded-2xl p-6">
-                      <Clock className="h-8 w-8 text-emerald-400 mb-4" />
+                      <Clock className="h-8 w-8 text-orange-600 mb-4" />
                       <h3 className="font-semibold mb-2">Time Commitment</h3>
                       <p className="text-white/60 text-sm">{input?.timePerWeek} hours/week</p>
                     </div>
                     <div className="glass rounded-2xl p-6">
-                      <Wallet className="h-8 w-8 text-emerald-400 mb-4" />
+                      <Wallet className="h-8 w-8 text-orange-600 mb-4" />
                       <h3 className="font-semibold mb-2">Starting Budget</h3>
                       <p className="text-white/60 text-sm">${input?.startingBudget}</p>
                     </div>
                     <div className="glass rounded-2xl p-6">
-                      <Briefcase className="h-8 w-8 text-emerald-400 mb-4" />
+                      <Briefcase className="h-8 w-8 text-orange-600 mb-4" />
                       <h3 className="font-semibold mb-2">Primary Skills</h3>
                       <p className="text-white/60 text-sm">{input?.skills?.join(", ")}</p>
                     </div>
@@ -204,7 +204,7 @@ export default function BlueprintResultsPage() {
               {activeTab === "market" && (
                 <div className="glass rounded-2xl p-8">
                   <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
-                    <Target className="h-6 w-6 text-emerald-400" />
+                    <Target className="h-6 w-6 text-orange-600" />
                     Target Market
                   </h2>
                   
@@ -250,7 +250,7 @@ export default function BlueprintResultsPage() {
                     <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
                       {blueprint.offering.deliverables.map((item, i) => (
                         <li key={i} className="flex items-center gap-2 bg-white/5 rounded-lg p-3">
-                          <CheckCircle2 className="h-5 w-5 text-emerald-400" />
+                          <CheckCircle2 className="h-5 w-5 text-orange-600" />
                           {item}
                         </li>
                       ))}
@@ -261,8 +261,8 @@ export default function BlueprintResultsPage() {
                     <h3 className="text-xl font-semibold mb-4">Upsell Opportunities</h3>
                     <div className="space-y-3">
                       {blueprint.offering.upsells.map((upsell, i) => (
-                        <div key={i} className="flex items-center gap-3 bg-emerald-500/10 border border-emerald-500/20 rounded-lg p-4">
-                          <DollarSign className="h-5 w-5 text-emerald-400" />
+                        <div key={i} className="flex items-center gap-3 bg-orange-700/10 border border-orange-700/20 rounded-lg p-4">
+                          <DollarSign className="h-5 w-5 text-orange-600" />
                           {upsell}
                         </div>
                       ))}
@@ -275,25 +275,25 @@ export default function BlueprintResultsPage() {
                 <div className="space-y-6">
                   <div className="glass rounded-2xl p-8 text-center">
                     <p className="text-sm text-white/60 mb-2">Pricing Strategy</p>
-                    <h2 className="text-3xl font-bold text-emerald-400 mb-2">{blueprint.pricingStrategy.pricePoint}</h2>
+                    <h2 className="text-3xl font-bold text-orange-600 mb-2">{blueprint.pricingStrategy.pricePoint}</h2>
                     <p className="text-white/60">{blueprint.pricingStrategy.pricingModel}</p>
                   </div>
                   
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     {blueprint.pricingStrategy.packages.map((pkg, i) => (
-                      <div key={i} className={`glass rounded-2xl p-6 ${i === 1 ? "border-2 border-emerald-500/50" : ""}`}>
+                      <div key={i} className={`glass rounded-2xl p-6 ${i === 1 ? "border-2 border-orange-700/50" : ""}`}>
                         {i === 1 && (
-                          <div className="inline-block px-3 py-1 bg-emerald-500 text-white text-xs rounded-full mb-4">
+                          <div className="inline-block px-3 py-1 bg-orange-700 text-white text-xs rounded-full mb-4">
                             Recommended
                           </div>
                         )}
                         <h3 className="text-xl font-bold mb-2">{pkg.name}</h3>
-                        <div className="text-3xl font-bold text-emerald-400 mb-4">{pkg.price}</div>
+                        <div className="text-3xl font-bold text-orange-600 mb-4">{pkg.price}</div>
                         
                         <ul className="space-y-2 mb-4">
                           {pkg.features.map((feature, j) => (
                             <li key={j} className="flex items-start gap-2 text-sm">
-                              <CheckCircle2 className="h-4 w-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+                              <CheckCircle2 className="h-4 w-4 text-orange-600 flex-shrink-0 mt-0.5" />
                               {feature}
                             </li>
                           ))}
@@ -313,13 +313,13 @@ export default function BlueprintResultsPage() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="glass rounded-2xl p-6">
                       <h3 className="font-semibold mb-4 flex items-center gap-2">
-                        <Target className="h-5 w-5 text-emerald-400" />
+                        <Target className="h-5 w-5 text-orange-600" />
                         Primary Channels
                       </h3>
                       <ul className="space-y-2">
                         {blueprint.customerAcquisition.primaryChannels.map((channel, i) => (
                           <li key={i} className="flex items-center gap-2">
-                            <ChevronRight className="h-4 w-4 text-emerald-400" />
+                            <ChevronRight className="h-4 w-4 text-orange-600" />
                             {channel}
                           </li>
                         ))}
@@ -328,13 +328,13 @@ export default function BlueprintResultsPage() {
                     
                     <div className="glass rounded-2xl p-6">
                       <h3 className="font-semibold mb-4 flex items-center gap-2">
-                        <Users className="h-5 w-5 text-emerald-400" />
+                        <Users className="h-5 w-5 text-orange-600" />
                         Secondary Channels
                       </h3>
                       <ul className="space-y-2">
                         {blueprint.customerAcquisition.secondaryChannels.map((channel, i) => (
                           <li key={i} className="flex items-center gap-2">
-                            <ChevronRight className="h-4 w-4 text-emerald-400" />
+                            <ChevronRight className="h-4 w-4 text-orange-600" />
                             {channel}
                           </li>
                         ))}
@@ -369,11 +369,11 @@ export default function BlueprintResultsPage() {
                     { week: "Week 4", items: blueprint.first30Days.week4 },
                   ].map((week, i) => (
                     <div key={i} className="glass rounded-2xl p-6">
-                      <h3 className="text-xl font-bold mb-4 text-emerald-400">{week.week}</h3>
+                      <h3 className="text-xl font-bold mb-4 text-orange-600">{week.week}</h3>
                       <ul className="space-y-3">
                         {week.items.map((item, j) => (
                           <li key={j} className="flex items-start gap-3">
-                            <div className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-bold flex-shrink-0">
+                            <div className="flex h-6 w-6 items-center justify-center rounded-full bg-orange-700/20 text-orange-600 text-xs font-bold flex-shrink-0">
                               {j + 1}
                             </div>
                             {item}
@@ -383,15 +383,15 @@ export default function BlueprintResultsPage() {
                     </div>
                   ))}
                   
-                  <div className="glass rounded-2xl p-6 border-2 border-emerald-500/30">
+                  <div className="glass rounded-2xl p-6 border-2 border-orange-700/30">
                     <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-                      <CheckCircle2 className="h-6 w-6 text-emerald-400" />
+                      <CheckCircle2 className="h-6 w-6 text-orange-600" />
                       30-Day Milestones
                     </h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {blueprint.first30Days.milestones.map((milestone, i) => (
-                        <div key={i} className="flex items-center gap-3 bg-emerald-500/10 rounded-lg p-4">
-                          <CheckCircle2 className="h-5 w-5 text-emerald-400" />
+                        <div key={i} className="flex items-center gap-3 bg-orange-700/10 rounded-lg p-4">
+                          <CheckCircle2 className="h-5 w-5 text-orange-600" />
                           {milestone}
                         </div>
                       ))}
@@ -417,7 +417,7 @@ export default function BlueprintResultsPage() {
                         >
                           {copiedScript === item.name ? (
                             <>
-                              <CheckCircle2 className="h-4 w-4 text-emerald-400" />
+                              <CheckCircle2 className="h-4 w-4 text-orange-600" />
                               Copied!
                             </>
                           ) : (
@@ -445,7 +445,7 @@ export default function BlueprintResultsPage() {
                       <div key={i} className="bg-white/5 rounded-xl p-4">
                         <div className="flex items-center justify-between mb-2">
                           <span className="text-xs text-white/60 uppercase tracking-wide">{tool.category}</span>
-                          <span className="text-sm text-emerald-400">{tool.cost}</span>
+                          <span className="text-sm text-orange-600">{tool.cost}</span>
                         </div>
                         <h3 className="font-semibold mb-1">{tool.tool}</h3>
                         <p className="text-sm text-white/60">{tool.purpose}</p>
@@ -469,19 +469,19 @@ export default function BlueprintResultsPage() {
                       ].map((proj, i) => (
                         <div key={i} className="flex items-center justify-between p-4 bg-white/5 rounded-xl">
                           <span className="font-medium">{proj.label}</span>
-                          <span className="text-xl font-bold text-emerald-400">{proj.value}</span>
+                          <span className="text-xl font-bold text-orange-600">{proj.value}</span>
                         </div>
                       ))}
                     </div>                  
                   </div>
                   
-                  <div className="glass rounded-2xl p-6 border-2 border-emerald-500/30">
+                  <div className="glass rounded-2xl p-6 border-2 border-orange-700/30">
                     <div className="flex items-center justify-between">
                       <div>
                         <p className="text-sm text-white/60">Break-even Timeline</p>
                         <p className="text-2xl font-bold">{blueprint.financialProjection.breakEven}</p>
                       </div>
-                      <TrendingUp className="h-12 w-12 text-emerald-400" />
+                      <TrendingUp className="h-12 w-12 text-orange-600" />
                     </div>
                   </div>
                 </div>

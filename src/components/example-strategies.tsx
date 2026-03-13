@@ -55,11 +55,11 @@ export function ExampleStrategies() {
             >
               <div className="flex items-start justify-between mb-4">
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/5">
-                  <example.icon className="h-5 w-5 text-emerald-400" />
+                  <example.icon className="h-5 w-5 text-orange-600" />
                 </div>
                 <span className={`
                   text-xs font-medium px-2 py-1 rounded-full
-                  ${example.difficulty === "Beginner" ? "bg-emerald-500/20 text-emerald-400" : ""}
+                  ${example.difficulty === "Beginner" ? "bg-orange-700/20 text-orange-600" : ""}
                   ${example.difficulty === "Intermediate" ? "bg-yellow-500/20 text-yellow-400" : ""}
                   ${example.difficulty === "Advanced" ? "bg-red-500/20 text-red-400" : ""}
                 `}>
@@ -71,7 +71,7 @@ export function ExampleStrategies() {
               <p className="text-sm text-white/60 mb-4">{example.description}</p>
 
               <div className="flex items-center justify-between pt-4 border-t border-white/10">
-                <span className="text-emerald-400 font-semibold">{example.income}</span>
+                <span className="text-orange-600 font-semibold">{example.income}</span>
                 <ArrowRight className="h-4 w-4 text-white/40 group-hover:text-white group-hover:translate-x-1 transition-all" />
               </div>
             </motion.div>

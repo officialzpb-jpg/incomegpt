@@ -128,13 +128,13 @@ export default function BuildBusinessPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-700/10 border border-orange-700/20 text-orange-600 text-sm mb-6">
               <Rocket className="h-4 w-4" />
               <span>Build Your $10K Business</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
               Let AI Build Your
-              <span className="text-emerald-400"> Business Blueprint</span>
+              <span className="text-orange-600"> Business Blueprint</span>
             </h1>
             <p className="text-lg text-white/60 max-w-xl mx-auto">
               Answer 4 questions and get a complete business plan capable of generating 
@@ -156,8 +156,8 @@ export default function BuildBusinessPage() {
           {/* Skills Selection */}
           <div className="glass rounded-2xl p-6">
             <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 rounded-lg bg-emerald-500/10">
-                <Zap className="h-5 w-5 text-emerald-400" />
+              <div className="p-2 rounded-lg bg-orange-700/10">
+                <Zap className="h-5 w-5 text-orange-600" />
               </div>
               <div>
                 <h3 className="font-semibold">What skills do you have?</h3>
@@ -173,7 +173,7 @@ export default function BuildBusinessPage() {
                   onClick={() => toggleSkill(skill)}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                     formData.skills.includes(skill)
-                      ? "bg-emerald-500 text-white"
+                      ? "bg-orange-700 text-white"
                       : "bg-white/5 text-white/70 hover:bg-white/10 border border-white/10"
                   }`}
                 >
@@ -199,7 +199,7 @@ export default function BuildBusinessPage() {
               <select
                 value={formData.timePerWeek}
                 onChange={(e) => setFormData(prev => ({ ...prev, timePerWeek: e.target.value }))}
-                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-emerald-500 focus:outline-none"
+                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-orange-700 focus:outline-none"
               >
                 <option value="10">10 hours/week (Side hustle)</option>
                 <option value="20">20 hours/week (Part-time)</option>
@@ -222,7 +222,7 @@ export default function BuildBusinessPage() {
               <select
                 value={formData.startingBudget}
                 onChange={(e) => setFormData(prev => ({ ...prev, startingBudget: e.target.value }))}
-                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-emerald-500 focus:outline-none"
+                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-orange-700 focus:outline-none"
               >
                 <option value="0">$0 (Zero budget)</option>
                 <option value="500">$500 (Minimal)</option>
@@ -250,7 +250,7 @@ export default function BuildBusinessPage() {
                   key={option.value}
                   className={`flex items-start gap-4 p-4 rounded-xl border cursor-pointer transition-all ${
                     formData.experienceLevel === option.value
-                      ? "border-emerald-500 bg-emerald-500/10"
+                      ? "border-orange-700 bg-orange-700/10"
                       : "border-white/10 bg-white/5 hover:bg-white/10"
                   }`}
                 >
@@ -260,7 +260,7 @@ export default function BuildBusinessPage() {
                     value={option.value}
                     checked={formData.experienceLevel === option.value}
                     onChange={(e) => setFormData(prev => ({ ...prev, experienceLevel: e.target.value }))}
-                    className="mt-1 accent-emerald-500"
+                    className="mt-1 accent-orange-700"
                   />
                   <div>
                     <p className="font-medium">{option.label}</p>
@@ -288,7 +288,7 @@ export default function BuildBusinessPage() {
               onChange={(e) => setFormData(prev => ({ ...prev, interests: e.target.value }))}
               placeholder="e.g., SaaS, healthcare, e-commerce, real estate, fitness..."
               rows={3}
-              className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-emerald-500 focus:outline-none resize-none"
+              className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-orange-700 focus:outline-none resize-none"
             />
           </div>
 
@@ -298,7 +298,7 @@ export default function BuildBusinessPage() {
             disabled={isLoading || formData.skills.length === 0}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="w-full flex items-center justify-center gap-3 bg-gradient-to-r from-emerald-500 to-cyan-500 text-white py-5 rounded-2xl font-semibold text-lg hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full flex items-center justify-center gap-3 bg-gradient-to-r from-orange-700 to-orange-600 text-white py-5 rounded-2xl font-semibold text-lg hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isLoading ? (
               <>

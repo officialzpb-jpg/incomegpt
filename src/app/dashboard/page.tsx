@@ -133,7 +133,7 @@ export default function DashboardPage() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-emerald-400" />
+        <Loader2 className="h-8 w-8 animate-spin text-orange-600" />
       </div>
     );
   }
@@ -212,7 +212,7 @@ export default function DashboardPage() {
 
         <div className="absolute bottom-0 left-0 right-0 p-6 border-t border-white/5">
           <div className="flex items-center gap-3 mb-4">
-            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center">
+            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-orange-700 to-orange-600 flex items-center justify-center">
               <User className="h-5 w-5 text-white" />
             </div>
             <div>
@@ -258,7 +258,7 @@ export default function DashboardPage() {
               ].map((stat, i) => (
                 <div key={i} className="glass rounded-xl p-6">
                   <div className="flex items-center gap-3 mb-2">
-                    <stat.icon className="h-5 w-5 text-emerald-400" />
+                    <stat.icon className="h-5 w-5 text-orange-600" />
                     <span className="text-sm text-white/60">{stat.label}</span>
                   </div>
                   <div className="text-2xl font-bold">{stat.value}</div>
@@ -278,7 +278,7 @@ export default function DashboardPage() {
                       value={incomeGoal}
                       onChange={(e) => setIncomeGoal(e.target.value)}
                       placeholder="10,000"
-                      className="w-full pl-8 pr-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-emerald-500 focus:outline-none"
+                      className="w-full pl-8 pr-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-orange-700 focus:outline-none"
                     />
                   </div>
                 </div>
@@ -297,7 +297,7 @@ export default function DashboardPage() {
               <div className="group glass rounded-2xl p-6 mb-4 hover:bg-white/[0.05] transition-colors cursor-pointer">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-cyan-500">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-orange-700 to-orange-600">
                       <Plus className="h-6 w-6 text-white" />
                     </div>
                     <div>
@@ -312,7 +312,7 @@ export default function DashboardPage() {
 
             {/* Build Business CTA */}
             <Link href="/business/build">
-              <div className="group glass rounded-2xl p-6 mb-8 hover:bg-white/[0.05] transition-colors cursor-pointer border border-emerald-500/20">
+              <div className="group glass rounded-2xl p-6 mb-8 hover:bg-white/[0.05] transition-colors cursor-pointer border border-orange-700/20">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
                     <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-pink-500">
@@ -329,19 +329,19 @@ export default function DashboardPage() {
             </Link>
 
             {/* Subscription Status */}
-            <div className={`glass rounded-2xl p-6 mb-8 border ${profile?.subscription_status === 'active' ? 'border-emerald-500/30 bg-emerald-500/5' : 'border-white/10'}`}>
+            <div className={`glass rounded-2xl p-6 mb-8 border ${profile?.subscription_status === 'active' ? 'border-orange-700/30 bg-orange-700/5' : 'border-white/10'}`}>
               <div className="flex items-center justify-between">
                 <div>
                   <h2 className="text-lg font-semibold mb-1">Subscription</h2>
                   <p className="text-white/60">{profile?.subscription_status === 'active' ? "You\u0026apos;re on the Pro plan" : "Upgrade to Pro for unlimited features"}</p>
                 </div>
-                <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm ${profile?.subscription_status === 'active' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-white/10 text-white/60'}`}>
-                  <div className={`w-2 h-2 rounded-full ${profile?.subscription_status === 'active' ? 'bg-emerald-400' : 'bg-white/40'}`} />
+                <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm ${profile?.subscription_status === 'active' ? 'bg-orange-700/20 text-orange-600' : 'bg-white/10 text-white/60'}`}>
+                  <div className={`w-2 h-2 rounded-full ${profile?.subscription_status === 'active' ? 'bg-orange-600' : 'bg-white/40'}`} />
                   {profile?.subscription_status === 'active' ? 'Active' : 'Free'}
                 </div>
               </div>
               {profile?.subscription_status !== 'active' && (
-                <Link href="/pricing" className="mt-4 inline-flex items-center gap-2 text-emerald-400 hover:text-emerald-300">
+                <Link href="/pricing" className="mt-4 inline-flex items-center gap-2 text-orange-600 hover:text-orange-300">
                   Upgrade to Pro <ChevronRight className="h-4 w-4" />
                 </Link>
               )}
@@ -366,9 +366,9 @@ export default function DashboardPage() {
                       <div className="flex items-start justify-between mb-4">
                         <div>
                           <h3 className="font-semibold mb-1">{strategy.title}</h3>
-                          <span className="text-emerald-400 text-sm">{strategy.expected_monthly_income}</span>
+                          <span className="text-orange-600 text-sm">{strategy.expected_monthly_income}</span>
                         </div>
-                        <span className="text-xs px-2 py-1 rounded-full bg-emerald-500/20 text-emerald-400">
+                        <span className="text-xs px-2 py-1 rounded-full bg-orange-700/20 text-orange-600">
                           {strategy.status}
                         </span>
                       </div>
@@ -379,7 +379,7 @@ export default function DashboardPage() {
                         </div>
                         <div className="h-2 bg-white/10 rounded-full overflow-hidden">
                           <div
-                            className="h-full bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-full"
+                            className="h-full bg-gradient-to-r from-orange-700 to-orange-600 rounded-full"
                             style={{ width: `${strategy.progress}%` }}
                           />
                         </div>
