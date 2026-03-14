@@ -1,14 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
 
 export function CookieConsent() {
   const [showBanner, setShowBanner] = useState(false);
 
   useEffect(() => {
-    // Check if user has already consented
     const consent = localStorage.getItem("cookie-consent");
     if (!consent) {
       setShowBanner(true);
@@ -37,26 +35,23 @@ export function CookieConsent() {
             Read our{" "}
             <a href="/privacy" className="text-orange-400 hover:text-orange-300 underline">
               Privacy Policy
-            </a{" "}
-            for more information.
+            </a>
+            {" "}for more information.
           </p>
         </div>
         <div className="flex items-center gap-3">
-          <Button
-            variant="outline"
-            size="sm"
+          <button
             onClick={declineCookies}
-            className="border-slate-600 text-slate-300 hover:bg-slate-800"
+            className="px-4 py-2 text-sm border border-slate-600 text-slate-300 hover:bg-slate-800 rounded-md transition-colors"
           >
             Decline
-          </Button>
-          <Button
-            size="sm"
+          </button>
+          <button
             onClick={acceptCookies}
-            className="bg-orange-600 hover:bg-orange-700 text-white"
+            className="px-4 py-2 text-sm bg-orange-600 hover:bg-orange-700 text-white rounded-md transition-colors"
           >
             Accept
-          </Button>
+          </button>
           <button
             onClick={() => setShowBanner(false)}
             className="p-1 text-slate-500 hover:text-slate-300"
