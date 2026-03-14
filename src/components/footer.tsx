@@ -16,7 +16,7 @@ export function Footer() {
           <div className="flex items-center gap-6 text-xs text-slate-500">
             <Link href="/privacy" className="hover:text-orange-400 transition-colors">Privacy</Link>
             <Link href="/terms" className="hover:text-orange-400 transition-colors">Terms</Link>
-            <Link href="mailto:support@wealthforge.com" className="hover:text-orange-400 transition-colors">Contact</Link>
+            <Link href="mailto:support@wealthforge.ai" className="hover:text-orange-400 transition-colors">Contact</Link>
           </div>
 
           <p className="text-xs text-slate-600">
